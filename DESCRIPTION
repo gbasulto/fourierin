@@ -1,11 +1,11 @@
 Package: fourierin
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Computes numeric Fourier integrals
 Version: 0.1
 Date: 2016-01-22
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
+Author: Guillermo Basulto-Elias
+Maintainer: Guillermo Basulto-Elias <guillermobasulto@gmail.com>
+Description: This package computes Fourier integrals of functions of one and two variables using the Fast Fourier transform
 License: What license is it under?
 LazyData: TRUE
 LinkingTo: Rcpp
