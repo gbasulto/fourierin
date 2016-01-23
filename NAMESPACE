@@ -2,6 +2,5 @@
 
 export(ecf_mod)
 export(hello)
-export(timesTwo)
 importFrom(Rcpp,sourceCpp)
 useDynLib(fourierin)

@@ -5,17 +5,6 @@
 
 using namespace Rcpp;
 
-// timesTwo
-NumericVector timesTwo(NumericVector x);
-RcppExport SEXP fourierin_timesTwo(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    __result = Rcpp::wrap(timesTwo(x));
-    return __result;
-END_RCPP
-}
 // ecf_mod
 NumericVector ecf_mod(NumericVector t, NumericVector smp);
 RcppExport SEXP fourierin_ecf_mod(SEXP tSEXP, SEXP smpSEXP) {
