@@ -6,7 +6,10 @@
 \usage{
 timesTwo(x)
 }
+\arguments{
+\item{x}{Vector to be multiplied by two.}
+}
 \description{
-It mulpliplies a vector by two.
+It mulpliplies a vector by two. This is only a test function.
 }
 

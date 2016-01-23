@@ -3,7 +3,9 @@
 
 #' Times two
 #'
-#' It mulpliplies a vector by two.
+#' It mulpliplies a vector by two. This is only a test function.
+#'
+#' @param x Vector to be multiplied by two.
 #' @export
 timesTwo <- function(x) {
     .Call('fourierin_timesTwo', PACKAGE = 'fourierin', x)
