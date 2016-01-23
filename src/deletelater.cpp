@@ -13,7 +13,7 @@ using namespace Rcpp;
 
 //' Times two
 //'
-//' It mulpliplies a vector by two.
+//' It mulpliplies a vector by two
 //' @export
 // [[Rcpp::export]]
 NumericVector timesTwo(NumericVector x) {
