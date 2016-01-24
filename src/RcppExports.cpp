@@ -18,9 +18,9 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// fourier_integral_1d
-arma::cx_vec fourier_integral_1d(arma::vec f, double a, double b, double c, double d, double r);
-RcppExport SEXP fourierin_fourier_integral_1d(SEXP fSEXP, SEXP aSEXP, SEXP bSEXP, SEXP cSEXP, SEXP dSEXP, SEXP rSEXP) {
+// fourierin_1d
+arma::cx_vec fourierin_1d(arma::vec f, double a, double b, double c, double d, double r);
+RcppExport SEXP fourierin_fourierin_1d(SEXP fSEXP, SEXP aSEXP, SEXP bSEXP, SEXP cSEXP, SEXP dSEXP, SEXP rSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -30,7 +30,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type c(cSEXP);
     Rcpp::traits::input_parameter< double >::type d(dSEXP);
     Rcpp::traits::input_parameter< double >::type r(rSEXP);
-    __result = Rcpp::wrap(fourier_integral_1d(f, a, b, c, d, r));
+    __result = Rcpp::wrap(fourierin_1d(f, a, b, c, d, r));
     return __result;
 END_RCPP
 }

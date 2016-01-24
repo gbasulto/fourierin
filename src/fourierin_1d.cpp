@@ -6,7 +6,7 @@ using namespace arma;
 
 // [[Rcpp::depends(RcppArmadillo)]]
 // [[Rcpp::export]]
-arma::cx_vec fourier_integral_1d(arma::vec f, double a,
+arma::cx_vec fourierin_1d(arma::vec f, double a,
 			  double b, double c, double d, double r)
 {
   // Description:
@@ -58,21 +58,3 @@ arma::cx_vec fourier_integral_1d(arma::vec f, double a,
   return out;
 }
 
-
-
-/*** R
-##ecf_mod(50, rnorm(100))
-
-##h0_politis(rnorm(100))
-
-##fourier_integral(1:8, 1, 2, 1, 9, 1)[1:2]
-
-#FIntegral(ff, 1, 8, 1, 2, 1, 9, 0, 1)$ft[1:2]
-
-##FIntegral(ff, 1, 8, 1, 2, 1, 9, 1, -1)$ft[1:2]
-
-#FIntegral(ff, 1, 8, 1, 2, 1, 9, 0, -1)$ft[1:2]
-
-#FIntegral(ff, 1, 8, 1, 2, 1, 9, -1, -1)$ft[1:2]
-
-*/

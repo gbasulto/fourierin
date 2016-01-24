@@ -10,7 +10,7 @@ ecf_mod_1d <- function(t, smp) {
     .Call('fourierin_ecf_mod_1d', PACKAGE = 'fourierin', t, smp)
 }
 
-fourier_integral_1d <- function(f, a, b, c, d, r) {
-    .Call('fourierin_fourier_integral_1d', PACKAGE = 'fourierin', f, a, b, c, d, r)
+fourierin_1d <- function(f, a, b, c, d, r) {
+    .Call('fourierin_fourierin_1d', PACKAGE = 'fourierin', f, a, b, c, d, r)
 }
 
