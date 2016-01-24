@@ -8,7 +8,10 @@ Maintainer: Guillermo Basulto-Elias <guillermobasulto@gmail.com>
 Description: This package computes Fourier integrals of functions of one and two variables using the Fast Fourier transform
 License: What license is it under?
 LazyData: TRUE
-LinkingTo: Rcpp
-Imports:
+LinkingTo:
+    RcppArmadillo,
     Rcpp
+Imports:
+    Rcpp,
+    RcppArmadillo
 RoxygenNote: 5.0.1
