@@ -6,7 +6,7 @@
 #' It computes the module of the empirical characteristic function
 #' evaluated on a sample
 #' @export
-ecf_mod <- function(t, smp) {
-    .Call('fourierin_ecf_mod', PACKAGE = 'fourierin', t, smp)
+ecf_mod_1d <- function(t, smp) {
+    .Call('fourierin_ecf_mod_1d', PACKAGE = 'fourierin', t, smp)
 }
 

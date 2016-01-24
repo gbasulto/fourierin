@@ -5,15 +5,15 @@
 
 using namespace Rcpp;
 
-// ecf_mod
-NumericVector ecf_mod(NumericVector t, NumericVector smp);
-RcppExport SEXP fourierin_ecf_mod(SEXP tSEXP, SEXP smpSEXP) {
+// ecf_mod_1d
+NumericVector ecf_mod_1d(NumericVector t, NumericVector smp);
+RcppExport SEXP fourierin_ecf_mod_1d(SEXP tSEXP, SEXP smpSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
     Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type smp(smpSEXP);
-    __result = Rcpp::wrap(ecf_mod(t, smp));
+    __result = Rcpp::wrap(ecf_mod_1d(t, smp));
     return __result;
 END_RCPP
 }

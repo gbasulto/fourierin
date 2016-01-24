@@ -5,7 +5,7 @@ using namespace Rcpp;
 /***** ecf and ******************/
 /****************************************************************/
 
-double ecf_mod(double t, NumericVector smp)
+double ecf_mod_1d(double t, NumericVector smp)
 {
   /* 
      Description: This function computes the module of the ecf from a
@@ -30,7 +30,7 @@ double ecf_mod(double t, NumericVector smp)
 //' evaluated on a sample
 //' @export
 // [[Rcpp::export]]
-NumericVector ecf_mod(NumericVector t, NumericVector smp)
+NumericVector ecf_mod_1d(NumericVector t, NumericVector smp)
 {
   /* 
      Description: This function computes the module of the ecf from a
@@ -40,7 +40,7 @@ NumericVector ecf_mod(NumericVector t, NumericVector smp)
   int i, m = t.size();
   NumericVector out(m);
 
-  for(i = 0; i < m; i++) out[i] = ecf_mod(t[i], smp);
+  for(i = 0; i < m; i++) out[i] = ecf_mod_1d(t[i], smp);
   
   return out;
 }
