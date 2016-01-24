@@ -5,33 +5,9 @@
 using namespace arma;
 
 // [[Rcpp::depends(RcppArmadillo)]]
-// [[Rcpp::export]]
 arma::cx_vec fourierin_1d(arma::vec f, double a,
 			  double b, double c, double d, double r)
 {
-  // Description:
-  // This function computes univariate and bivariate continuous
-  // Fourier tranform based on the paper by Inverarity (2002):
-  // "Fast computation of multidimensional Fourier integrals".
-  // It is the formula (4.1) on the paper.
-  //
-  // Arguments:
-  // f: Function from R^2 or R to C to which we will apply
-  //    the ft.
-  // m: Resolution of the integral.
-  // a: nx1 vector. Lower integration limit.
-  // b: nx1 vector. Upper integration limit.
-  // d: nx1 vector. Lower limit of w.
-  // l: nx1 vector. Upper limit of w.
-  // r: Power in (4.1).
-  // s: Scale constant in (4.1).
-  //
-  // Output:
-  // w: vector or matrix with the values for which the cft was
-  //    computed.
-  // ft: Continuous Fourier transform values at w.
-  // 
-
   int m = f.n_rows;
   arma::cx_vec out(m), y(2*m), z(2*m), aux(2*m);
   arma::vec J1(m), J2(m), t(m), w(m);
@@ -58,3 +34,42 @@ arma::cx_vec fourierin_1d(arma::vec f, double a,
   return out;
 }
 
+
+// [[Rcpp::depends(RcppArmadillo)]]
+// [[Rcpp::export]]
+arma::cx_vec fourierin_1d(arma::vec f, double a,
+			  double b, double c, double d,
+			  double r, double s)
+{
+  // Description:
+  // This function computes univariate and bivariate continuous
+  // Fourier tranform based on the paper by Inverarity (2002):
+  // "Fast computation of multidimensional Fourier integrals".
+  // It is the formula (4.1) on the paper.
+  //
+  // Arguments:
+  // f: Function from R^2 or R to C to which we will apply
+  //    the ft.
+  // m: Resolution of the integral.
+  // a: nx1 vector. Lower integration limit.
+  // b: nx1 vector. Upper integration limit.
+  // d: nx1 vector. Lower limit of w.
+  // l: nx1 vector. Upper limit of w.
+  // r: Power in (4.1).
+  // s: Scale constant in (4.1).
+  //
+  // Output:
+  // w: vector or matrix with the values for which the cft was
+  //    computed.
+  // ft: Continuous Fourier transform values at w.
+  // 
+
+  int m = f.n_rows;
+  arma::cx_vec out(m);
+  
+  // fourierin_1d without s argument is meant for s = 1. Thus we have
+  // to make it valid for any s.
+  out = pow(abs(s), 1/2)*fourierin_1d(f, a, b, s*c, s*d, r);
+
+  return out;
+}
