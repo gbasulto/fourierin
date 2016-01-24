@@ -45,20 +45,3 @@ NumericVector ecf_mod_1d(NumericVector t, NumericVector smp)
   return out;
 }
 
-
-/*** R
-##ecf_mod(50, rnorm(100))
-
-##h0_politis(rnorm(100))
-
-##fourier_integral(1:8, 1, 2, 1, 9, 1)[1:2]
-
-#FIntegral(ff, 1, 8, 1, 2, 1, 9, 0, 1)$ft[1:2]
-
-##FIntegral(ff, 1, 8, 1, 2, 1, 9, 1, -1)$ft[1:2]
-
-#FIntegral(ff, 1, 8, 1, 2, 1, 9, 0, -1)$ft[1:2]
-
-#FIntegral(ff, 1, 8, 1, 2, 1, 9, -1, -1)$ft[1:2]
-
-*/
