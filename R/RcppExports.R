@@ -16,7 +16,7 @@ ecf_mod_1d <- function(t, smp) {
 #' Fourier tranform based on the paper by Inverarity (2002):
 #' "Fast computation of multidimensional Fourier integrals".
 #' It is the formula (4.1) on the paper.
-#'  
+#'
 #' @param f Values of the function.
 #' @param m Resolution of the integral.
 #' @param a \eqn{n x 1} vector. Lower integration limit.
