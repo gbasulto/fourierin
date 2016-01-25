@@ -4,7 +4,7 @@
 \alias{fourierin}
 \title{Compute Fourier integrals}
 \usage{
-fourierin(f, a, b, c, d, r, s)
+fourierin(f, a, b, c, d, r, s, resol)
 }
 \description{
 It computes Fourier integrals for functions of one and two
