@@ -34,35 +34,29 @@ arma::cx_vec fourierin_1d(arma::vec f, double a,
   return out;
 }
 
-
-// [[Rcpp::depends(RcppArmadillo)]]
+//' Computes Fourier integral of univariate functions
+//'
+//' This function computes univariate and bivariate continuous
+//' Fourier tranform based on the paper by Inverarity (2002):
+//' "Fast computation of multidimensional Fourier integrals".
+//' It is the formula (4.1) on the paper.
+//'  
+//' @param f Values of the function.
+//' @param m Resolution of the integral.
+//' @param a \eqn{n x 1} vector. Lower integration limit.
+//' @param b \eqn{n x 1} vector. Upper integration limit.
+//' @param c \eqn{n x 1} vector. Lower limit of w.
+//' @param d \eqn{n x 1} vector. Upper limit of w.
+//' @param r Power in (4.1).
+//' @param s Scale constant in (4.1).
+//' @return Continuous Fourier transform values at w.
+//'
+//' @export
 // [[Rcpp::export]]
 arma::cx_vec fourierin_1d(arma::vec f, double a,
 			  double b, double c, double d,
 			  double r, double s)
 {
-  // Description:
-  // This function computes univariate and bivariate continuous
-  // Fourier tranform based on the paper by Inverarity (2002):
-  // "Fast computation of multidimensional Fourier integrals".
-  // It is the formula (4.1) on the paper.
-  //
-  // Arguments:
-  // f: Function from R^2 or R to C to which we will apply
-  //    the ft.
-  // m: Resolution of the integral.
-  // a: nx1 vector. Lower integration limit.
-  // b: nx1 vector. Upper integration limit.
-  // d: nx1 vector. Lower limit of w.
-  // l: nx1 vector. Upper limit of w.
-  // r: Power in (4.1).
-  // s: Scale constant in (4.1).
-  //
-  // Output:
-  // w: vector or matrix with the values for which the cft was
-  //    computed.
-  // ft: Continuous Fourier transform values at w.
-  // 
 
   int m = f.n_rows;
   arma::cx_vec out(m);
