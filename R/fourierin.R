@@ -22,7 +22,7 @@
 #' @example
 #' examples/ex_fourierin_1d.R
 #' @export
-fourierin <- function(f, a, b, c, d, r, s, resol){
+fourierin <- function(f, a, b, c, d, r, s, resol = NULL){
                                         # If function values are
                                         # provided, then the
                                         # resolution is the length of
