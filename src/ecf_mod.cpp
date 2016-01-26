@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 double ecf_mod_1d(double t, NumericVector smp)
 {
-  /* 
+  /*
      Description: This function computes the module of the ecf from a
      sample smp at t.
    */
@@ -17,10 +17,10 @@ double ecf_mod_1d(double t, NumericVector smp)
 
   // First find the real and imaginary parts and then the modulus.
   aux = t*smp;
-  real_sq = pow(mean(cos(aux)), 2);
-  imag_sq = pow(mean(sin(aux)), 2);
+  real_sq = pow(mean(cos(aux)), 2.0);
+  imag_sq = pow(mean(sin(aux)), 2.0);
   out = sqrt(real_sq + imag_sq);
-  
+
   return out;
 }
 
@@ -32,7 +32,7 @@ double ecf_mod_1d(double t, NumericVector smp)
 // [[Rcpp::export]]
 NumericVector ecf_mod_1d(NumericVector t, NumericVector smp)
 {
-  /* 
+  /*
      Description: This function computes the module of the ecf from a
      sample smp and it evaluates it in the vector t. It returns a
      vector of the same size as t.
@@ -41,7 +41,7 @@ NumericVector ecf_mod_1d(NumericVector t, NumericVector smp)
   NumericVector out(m);
 
   for(i = 0; i < m; i++) out[i] = ecf_mod_1d(t[i], smp);
-  
+
   return out;
 }
 

@@ -20,7 +20,7 @@
 #' \item{values}{dddd}
 #'
 #' @example
-#' examples/fourierin_1d.R
+#' examples/ex_fourierin_1d.R
 #' @export
 fourierin <- function(f, a, b, c, d, r, s, resol){
                                         # If function values are
