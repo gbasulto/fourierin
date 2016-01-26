@@ -6,8 +6,45 @@
 \usage{
 fourierin(f, a, b, c, d, r, s, resol)
 }
+\arguments{
+\item{f}{A function which can be evaluated in matrices of n columns
+(n = 1 or n = 2). Or a matrix of n columns with f already
+evaluated.}
+
+\item{a}{Lower integration limit(s).}
+
+\item{b}{Upper integration limit(s).}
+
+\item{c}{Lower evaluation limit(s).}
+
+\item{d}{Upper evaluation limit(s).}
+
+\item{r}{Factor related to adjust definition of Fourier
+transform. It is usually 0, -1 or 1.}
+
+\item{s}{Constant to adjust the exponent on the definition of the
+Fourier transform. It is usually 1, -1, 2pi or -2pi.}
+}
+\value{
+A list with the elements
+\item{w}{ddd}
+\item{values}{dddd}
+}
 \description{
 It computes Fourier integrals for functions of one and two
 variables.
+}
+\examples{
+## ------ Example 1 -----------------------------------------------------------
+## -- Example 1: Recovering std. normal from its characteristic function ------
+
+out <- fourierin(f = function(t) exp(-t^2/2),
+                 a = -5, b = 5, c = -3, d = 3,
+                 r = -1, s = -1, resol = 128)
+grid <- out$w
+values <- Re(out$values)
+
+plot(grid, values, type = "l", col = 3)
+lines(grid, dnorm(grid), col = 4)
 }
 
