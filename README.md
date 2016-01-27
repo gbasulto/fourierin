@@ -2,27 +2,13 @@
 Guillermo Basulto-Elias  
 January 26, 2016  
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+This is a package to numerically calculate Fourier integrals. Specifically, integrals of the type
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+$$
+I \left[f(\boldsymbol{t}), \boldsymbol{a}, 
+  \boldsymbol{b};r, s \right]
+  = \left[ \frac{|s|}{(2\pi)^{1 - r}}\right]^{n/2}
+  \int_{a_1}^{b_1}\int_{a_2}^{b_2}\cdots\int_{a_n}^{b_n}
+  f(\boldsymbol{t})\exp\left(\imath t\right)
+$$
 
-
-```r
-summary(cars)
-```
-
-```
-##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00
-```
-
-You can also embed plots, for example:
-
-![](README_files/figure-html/unnamed-chunk-2-1.png)
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
