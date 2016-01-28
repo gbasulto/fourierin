@@ -1,6 +1,5 @@
 # fourierin
 Guillermo Basulto-Elias  
-January 26, 2016  
 
 This is a package in `R` to numerically calculate Fourier-type integrals of multivariate functions with compact support. Specifically, integrals of the type
 
@@ -13,17 +12,19 @@ I \left[f(t), \boldsymbol{a}, \boldsymbol{b};r, s \right]
   \langle \boldsymbol{w}, \boldsymbol{t}\rangle} \text{d}\boldsymbol{t},
 $$
 -->
-
-![Caption for the picture.](eq01_main_eq.png)
-
+<img src="eq01_main_eq.png" height="800px" width="600px" />
 
 where,
+
+<!--
 $\boldsymbol{a} = (a_1, \ldots, a_n)$, 
 $\boldsymbol{b} = (b_1, \ldots, b_n)$, 
 $\boldsymbol{t} = (t^{(1)}, \ldots, t^{(n)})$, 
 $\boldsymbol{w} = (w^{(1)}, \ldots, w^{(n)})$, 
 $a_l \leq t^{(l)} \leq b_l$,
 $c_l \leq w^{(l)} \leq c_l$.
+-->
+<img src="eq02_details.png" height="300px" width="250px" />
 
 Common values for $r$ are -1, 0 and -1, while common values for $s$ are $-2\pi$, -1, 1 and $2\pi$. For example, if $f$ is a density function, $s = 1$ and $r = 1$ could be used to obtain the characteristic function of $f$. Conversely, if $f$ is the characteristic function of a probability density function, then $r = -1$ and $s = -1$ could be used to recover the density.
 
