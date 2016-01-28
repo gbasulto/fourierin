@@ -17,7 +17,7 @@ I \left[f(t), \boldsymbol{a}, \boldsymbol{b};r, s \right]
   \langle \boldsymbol{w}, \boldsymbol{t}\rangle} \text{d}\boldsymbol{t},
 $$
 -->
-<img src="eq01_main_eq.png" height="800px" width="600px" />
+<img src="eq01_main_eq.png" width="600px" />
 
 where,
 
@@ -29,7 +29,7 @@ $\boldsymbol{w} = (w^{(1)}, \ldots, w^{(n)})$,
 $a_l \leq t^{(l)} \leq b_l$,
 $c_l \leq w^{(l)} \leq c_l$.
 -->
-<img src="eq02_details.png" height="300px" width="250px" />
+<img src="eq02_details.png" width="200px" />
 
 Common values for $r$ are -1, 0 and -1, while common values for $s$ are $-2\pi$, -1, 1 and $2\pi$. For example, if $f$ is a density function, $s = 1$ and $r = 1$ could be used to obtain the characteristic function of $f$. Conversely, if $f$ is the characteristic function of a probability density function, then $r = -1$ and $s = -1$ could be used to recover the density.
 
