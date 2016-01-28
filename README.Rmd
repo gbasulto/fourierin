@@ -7,144 +7,18 @@ output:
     keep_md: yes
 ---
 
-This is a package to numerically calculate Fourier integrals. Specifically, integrals of the type
+This is a package in `R` to numerically calculate Fourier integrals. Specifically, integrals of the type.
 
+<!--
 $$
-I \left[f(\boldsymbol{t}), \boldsymbol{a}, 
-  \boldsymbol{b};r, s \right]
+I \left[f(t), a, b;r, s \right]
   = \left[ \frac{|s|}{(2\pi)^{1 - r}}\right]^{n/2}
   \int_{a_1}^{b_1}\int_{a_2}^{b_2}\cdots\int_{a_n}^{b_n}
-  f(\boldsymbol{t})\exp\left(\imath t\right)
+  f(t)e^{\imath s \langle w, t\rangle} \text{d}t,
 $$
+-->
 
-Hola.
+<img src="http://www.sciweavers.org/tex2img.php?eq=I%20%5Cleft%5Bf%28t%29%2C%20a%2C%20b%3Br%2C%20s%20%5Cright%5D%0A%20%20%3D%20%5Cleft%5B%20%5Cfrac%7B%7Cs%7C%7D%7B%282%5Cpi%29%5E%7B1%20-%20r%7D%7D%5Cright%5D%5E%7Bn%2F2%7D%0A%20%20%5Cint_%7Ba_1%7D%5E%7Bb_1%7D%5Cint_%7Ba_2%7D%5E%7Bb_2%7D%5Ccdots%5Cint_%7Ba_n%7D%5E%7Bb_n%7D%0A%20%20f%28t%29e%5E%7B%5Cimath%20s%20%5Clangle%20w%2C%20t%5Crangle%7D%20%5Ctext%7Bd%7Dt%2C&bc=White&fc=Black&im=png&fs=12&ff=arev&edit=0" align="center" border="0" alt="I \left[f(t), a, b;r, s \right]  = \left[ \frac{|s|}{(2\pi)^{1 - r}}\right]^{n/2}  \int_{a_1}^{b_1}\int_{a_2}^{b_2}\cdots\int_{a_n}^{b_n}  f(t)e^{\imath s \langle w, t\rangle} \text{d}t," width="496" height="53" />
 
-<!-- begin MathToWeb -->
-<!-- (your LaTeX) $I \left[f(\boldsymbol{t}), \boldsymbol{a}, 
-  \boldsymbol{b};r, s \right]
-  = \left[ \frac{|s|}{(2\pi)^{1 - r}}\right]^{n/2}
-  \int_{a_1}^{b_1}\int_{a_2}^{b_2}\cdots\int_{a_n}^{b_n}
-  f(\boldsymbol{t})\exp\left(\imath t\right)$ -->
-<math xmlns="http://www.w3.org/1998/Math/MathML">
-<mrow>
-	<mi>I</mi>
-	<mrow>
-		<mo rspace="0.3em" lspace="0em" stretchy="true" fence="true" form="prefix">[</mo>
-		<mi>f</mi>
-		<mrow>
-			<mo form="prefix">(</mo>
-			<mi mathvariant="bold">t</mi>
-			<mo form="postfix">)</mo>
-		</mrow>
-		<mo>,</mo>
-		<mi mathvariant="bold">a</mi>
-		<mo>,</mo>
-		<mi mathvariant="bold">b</mi>
-		<mo>;</mo>
-		<mi>r</mi>
-		<mo>,</mo>
-		<mi>s</mi>
-		<mo rspace="0em" lspace="0.3em" stretchy="true" fence="true" form="postfix">]</mo>
-	</mrow>
-	<mo>=</mo>
-	<msup>
-		<mrow>
-			<mo rspace="0.3em" lspace="0em" stretchy="true" fence="true" form="prefix">[</mo>
-			<mfrac linethickness="1">
-				<mrow>
-					<mo>|</mo>
-					<mi>s</mi>
-					<mo>|</mo>
-				</mrow>
-				<mrow>
-					<msup>
-						<mrow>
-							<mo form="prefix">(</mo>
-							<mn>2</mn>
-							<mi>&#x003C0;</mi>
-							<mo form="postfix">)</mo>
-						</mrow>
-						<mrow>
-							<mn>1</mn>
-							<mo>-</mo>
-							<mi>r</mi>
-						</mrow>
-					</msup>
-				</mrow>
-			</mfrac>
-			<mo rspace="0em" lspace="0.3em" stretchy="true" fence="true" form="postfix">]</mo>
-		</mrow>
-		<mrow>
-			<mi>n</mi>
-			<mo>&#x0002F;</mo>
-			<mn>2</mn>
-		</mrow>
-	</msup>
-	<mstyle displaystyle="true">
-		<munderover>
-			<mo>&#x0222B;</mo>
-			<mrow>
-				<msub>
-					<mi>a</mi>
-					<mn>1</mn>
-				</msub>
-			</mrow>
-			<mrow>
-				<msub>
-					<mi>b</mi>
-					<mn>1</mn>
-				</msub>
-			</mrow>
-		</munderover>
-	</mstyle>
-	<mstyle displaystyle="true">
-		<munderover>
-			<mo>&#x0222B;</mo>
-			<mrow>
-				<msub>
-					<mi>a</mi>
-					<mn>2</mn>
-				</msub>
-			</mrow>
-			<mrow>
-				<msub>
-					<mi>b</mi>
-					<mn>2</mn>
-				</msub>
-			</mrow>
-		</munderover>
-	</mstyle>
-	<mo>&#x022EF;</mo>
-	<mstyle displaystyle="true">
-		<munderover>
-			<mo>&#x0222B;</mo>
-			<mrow>
-				<msub>
-					<mi>a</mi>
-					<mi>n</mi>
-				</msub>
-			</mrow>
-			<mrow>
-				<msub>
-					<mi>b</mi>
-					<mi>n</mi>
-				</msub>
-			</mrow>
-		</munderover>
-	</mstyle>
-	<mi>f</mi>
-	<mrow>
-		<mo form="prefix">(</mo>
-		<mi mathvariant="bold">t</mi>
-		<mo form="postfix">)</mo>
-	</mrow>
-	<mi>exp</mi>
-	<mrow>
-		<mo rspace="0.3em" lspace="0em" stretchy="true" fence="true" form="prefix">(</mo>
-		<mo>&#x00131;</mo>
-		<mi>t</mi>
-		<mo rspace="0em" lspace="0.3em" stretchy="true" fence="true" form="postfix">)</mo>
-	</mrow>
-</mrow>
-</math>
-<!-- end MathToWeb -->
+where,
+$a = (a_1, \ldots, a_n)$, 
