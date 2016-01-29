@@ -37,9 +37,9 @@ The implementation of this algorithm is the one described in [Inverarity (2002),
 
 Some examples (also found in documentation).
 
+#### Example 1: Recovering standard normal from its characteristic function
+
 ```{r}
-## -- Example 1 ------------------------------------------------------
-## -- Recovering std. normal from its characteristic function --------
 library(fourierin)
 
                                         # Compute integral
@@ -51,9 +51,11 @@ values <- Re(out$values)
 
 plot(grid, values, type = "l", col = 3)
 lines(grid, dnorm(grid), col = 4)
+```
 
-## -- Example 2 ------------------------------------------------------
-## -- Computing characteristic function of a gamma r. v. ------------
+#### Example 2: Computing characteristic function of a gamma density
+
+```{r}
 
 library(fourierin)
                                         # Compute integral

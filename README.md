@@ -32,10 +32,10 @@ The implementation of this algorithm is the one described in [Inverarity (2002),
 
 Some examples (also found in documentation).
 
+#### Example 1: Recovering standard normal from its characteristic function
+
 
 ```r
-## -- Example 1 ------------------------------------------------------
-## -- Recovering std. normal from its characteristic function --------
 library(fourierin)
 
                                         # Compute integral
@@ -51,10 +51,10 @@ lines(grid, dnorm(grid), col = 4)
 
 ![](README_files/figure-html/unnamed-chunk-1-1.png)
 
-```r
-## -- Example 2 ------------------------------------------------------
-## -- Computing characteristic function of a gamma r. v. ------------
+#### Example 2: Computing characteristic function of a gamma density
 
+
+```r
 library(fourierin)
                                         # Compute integral
 shape <- 5
@@ -82,7 +82,7 @@ plot(grid, re_values, type = "l", col = 3)
 lines(grid, true_re, col = 4)
 ```
 
-![](README_files/figure-html/unnamed-chunk-1-2.png)
+![](README_files/figure-html/unnamed-chunk-2-1.png)
 
 ```r
                                         # Same here
@@ -90,5 +90,5 @@ plot(grid, im_values, type = "l", col = 3)
 lines(grid, true_im, col = 4)
 ```
 
-![](README_files/figure-html/unnamed-chunk-1-3.png)
+![](README_files/figure-html/unnamed-chunk-2-2.png)
 
