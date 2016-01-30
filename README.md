@@ -45,8 +45,10 @@ out <- fourierin(f = function(t) exp(-t^2/2),
 grid <- out$w                           # Extract grid and values
 values <- Re(out$values)
 
-plot(grid, values, type = "l", col = 3)
+plot(grid, values, type = "l", col = 3, xlab = "x", ylab = "f(x)")
 lines(grid, dnorm(grid), col = 4)
+legend("topleft", legend = c("True", "Recovered"), col = c(4, 3),
+      lwd = 1)
 ```
 
 ![](README_files/figure-html/unnamed-chunk-1-1.png)
