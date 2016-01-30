@@ -80,16 +80,22 @@ true_im <- Im(true_cf(grid, shape, rate))
                                         # tails, but that is fixed
                                         # when resulution is
                                         # increased.
-plot(grid, re_values, type = "l", col = 3)
+plot(grid, re_values, type = "l", col = 3, xlab = "t",
+     ylab = expression(paste("Re ", phi(t))))
 lines(grid, true_re, col = 4)
+legend("topright", legend = c("True", "Recovered"), col = c(4, 3),
+      lwd = 1)
 ```
 
 ![](README_files/figure-html/unnamed-chunk-2-1.png)
 
 ```r
                                         # Same here
-plot(grid, im_values, type = "l", col = 3)
+plot(grid, im_values, type = "l", col = 3, xlab = "t",
+     ylab = expression(paste("Im ", phi(t))))
 lines(grid, true_im, col = 4)
+legend("topright", legend = c("True", "Recovered"), col = c(4, 3),
+      lwd = 1)
 ```
 
 ![](README_files/figure-html/unnamed-chunk-2-2.png)
