@@ -1,7 +1,7 @@
 # fourierin
 Guillermo Basulto-Elias  
 
-This is a package in `R` to numerically calculate Fourier-type integrals of multivariate functions with compact support. Specifically, integrals of the type
+This is a package in `R` to numerically calculate Fourier-type integrals of multivariate functions with compact support evaluated at regular grids. Specifically, integrals of the type
 
 <!--
 $$
