@@ -40,7 +40,8 @@ fourierin <- function(f, a, b, c, d, r, s, resol = NULL){
     if(is.function(f)){
         del <- (b - a)/resol            #Increment in the time
                                         # domain.
-        t <- seq(a, b - del, length.out = resol) # Freq. dom. vector.
+        t <- seq(a + del/2, b - del/2,
+                 length.out = resol)    # Freq. dom. vector.
         out <- fourierin_1d(f(t), a, b, c, d, r, s)
     } else{
         out <- fourierin_1d(f, a, b, c, d, r, s)
