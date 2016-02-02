@@ -35,3 +35,20 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// fourierin_2d
+arma::cx_mat fourierin_2d(arma::mat f, arma::vec a, arma::vec b, arma::vec c, arma::vec d, double r, double s);
+RcppExport SEXP fourierin_fourierin_2d(SEXP fSEXP, SEXP aSEXP, SEXP bSEXP, SEXP cSEXP, SEXP dSEXP, SEXP rSEXP, SEXP sSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< arma::mat >::type f(fSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type a(aSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type b(bSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type c(cSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type d(dSEXP);
+    Rcpp::traits::input_parameter< double >::type r(rSEXP);
+    Rcpp::traits::input_parameter< double >::type s(sSEXP);
+    __result = Rcpp::wrap(fourierin_2d(f, a, b, c, d, r, s));
+    return __result;
+END_RCPP
+}
