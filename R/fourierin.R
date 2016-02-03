@@ -23,29 +23,40 @@
 #' examples/ex_fourierin_1d.R
 #' @export
 fourierin <- function(f, a, b, c, d, r, s, resol = NULL){
-                                        # If function values are
-                                        # provided, then the
-                                        # resolution is the length of
-                                        # the vector of values.
-    if(!is.function(f)) resol <- length(f)
 
-    gam <- (d - c)/resol                # Increment in the frequency
+    n <- length(a)                      # Get dimension of function
+                                        # from lower integration
+                                        # limit.
+    switch(n,
+           ## --- Case n = 1 -----------------------------------------
+           "1" = {
+               ## If function values are provided, then the resolution
+               ## is the length of the vector of values.
+               if(!is.function(f)) resol <- length(f)
+
+               ## Increment in the frequency domain.
+               gam <- (d - c)/resol
+
+               ## Freq. dom. vector.
+               w <- seq(c, d - gam, length.out = resol)
+
+               ## If f is the function, it needs to be evaluated in
+               ## the time domain values.
+               if(is.function(f)){
+                   del <- (b - a)/resol # Increment in the time
                                         # domain.
-
-    w <- seq(c, d - gam, length.out = resol) # Freq. dom. vector.
-
-                                        # If f is the function, it
-                                        # needs to be evaluated in the
-                                        # time domain values.
-    if(is.function(f)){
-        del <- (b - a)/resol            #Increment in the time
-                                        # domain.
-        t <- seq(a + del/2, b - del/2,
-                 length.out = resol)    # Freq. dom. vector.
-        out <- fourierin_1d(f(t), a, b, c, d, r, s)
-    } else{
-        out <- fourierin_1d(f, a, b, c, d, r, s)
-    }
+                   t <- seq(a + del/2, b - del/2,
+                            length.out = resol)    # Freq. dom. vector.
+                   out <- fourierin_1d(f(t), a, b, c, d, r, s)
+               } else{
+                   out <- fourierin_1d(f, a, b, c, d, r, s)
+               }
+           },
+           ## --- Case n = 2 -----------------------------------------
+           "2" = {
+               "Hola"
+           } # End n =2
+           ) # End switch
 
     return(list(w = w,                  # Return list.
                 values = out))
