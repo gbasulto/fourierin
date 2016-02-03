@@ -20,7 +20,7 @@ library(fourierin)
 shape <- 5
 rate <- 3
 out <- fourierin(f = function(t) dgamma(t, shape, rate),
-                 a = -15, b = 15, c = 0, d = 8,
+                 a = 0, b = 8, c = -4, d = 4,
                  r = 1, s = 1, resol = 64)
 grid <- out$w                           # Extract grid
 re_values <- Re(out$values)             # Real values
