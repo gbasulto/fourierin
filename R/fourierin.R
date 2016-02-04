@@ -47,9 +47,9 @@ fourierin <- function(f, a, b, c, d, r, s, resol = NULL){
                                         # domain.
                    t <- seq(a + del/2, b - del/2,
                             length.out = resol)    # Freq. dom. vector.
-                   out <- fourierin_1d(f(t), a, b, c, d, r, s)
+                   out <- fourierin_1d_cpp(f(t), a, b, c, d, r, s)
                } else{
-                   out <- fourierin_1d(f, a, b, c, d, r, s)
+                   out <- fourierin_1d_cpp(f, a, b, c, d, r, s)
                }
            },
            ## --- Case n = 2 -----------------------------------------
@@ -74,9 +74,9 @@ fourierin <- function(f, a, b, c, d, r, s, resol = NULL){
                             length.out = resol[1]) # Freq. dom. vector.
                    t2 <- seq(a[2] + del[2]/2, b[2] - del[2]/2,
                             length.out = resol[1]) # Freq. dom. vector.
-                  out <- fourierin_2d(f(t), a, b, c, d, r, s)
+                  out <- fourierin_2d_cpp(f(t), a, b, c, d, r, s)
                } else{
-                   out <- fourierin_2d(f, a, b, c, d, r, s)
+                   out <- fourierin_2d_cpp(f, a, b, c, d, r, s)
                }
            } # End n =2
            ) # End switch

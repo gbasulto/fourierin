@@ -18,9 +18,9 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
-// fourierin_1d
-arma::cx_vec fourierin_1d(arma::vec f, double a, double b, double c, double d, double r, double s);
-RcppExport SEXP fourierin_fourierin_1d(SEXP fSEXP, SEXP aSEXP, SEXP bSEXP, SEXP cSEXP, SEXP dSEXP, SEXP rSEXP, SEXP sSEXP) {
+// fourierin_1d_cpp
+arma::cx_vec fourierin_1d_cpp(arma::vec f, double a, double b, double c, double d, double r, double s);
+RcppExport SEXP fourierin_fourierin_1d_cpp(SEXP fSEXP, SEXP aSEXP, SEXP bSEXP, SEXP cSEXP, SEXP dSEXP, SEXP rSEXP, SEXP sSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -31,13 +31,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type d(dSEXP);
     Rcpp::traits::input_parameter< double >::type r(rSEXP);
     Rcpp::traits::input_parameter< double >::type s(sSEXP);
-    __result = Rcpp::wrap(fourierin_1d(f, a, b, c, d, r, s));
+    __result = Rcpp::wrap(fourierin_1d_cpp(f, a, b, c, d, r, s));
     return __result;
 END_RCPP
 }
-// fourierin_2d
-arma::cx_mat fourierin_2d(arma::mat f, arma::vec a, arma::vec b, arma::vec c, arma::vec d, double r, double s);
-RcppExport SEXP fourierin_fourierin_2d(SEXP fSEXP, SEXP aSEXP, SEXP bSEXP, SEXP cSEXP, SEXP dSEXP, SEXP rSEXP, SEXP sSEXP) {
+// fourierin_2d_cpp
+arma::cx_mat fourierin_2d_cpp(arma::mat f, arma::vec a, arma::vec b, arma::vec c, arma::vec d, double r, double s);
+RcppExport SEXP fourierin_fourierin_2d_cpp(SEXP fSEXP, SEXP aSEXP, SEXP bSEXP, SEXP cSEXP, SEXP dSEXP, SEXP rSEXP, SEXP sSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -48,7 +48,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::vec >::type d(dSEXP);
     Rcpp::traits::input_parameter< double >::type r(rSEXP);
     Rcpp::traits::input_parameter< double >::type s(sSEXP);
-    __result = Rcpp::wrap(fourierin_2d(f, a, b, c, d, r, s));
+    __result = Rcpp::wrap(fourierin_2d_cpp(f, a, b, c, d, r, s));
     return __result;
 END_RCPP
 }
