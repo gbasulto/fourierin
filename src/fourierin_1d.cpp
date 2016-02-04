@@ -41,24 +41,6 @@ arma::cx_vec fourierin_1d_cpp(arma::vec f, double a,
   return out;
 }
 
-// Computes Fourier integral of univariate functions
-//
-// This function computes univariate and bivariate continuous
-// Fourier tranform based on the paper by Inverarity (2002):
-// "Fast computation of multidimensional Fourier integrals".
-// It is the formula (4.1) on the paper.
-//
-// @param f Values of the function.
-// @param m Resolution of the integral.
-// @param a \eqn{n x 1} vector. Lower integration limit.
-// @param b \eqn{n x 1} vector. Upper integration limit.
-// @param c \eqn{n x 1} vector. Lower limit of w.
-// @param d \eqn{n x 1} vector. Upper limit of w.
-// @param r Power in (4.1).
-// @param s Scale constant in (4.1).
-// @return Continuous Fourier transform values at w.
-//
-// @export
 // [[Rcpp::export]]
 arma::cx_vec fourierin_1d_cpp(arma::vec f, double a,
 			  double b, double c, double d,
