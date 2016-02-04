@@ -3,5 +3,6 @@
 export(ecf_mod_1d)
 export(fourierin)
 export(fourierin_1d)
+export(fourierin_2d)
 importFrom(Rcpp,sourceCpp)
 useDynLib(fourierin)
