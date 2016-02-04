@@ -74,8 +74,8 @@ fourierin_1d <- function(f, a, b, c, d, r, s, resol = NULL){
 #' examples/ex_fourierin_1d.R
 #' @export
 fourierin_2d <- function(f, a, b, c, d, r, s, resol = NULL){
-    ## If function values are provided, then the resolution
-    ## is the length of the vector of values.
+    ## If function values are provided, then the resolution is the
+    ## length of the vector of values.
     if(!is.function(f)) resol <- dim
 
     ## Increment in the frequency domain.
@@ -85,8 +85,8 @@ fourierin_2d <- function(f, a, b, c, d, r, s, resol = NULL){
     w1 <- seq(c[1], d[1] - gam[1], length.out = resol[1])
     w2 <- seq(c[2], d[2] - gam[2], length.out = resol[2])
 
-    ## If f is the function, it needs to be evaluated in
-    ## the time domain values.
+    ## If f is the function, it needs to be evaluated in the time
+    ## domain values.
     if(is.function(f)){
         del <- (b - a)/resol # Increment in the time
                                         # domain.
@@ -94,11 +94,13 @@ fourierin_2d <- function(f, a, b, c, d, r, s, resol = NULL){
                   length.out = resol[1]) # Freq. dom. vector.
         t2 <- seq(a[2] + del[2]/2, b[2] - del[2]/2,
                   length.out = resol[1]) # Freq. dom. vector.
-        out <- fourierin_2d_cpp(f(t), a, b, c, d, r, s)
+        out <- fourierin_2d_cpp(outer(t1, t2, f), a, b, c, d, r, s)
     } else{
         out <- fourierin_2d_cpp(f, a, b, c, d, r, s)
-        return(out)
     }
+
+    return(list(w = w,
+                values = out))
 }
 
 
