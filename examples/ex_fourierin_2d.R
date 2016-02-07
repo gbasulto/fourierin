@@ -28,27 +28,46 @@ phi <- function(s) {
             argument = s %*% mu)
 }
 
+library(mvtnorm)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
 
 
+x1 <- seq(-5, 5, len = 150) + mu[1]
+x2 <- seq(-5, 5, len = 150) + mu[2]
+expand.grid(x1 = x1, x2 = x2) %>%
+    tbl_df() %>%
+    mutate(y = f(cbind(x1, x2))) %>%
+    ggplot(aes(x1, x2)) +
+    geom_raster(aes(fill = y), interpolate = T)
 
-## library(mvtnorm)
 
-## library(ggplot2)
-## head(faithfuld)
-## ggplot(faithfuld, aes(waiting, eruptions)) +
-##     geom_raster(aes(fill = density))
+t1 <- seq(-2, 2, len = 150)
+t2 <- seq(-2, 2, len = 150)
+expand.grid(t1 = t1, t2 = t2) %>%
+    tbl_df() %>%
+    mutate(y = Im(phi(cbind(t1, t2)))) %>%
+    ggplot(aes(t1, t2)) +
+    geom_raster(aes(fill = y), interpolate = T)
 
-## x1 <- seq(-5, 5, len = 150) + mu[1]
-## x2 <- seq(-5, 5, len = 150) + mu[2]
+zz <- fourierin(f,
+                a = c(-8, -6), b = c(6, 8),
+                c = c(-2, -2), d = c(2, 2),
+                r = 1, s = 1, resol = c(256, 256))
 
-## library(dplyr)
-## library(tidyr)
+expand.grid(t1 = zz$w1, t2 = zz$w2) %>%
+  tbl_df() %>%
+  mutate(y = Im(c(zz$values))) %>%
+  ggplot(aes(t1, t2)) +
+  geom_raster(aes(fill = y), interpolate = T)
 
-## expand.grid(x1 = x1, x2 = x2) %>%
-##     tbl_df() %>%
-##     mutate(y = f(cbind(x1, x2))) %>%
-##     ggplot(aes(x1, x2)) +
-##     geom_raster(aes(fill = y), interpolate = T)
+
+expand.grid(t1 = zz$w1, t2 = zz$w2) %>%
+  tbl_df() %>%
+  mutate(y = Re(c(zz$values))) %>%
+  filter(y > .773)
+
 
 ## expand.grid(x1 = x1, x2 = x2) %>%
 ##     tbl_df() %>%
