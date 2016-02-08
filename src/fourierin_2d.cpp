@@ -69,7 +69,7 @@ arma::cx_mat fourierin_2d_cpp(arma::mat f, arma::vec a, arma::vec b,
   out = ifft2(fft2(y) % (fft(z1) * (fft(z2)).t()));
 
   // ... Which we do here.
-  cnst = pow(2.0*datum::pi, -(1 - r))*
+  cnst = pow(2.0*datum::pi, -(1.0 - r))*
     bet(0)*bet(1);		// Note that n/2 = 1 in this case.
   for(j1 = 0; j1 < m1; j1++)
     {

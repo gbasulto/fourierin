@@ -13,4 +13,6 @@ LinkingTo:
     Rcpp
 Imports:
     Rcpp
+Suggests:
+    MASS
 RoxygenNote: 5.0.1

@@ -94,7 +94,10 @@ fourierin_2d <- function(f, a, b, c, d, r, s, resol = NULL){
                   length.out = resol[1]) # Freq. dom. vector.
         t2 <- seq(a[2] + del[2]/2, b[2] - del[2]/2,
                   length.out = resol[1]) # Freq. dom. vector.
-        out <- fourierin_2d_cpp(outer(t1, t2, f), a, b, c, d, r, s)
+        t <- as.matrix(expand.grid(t1, t2))
+        f_vals <- matrix(f(t), resol[1], resol[2])
+        out <- fourierin_2d_cpp(f_vals, a, b, c, d, r, s)
+#         out <- fourierin_2d_cpp(outer(t1, t2, f), a, b, c, d, r, s)
     } else{
         out <- fourierin_2d_cpp(f, a, b, c, d, r, s)
     }
