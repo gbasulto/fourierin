@@ -66,7 +66,8 @@ arma::cx_mat fourierin_2d_cpp(arma::mat f, arma::vec a, arma::vec b,
 
   // Output m1 x m2 matrix. It only requires to be multiplied by some
   // constants.
-  out = ifft2(fft2(y) % (fft(z1) * (fft(z2)).t()));
+  // out = ifft2(fft2(y) % (fft(z1) * (fft(z2).t())));
+  out = ifft2(fft2(y) % (fft(z1) * strans(fft(z2))));
 
   // ... Which we do here.
   cnst = pow(2.0*datum::pi, -(1.0 - r))*
