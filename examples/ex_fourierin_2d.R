@@ -28,21 +28,23 @@ phi <- function(s) {
             argument = s %*% mu)
 }
 
-# library(mvtnorm)
-# library(ggplot2)
-# library(dplyr)
-# library(tidyr)
-#
-#
-# x1 <- seq(-5, 5, len = 150) + mu[1]
-# x2 <- seq(-5, 5, len = 150) + mu[2]
-# expand.grid(x1 = x1, x2 = x2) %>%
-#     tbl_df() %>%
-#     mutate(y = f(cbind(x1, x2))) %>%
-#     ggplot(aes(x1, x2)) +
-#     geom_raster(aes(fill = y), interpolate = T)
-#
-#
+library(mvtnorm)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+
+eval <- fourierin(f, a = c(-8, -6), b = c(6, 8),
+                    c = c(-2, -2), d = c(2, 2),
+                    r = 1, s = 1, resol = c(128, 128))
+t1 <- eval$w1
+t2 <- eval$w2
+t <- as.matrix(expand.grid(t1 = t1, t2 = t2))
+approx <- eval$values
+true <- matrix(f(t), 128, 128)
+
+
+
 # t1 <- seq(-2, 2, len = 150)
 # t2 <- seq(-2, 2, len = 150)
 # expand.grid(t1 = t1, t2 = t2) %>%
