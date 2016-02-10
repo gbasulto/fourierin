@@ -1,19 +1,23 @@
-#' Compute Univariate Fourier integrals
+#' Univariate Fourier integrals
 #'
-#' It computes Fourier integrals for functions of one and two
-#' variables.
+#' It computes Fourier integrals of functions of one and two
+#' variables on a regular grid.
 #'
-#' @param f A function which can be evaluated in matrices of n columns
-#'     (n = 1 or n = 2). Or a matrix of n columns with f already
-#'     evaluated.
-#' @param a Lower integration limit(s).
-#' @param b Upper integration limit(s).
-#' @param c Lower evaluation limit(s).
-#' @param d Upper evaluation limit(s).
+#' @param f function or a vector of size m. If a function is provided,
+#'     it must be able to be evaluated in vectors. If a vector of
+#'     values is provided, such evaluations must have been obtained on
+#'     a regular grid and the Fourier integral is faster is m is a
+#'     power of 2.
+#' @param a Lower integration limit.
+#' @param b Upper integration limit.
+#' @param c Lower evaluation limit.
+#' @param d Upper evaluation limit.
 #' @param r Factor related to adjust definition of Fourier
 #'     transform. It is usually 0, -1 or 1.
 #' @param s Constant to adjust the exponent on the definition of the
 #'     Fourier transform. It is usually 1, -1, 2pi or -2pi.
+#' @param resol An integer (faster if power of two) determining the
+#'     resolution of the evaluation grid.
 #'
 #' @return A list with the elements
 #' \item{w}{ddd}
