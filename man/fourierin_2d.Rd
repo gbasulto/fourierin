@@ -35,52 +35,65 @@ It computes Fourier integrals for functions of one and two
 variables.
 }
 \examples{
-## -- Example 1 ------------------------------------------------------
 ## -- Recovering std. normal from its characteristic function --------
 library(fourierin)
 
-                                        # Compute integral
-out <- fourierin(f = function(t) exp(-t^2/2),
-                 a = -5, b = 5, c = -3, d = 3,
-                 r = -1, s = -1, resol = 64)
-grid <- out$w                           # Extract grid and values
-values <- Re(out$values)
+## Parameters of bivariate normal distribution
+mu <- c(-1, 1)
+sig <- matrix(c(3, -1, -1, 2), 2, 2)
 
-plot(grid, values, type = "l", col = 3)
-lines(grid, dnorm(grid), col = 4)
+## Multivariate normal density
+## x is n x d
+f <- function(x) {
+    ## Auxiliar values
+    d <- ncol(x)
+    z <- sweep(x, 2, mu, "-")
 
-## -- Example 2 ------------------------------------------------------
-## -- Computing characteristic function of a gamma r. v. ------------
+    ## Get numerator and denominator of normal density
+    num <- exp(-0.5*rowSums(z * (z \%*\% solve(sig))))
+    denom <- sqrt((2*pi)^d*det(sig))
 
-library(fourierin)
-                                        # Compute integral
-shape <- 5
-rate <- 3
-out <- fourierin(f = function(t) dgamma(t, shape, rate),
-                 a = 0, b = 6, c = -4, d = 4,
-                 r = 1, s = 1, resol = 64)
-grid <- out$w                           # Extract grid
-re_values <- Re(out$values)             # Real values
-im_values <- Im(out$values)             # Imag values
+    return(num/denom)
+}
 
-                                        # Now compute the real and
-                                        # imaginary true values of the
-                                        # characteric function.
-true_cf <- function(t, shape, rate) (1 - 1i*t/rate)^-shape
-true_re <- Re(true_cf(grid, shape, rate))
-true_im <- Im(true_cf(grid, shape, rate))
+## Characteristic function
+## s is n x d
+phi <- function(s) {
+    complex(modulus = exp(- 0.5*rowSums(s*(s \%*\% sig))),
+            argument = s \%*\% mu)
+}
 
-                                        # Compare them. We can see a
-                                        # slight discrepancy on the
-                                        # tails, but that is fixed
-                                        # when resulution is
-                                        # increased.
-plot(grid, re_values, type = "l", col = 3)
-lines(grid, true_re, col = 4)
+## Approximate cf using Fourier integrals
+eval <- fourierin_2d(f, a = c(-8, -6), b = c(6, 8),
+                    c = c(-4, -4), d = c(4, 4),
+                    r = 1, s = 1, resol = c(128, 128))
+t1 <- eval$w1
+t2 <- eval$w2
+t <- as.matrix(expand.grid(t1 = t1, t2 = t2))
+approx <- eval$values
+true <- matrix(phi(t), 128, 128)        # Compute true values
 
-                                        # Same here
-plot(grid, im_values, type = "l", col = 3)
-lines(grid, true_im, col = 4)
+## This is a section of the characteristic functions
+i <- 65
+plot(t2, Re(approx[i, ]), type = "l", col = 2,
+     ylab = "",
+     xlab = expression(t[2]),
+     main = expression(paste("Real part section at ",
+                             t[1], "= 0")))
+lines(t2, Re(true[i, ]), col = 3)
+legend("topleft", legend = c("true", "approximation"),
+       col = 3:2, lwd = 1)
+
+## Another section, now of the imaginary part
+plot(t1, Im(approx[, i]), type = "l", col = 2,
+     ylab = "",
+     xlab = expression(t[1]),
+     main = expression(paste("Imaginary part section at ",
+                             t[2], "= 0")))
+lines(t1, Im(true[, i]), col = 3)
+legend("topleft", legend = c("true", "approximation"),
+       col = 3:2, lwd = 1)
+
 
 }
 

@@ -1,4 +1,3 @@
-## -- Example 3 ------------------------------------------------------
 ## -- Recovering std. normal from its characteristic function --------
 library(fourierin)
 
@@ -28,7 +27,7 @@ phi <- function(s) {
 }
 
 ## Approximate cf using Fourier integrals
-eval <- fourierin(f, a = c(-8, -6), b = c(6, 8),
+eval <- fourierin_2d(f, a = c(-8, -6), b = c(6, 8),
                     c = c(-4, -4), d = c(4, 4),
                     r = 1, s = 1, resol = c(128, 128))
 t1 <- eval$w1

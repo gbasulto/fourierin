@@ -40,7 +40,7 @@ variables.
 library(fourierin)
 
                                         # Compute integral
-out <- fourierin(f = function(t) exp(-t^2/2),
+out <- fourierin_1d(f = function(t) exp(-t^2/2),
                  a = -5, b = 5, c = -3, d = 3,
                  r = -1, s = -1, resol = 64)
 grid <- out$w                           # Extract grid and values
@@ -56,7 +56,7 @@ library(fourierin)
                                         # Compute integral
 shape <- 5
 rate <- 3
-out <- fourierin(f = function(t) dgamma(t, shape, rate),
+out <- fourierin_1d(f = function(t) dgamma(t, shape, rate),
                  a = 0, b = 6, c = -4, d = 4,
                  r = 1, s = 1, resol = 64)
 grid <- out$w                           # Extract grid
