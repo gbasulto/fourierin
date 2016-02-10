@@ -1,7 +1,6 @@
 ## -- Example 3 ------------------------------------------------------
 ## -- Recovering std. normal from its characteristic function --------
 library(fourierin)
-library(MASS)                           # For biv. normal
 
 ## Parameters of bivariate normal distribution
 mu <- c(-1, 1)
@@ -28,57 +27,35 @@ phi <- function(s) {
             argument = s %*% mu)
 }
 
-library(mvtnorm)
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-
-
+## Approximate cf using Fourier integrals
 eval <- fourierin(f, a = c(-8, -6), b = c(6, 8),
-                    c = c(-2, -2), d = c(2, 2),
+                    c = c(-4, -4), d = c(4, 4),
                     r = 1, s = 1, resol = c(128, 128))
 t1 <- eval$w1
 t2 <- eval$w2
 t <- as.matrix(expand.grid(t1 = t1, t2 = t2))
 approx <- eval$values
-true <- matrix(f(t), 128, 128)
+true <- matrix(phi(t), 128, 128)        # Compute true values
+
+## This is a section of the characteristic functions
+i <- 65
+plot(t2, Re(approx[i, ]), type = "l", col = 2,
+     ylab = "",
+     xlab = expression(t[2]),
+     main = expression(paste("Real part section at ",
+                             t[1], "= 0")))
+lines(t2, Re(true[i, ]), col = 3)
+legend("topleft", legend = c("true", "approximation"),
+       col = 3:2, lwd = 1)
+
+## Another section, now of the imaginary part
+plot(t1, Im(approx[, i]), type = "l", col = 2,
+     ylab = "",
+     xlab = expression(t[1]),
+     main = expression(paste("Imaginary part section at ",
+                             t[2], "= 0")))
+lines(t1, Im(true[, i]), col = 3)
+legend("topleft", legend = c("true", "approximation"),
+       col = 3:2, lwd = 1)
 
 
-
-# t1 <- seq(-2, 2, len = 150)
-# t2 <- seq(-2, 2, len = 150)
-# expand.grid(t1 = t1, t2 = t2) %>%
-#     tbl_df() %>%
-#     mutate(y = Im(phi(cbind(t1, t2)))) %>%
-#     ggplot(aes(t1, t2)) +
-#     geom_raster(aes(fill = y), interpolate = T)
-#
-# zz <- fourierin(f,
-#                 a = c(-8, -6), b = c(6, 8),
-#                 c = c(-2, -2), d = c(2, 2),
-#                 r = 1, s = 1, resol = c(256, 256))
-#
-# expand.grid(t1 = zz$w1, t2 = zz$w2) %>%
-#   tbl_df() %>%
-#   mutate(y = Im(c(zz$values))) %>%
-#   ggplot(aes(t1, t2)) +
-#   geom_raster(aes(fill = y), interpolate = T)
-#
-#
-# expand.grid(t1 = zz$w1, t2 = zz$w2) %>%
-#   tbl_df() %>%
-#   mutate(y = Re(c(zz$values))) %>%
-#   filter(y > .773)
-
-
-## expand.grid(x1 = x1, x2 = x2) %>%
-##     tbl_df() %>%
-##     mutate(y = dmvnorm(cbind(x1, x2), mu, sig)) %>%
-##     ggplot(aes(x1, x2)) +
-##     geom_raster(aes(fill = y), interpolate = T)
-
-
-## microbenchmark(
-##     dmvnorm(rbind(sig, sig), mu, sig),
-##     f(rbind(sig, sig))
-## )

@@ -21,6 +21,7 @@
 #'
 #' @example
 #' examples/ex_fourierin_1d.R
+#' examples/ex_fourierin_2d.R
 #' @export
 fourierin_1d <- function(f, a, b, c, d, r, s, resol = NULL){
     ## If function values are provided, then the resolution
