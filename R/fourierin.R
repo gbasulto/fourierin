@@ -17,7 +17,7 @@
 #' @param s Constant to adjust the exponent on the definition of the
 #'     Fourier transform. It is usually 1, -1, 2pi or -2pi.
 #' @param resol An integer (faster if power of two) determining the
-#'     resolution of the evaluation grid.
+#'     resolution of the evaluation grid. Not required if f is a vector.
 #'
 #' @return A list with the elements
 #' \item{w}{ddd}
@@ -69,6 +69,8 @@ fourierin_1d <- function(f, a, b, c, d, r, s, resol = NULL){
 #'     transform. It is usually 0, -1 or 1.
 #' @param s Constant to adjust the exponent on the definition of the
 #'     Fourier transform. It is usually 1, -1, 2pi or -2pi.
+#' @param resol An integer (faster if power of two) determining the
+#'     resolution of the evaluation grid. Not required if f is a vector.
 #'
 #' @return A list with the elements
 #' \item{w}{ddd}
@@ -129,6 +131,8 @@ fourierin_2d <- function(f, a, b, c, d, r, s, resol = NULL){
 #'     transform. It is usually 0, -1 or 1.
 #' @param s Constant to adjust the exponent on the definition of the
 #'     Fourier transform. It is usually 1, -1, 2pi or -2pi.
+#' @param resol An integer (faster if power of two) determining the
+#'     resolution of the evaluation grid. Not required if f is a vector.
 #'
 #' @return A list with the elements
 #' \item{w}{ddd}

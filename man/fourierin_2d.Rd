@@ -24,6 +24,9 @@ transform. It is usually 0, -1 or 1.}
 
 \item{s}{Constant to adjust the exponent on the definition of the
 Fourier transform. It is usually 1, -1, 2pi or -2pi.}
+
+\item{resol}{An integer (faster if power of two) determining the
+resolution of the evaluation grid. Not required if f is a vector.}
 }
 \value{
 A list with the elements
