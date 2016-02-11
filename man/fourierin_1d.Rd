@@ -32,8 +32,8 @@ resolution of the evaluation grid. Not required if f is a vector.}
 }
 \value{
 A list with the elements
-\item{w}{ddd}
-\item{values}{dddd}
+\item{w}{A vector of size m where the integral was computed.}
+\item{values}{A complex vector of size m with the values of the integral}
 }
 \description{
 It computes Fourier integrals of functions of one and two

@@ -20,8 +20,8 @@
 #'     resolution of the evaluation grid. Not required if f is a vector.
 #'
 #' @return A list with the elements
-#' \item{w}{ddd}
-#' \item{values}{dddd}
+#' \item{w}{A vector of size m where the integral was computed.}
+#' \item{values}{A complex vector of size m with the values of the integral}
 #'
 #' @example
 #' examples/ex_fourierin_1d.R
@@ -53,28 +53,34 @@ fourierin_1d <- function(f, a, b, c, d, r, s, resol = NULL){
                 values = out))
 }
 
-#' Compute Univariate Fourier integrals
+#' Bivariate Fourier integrals
 #'
 #' It computes Fourier integrals for functions of one and two
 #' variables.
 #'
-#' @param f A function which can be evaluated in matrices of n columns
-#'     (n = 1 or n = 2). Or a matrix of n columns with f already
-#'     evaluated.
-#' @param a Lower integration limit(s).
-#' @param b Upper integration limit(s).
-#' @param c Lower evaluation limit(s).
-#' @param d Upper evaluation limit(s).
+#' @param f function or a matrix of size m1 x m2. If a function is
+#'     provided, it must be able to be evaluated in a matrix of two
+#'     columns. If a matrix of values is provided instead, such
+#'     evaluations must have been obtained on
+#'     a regular grid matrix and the Fourier integral is faster is m1
+#'     and m2 are powers of 2.
+#' @param a Lower integration limits.
+#' @param b Upper integration limits.
+#' @param c Lower evaluation limits.
+#' @param d Upper evaluation limits.
 #' @param r Factor related to adjust definition of Fourier
 #'     transform. It is usually 0, -1 or 1.
 #' @param s Constant to adjust the exponent on the definition of the
 #'     Fourier transform. It is usually 1, -1, 2pi or -2pi.
-#' @param resol An integer (faster if power of two) determining the
+#' @param resol A vector of two integers (faster if entries are powers
+#'     of two) determining the
 #'     resolution of the evaluation grid. Not required if f is a vector.
 #'
-#' @return A list with the elements
-#' \item{w}{ddd}
-#' \item{values}{dddd}
+#' @return A list with three elements
+#' \item{w1}{Evaluation grid for first entry}
+#' \item{w2}{Evaluation grid for second entry}
+#' \item{values}{m1 x m2 matrix of complex numbers, correspoding to the
+#'       evaluations of the integral}
 #'
 #' @example
 #' examples/ex_fourierin_2d.R
