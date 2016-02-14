@@ -6,18 +6,6 @@
 
 using namespace Rcpp;
 
-// ecf_mod_1d
-NumericVector ecf_mod_1d(NumericVector t, NumericVector smp);
-RcppExport SEXP fourierin_ecf_mod_1d(SEXP tSEXP, SEXP smpSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< NumericVector >::type t(tSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type smp(smpSEXP);
-    __result = Rcpp::wrap(ecf_mod_1d(t, smp));
-    return __result;
-END_RCPP
-}
 // fourierin_1d_cpp
 arma::cx_vec fourierin_1d_cpp(arma::vec f, double a, double b, double c, double d, double r, double s);
 RcppExport SEXP fourierin_fourierin_1d_cpp(SEXP fSEXP, SEXP aSEXP, SEXP bSEXP, SEXP cSEXP, SEXP dSEXP, SEXP rSEXP, SEXP sSEXP) {
