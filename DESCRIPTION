@@ -5,7 +5,7 @@ Version: 0.1.1
 Date: 2016-01-22
 Author: Guillermo Basulto-Elias
 Maintainer: Guillermo Basulto-Elias <guillermobasulto@gmail.com>
-Description: This package computes Fourier integrals of functions of one and two variables using the Fast Fourier transform
+Description: Computes Fourier integrals of functions of one and two variables using the Fast Fourier transform. The Fourier transforms must be evaluated on a regular grid.
 License: MIT + file LICENSE
 LazyData: TRUE
 LinkingTo:
