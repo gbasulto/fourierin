@@ -6,7 +6,7 @@ Date: 2016-01-22
 Author: Guillermo Basulto-Elias
 Maintainer: Guillermo Basulto-Elias <guillermobasulto@gmail.com>
 Description: This package computes Fourier integrals of functions of one and two variables using the Fast Fourier transform
-License: What license is it under?
+License: MIT + file LICENSE
 LazyData: TRUE
 LinkingTo:
     RcppArmadillo,
