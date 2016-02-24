@@ -140,9 +140,13 @@ fourierin_2d <- function(f, a, b, c, d, r, s, resol = NULL){
 #' @param resol An integer (faster if power of two) determining the
 #'     resolution of the evaluation grid. Not required if f is a vector.
 #'
-#' @return A list with the elements
-#' \item{w}{ddd}
-#' \item{values}{dddd}
+#' @return A list with the elements n-dimensional array and n vectors
+#'     with their corresponding resolution. Specifically,
+#' \item{values}{A n-dimensional (resol_1 x resol_2 x ... x resol_n)
+#'       complex array with the values.}
+#' \item{w1}{A vector of size resol_1}
+#' \item{...}{ }
+#' \item{wn}{A vector of size resol_n}
 #'
 #' @example
 #' examples/ex_fourierin.R
