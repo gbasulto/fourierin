@@ -18,4 +18,6 @@ Suggests:
     knitr,
     rmarkdown
 RoxygenNote: 5.0.1
+URL: http://github.com/gbasulto/fourierin
+BugReports: https://github.com/gbasulto/fourierin/issues
 VignetteBuilder: knitr
