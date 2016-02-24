@@ -14,5 +14,8 @@ LinkingTo:
 Imports:
     Rcpp
 Suggests:
-    MASS
+    MASS,
+    knitr,
+    rmarkdown
 RoxygenNote: 5.0.1
+VignetteBuilder: knitr
