@@ -25,15 +25,14 @@ $$
 
 where,
 
-<!--
 $\boldsymbol{a} = (a_1, \ldots, a_n)$, 
 $\boldsymbol{b} = (b_1, \ldots, b_n)$, 
 $\boldsymbol{t} = (t^{(1)}, \ldots, t^{(n)})$, 
 $\boldsymbol{w} = (w^{(1)}, \ldots, w^{(n)})$, 
 $a_l \leq t^{(l)} \leq b_l$,
 $c_l \leq w^{(l)} \leq c_l$.
--->
- <!--
+
+<!--
 <img src="eq02_details.png" width="200px" />
 -->
 
