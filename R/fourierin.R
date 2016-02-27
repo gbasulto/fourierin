@@ -44,7 +44,11 @@ fourierin_1d <- function(f, a, b, c, d, r, s, resol = NULL){
                                         # domain.
         t <- seq(a + del/2, b - del/2,
                  length.out = resol)    # Freq. dom. vector.
-        out <- fourierin_1d_cpp(f(t), a, b, c, d, r, s)
+        f_t <- f(t)                     # Function values
+              # Rutinary check
+        if(is.null(f_t)) stop("Function f is null.")
+
+        out <- fourierin_1d_cpp(f_t, a, b, c, d, r, s)
     } else{
         out <- fourierin_1d_cpp(f, a, b, c, d, r, s)
     }
@@ -108,6 +112,10 @@ fourierin_2d <- function(f, a, b, c, d, r, s, resol = NULL){
                   length.out = resol[1]) # Freq. dom. vector.
         t <- as.matrix(expand.grid(t1, t2))
         f_vals <- matrix(f(t), resol[1], resol[2])
+
+        # Rutinary check
+        if(is.null(f_vals)) stop("Function f is null.")
+
         out <- fourierin_2d_cpp(f_vals, a, b, c, d, r, s)
 #         out <- fourierin_2d_cpp(outer(t1, t2, f), a, b, c, d, r, s)
     } else{
