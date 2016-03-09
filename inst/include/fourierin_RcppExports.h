@@ -63,6 +63,44 @@ namespace fourierin {
         return Rcpp::as<arma::cx_mat >(__result);
     }
 
+    inline arma::cx_vec fourierin_cx_1d_cpp(arma::cx_vec f, double a, double b, double c, double d, double r, double s) {
+        typedef SEXP(*Ptr_fourierin_cx_1d_cpp)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_fourierin_cx_1d_cpp p_fourierin_cx_1d_cpp = NULL;
+        if (p_fourierin_cx_1d_cpp == NULL) {
+            validateSignature("arma::cx_vec(*fourierin_cx_1d_cpp)(arma::cx_vec,double,double,double,double,double,double)");
+            p_fourierin_cx_1d_cpp = (Ptr_fourierin_cx_1d_cpp)R_GetCCallable("fourierin", "fourierin_fourierin_cx_1d_cpp");
+        }
+        RObject __result;
+        {
+            RNGScope __rngScope;
+            __result = p_fourierin_cx_1d_cpp(Rcpp::wrap(f), Rcpp::wrap(a), Rcpp::wrap(b), Rcpp::wrap(c), Rcpp::wrap(d), Rcpp::wrap(r), Rcpp::wrap(s));
+        }
+        if (__result.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (__result.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(__result).c_str());
+        return Rcpp::as<arma::cx_vec >(__result);
+    }
+
+    inline arma::cx_mat fourierin_cx_2d_cpp(arma::cx_mat f, arma::vec a, arma::vec b, arma::vec c, arma::vec d, double r, double s) {
+        typedef SEXP(*Ptr_fourierin_cx_2d_cpp)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_fourierin_cx_2d_cpp p_fourierin_cx_2d_cpp = NULL;
+        if (p_fourierin_cx_2d_cpp == NULL) {
+            validateSignature("arma::cx_mat(*fourierin_cx_2d_cpp)(arma::cx_mat,arma::vec,arma::vec,arma::vec,arma::vec,double,double)");
+            p_fourierin_cx_2d_cpp = (Ptr_fourierin_cx_2d_cpp)R_GetCCallable("fourierin", "fourierin_fourierin_cx_2d_cpp");
+        }
+        RObject __result;
+        {
+            RNGScope __rngScope;
+            __result = p_fourierin_cx_2d_cpp(Rcpp::wrap(f), Rcpp::wrap(a), Rcpp::wrap(b), Rcpp::wrap(c), Rcpp::wrap(d), Rcpp::wrap(r), Rcpp::wrap(s));
+        }
+        if (__result.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (__result.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(__result).c_str());
+        return Rcpp::as<arma::cx_mat >(__result);
+    }
+
 }
 
 #endif // __fourierin_RcppExports_h__
