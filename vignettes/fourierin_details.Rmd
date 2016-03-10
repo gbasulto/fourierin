@@ -60,6 +60,34 @@ legend("topleft", legend = c("True", "Recovered"), col = c(4, 3),
       lwd = 1)
 ```
 
+This is another example using gamma density
+
+```{r, fig.height= 5, fig.width= 7}
+library(fourierin)
+
+                                        # Set gamma parameters
+shape <- 5
+rate <- 8
+
+                                        # Set functions
+cfgamma <- function(t) (1 - 1i*t/rate)^(-shape)
+dens <- function(t) dgamma(t, shape, rate)
+
+                                        # Compute integral
+out <- fourierin(f = cfgamma,
+                 a = -30, b = 30, c = -1, d = 3,
+                 r = -1, s = -1, resol = 128)
+grid <- out$w                           # Extract grid and values
+values <- Re(out$values)
+
+plot(grid, values, type = "l", col = 3, xlab = "x", ylab = "f(x)")
+lines(grid, dens(grid), col = 4)
+legend("topright", legend = c("True", "Recovered"), col = c(4, 3),
+      lwd = 1)
+
+```
+
+
 ## Example 2: Computing characteristic function of a gamma density
 
 ```{r, fig.height= 5, fig.width= 7}
