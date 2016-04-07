@@ -17,6 +17,11 @@ fourierin_cx_2d_cpp <- function(f, a, b, c, d, r, s) {
     .Call('fourierin_fourierin_cx_2d_cpp', PACKAGE = 'fourierin', f, a, b, c, d, r, s)
 }
 
+#' @export
+fft_rcpp <- function(v) {
+    .Call('fourierin_fft_rcpp', PACKAGE = 'fourierin', v)
+}
+
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
     .Call('fourierin_RcppExport_registerCCallable', PACKAGE = 'fourierin')

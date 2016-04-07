@@ -153,6 +153,36 @@ RcppExport SEXP fourierin_fourierin_cx_2d_cpp(SEXP fSEXP, SEXP aSEXP, SEXP bSEXP
     UNPROTECT(1);
     return __result;
 }
+// fft_rcpp
+Rcpp::ComplexVector fft_rcpp(Rcpp::ComplexVector v);
+static SEXP fourierin_fft_rcpp_try(SEXP vSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::traits::input_parameter< Rcpp::ComplexVector >::type v(vSEXP);
+    __result = Rcpp::wrap(fft_rcpp(v));
+    return __result;
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP fourierin_fft_rcpp(SEXP vSEXP) {
+    SEXP __result;
+    {
+        Rcpp::RNGScope __rngScope;
+        __result = PROTECT(fourierin_fft_rcpp_try(vSEXP));
+    }
+    Rboolean __isInterrupt = Rf_inherits(__result, "interrupted-error");
+    if (__isInterrupt) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    Rboolean __isError = Rf_inherits(__result, "try-error");
+    if (__isError) {
+        SEXP __msgSEXP = Rf_asChar(__result);
+        UNPROTECT(1);
+        Rf_error(CHAR(__msgSEXP));
+    }
+    UNPROTECT(1);
+    return __result;
+}
 
 // validate (ensure exported C++ functions exist before calling them)
 static int fourierin_RcppExport_validate(const char* sig) { 
@@ -162,6 +192,7 @@ static int fourierin_RcppExport_validate(const char* sig) {
         signatures.insert("arma::cx_mat(*fourierin_2d_cpp)(arma::mat,arma::vec,arma::vec,arma::vec,arma::vec,double,double)");
         signatures.insert("arma::cx_vec(*fourierin_cx_1d_cpp)(arma::cx_vec,double,double,double,double,double,double)");
         signatures.insert("arma::cx_mat(*fourierin_cx_2d_cpp)(arma::cx_mat,arma::vec,arma::vec,arma::vec,arma::vec,double,double)");
+        signatures.insert("Rcpp::ComplexVector(*fft_rcpp)(Rcpp::ComplexVector)");
     }
     return signatures.find(sig) != signatures.end();
 }
@@ -172,6 +203,7 @@ RcppExport SEXP fourierin_RcppExport_registerCCallable() {
     R_RegisterCCallable("fourierin", "fourierin_fourierin_2d_cpp", (DL_FUNC)fourierin_fourierin_2d_cpp_try);
     R_RegisterCCallable("fourierin", "fourierin_fourierin_cx_1d_cpp", (DL_FUNC)fourierin_fourierin_cx_1d_cpp_try);
     R_RegisterCCallable("fourierin", "fourierin_fourierin_cx_2d_cpp", (DL_FUNC)fourierin_fourierin_cx_2d_cpp_try);
+    R_RegisterCCallable("fourierin", "fourierin_fft_rcpp", (DL_FUNC)fourierin_fft_rcpp_try);
     R_RegisterCCallable("fourierin", "fourierin_RcppExport_validate", (DL_FUNC)fourierin_RcppExport_validate);
     return R_NilValue;
 }

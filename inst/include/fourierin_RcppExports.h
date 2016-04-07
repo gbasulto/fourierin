@@ -101,6 +101,25 @@ namespace fourierin {
         return Rcpp::as<arma::cx_mat >(__result);
     }
 
+    inline Rcpp::ComplexVector fft_rcpp(Rcpp::ComplexVector v) {
+        typedef SEXP(*Ptr_fft_rcpp)(SEXP);
+        static Ptr_fft_rcpp p_fft_rcpp = NULL;
+        if (p_fft_rcpp == NULL) {
+            validateSignature("Rcpp::ComplexVector(*fft_rcpp)(Rcpp::ComplexVector)");
+            p_fft_rcpp = (Ptr_fft_rcpp)R_GetCCallable("fourierin", "fourierin_fft_rcpp");
+        }
+        RObject __result;
+        {
+            RNGScope __rngScope;
+            __result = p_fft_rcpp(Rcpp::wrap(v));
+        }
+        if (__result.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (__result.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(__result).c_str());
+        return Rcpp::as<Rcpp::ComplexVector >(__result);
+    }
+
 }
 
 #endif // __fourierin_RcppExports_h__
