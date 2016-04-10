@@ -15,9 +15,11 @@
 
 //' @export
 //[[Rcpp::export]]
-Rcpp::ComplexVector fft_rcpp(Rcpp::ComplexVector v)
+Rcpp::ComplexVector fft_rcpp(Rcpp::NumericVector real, Rcpp::NumericVector imag)
 {
+  Rprintf("v = %f\n", v[0].i);
   // // Reuses memory and avoids extra copy
+  // arma::vec re(), im;
   // arma::cx_vec v_arma(v.begin(), v.size());
 
   // //  arma::fft();
