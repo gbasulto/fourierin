@@ -5,7 +5,7 @@
 
 using namespace arma;
 
-arma::cx_vec fourierin_1d_cpp(arma::vec f, double a,
+arma::cx_vec fourierin_1d_cpp(const arma::vec & f, double a,
 			  double b, double c, double d, double r)
 {
   int m = f.n_rows;
@@ -43,7 +43,7 @@ arma::cx_vec fourierin_1d_cpp(arma::vec f, double a,
 }
 
 // [[Rcpp::export]]
-arma::cx_vec fourierin_1d_cpp(arma::vec f, double a,
+arma::cx_vec fourierin_1d_cpp(const arma::vec & f, double a,
 			  double b, double c, double d,
 			  double r, double s)
 {
