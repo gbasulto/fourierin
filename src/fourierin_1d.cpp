@@ -10,7 +10,7 @@ arma::cx_vec fourierin_1d_cpp(const arma::vec & f, double a,
 {
   int m = f.n_rows;
   arma::cx_vec out(m), y(2*m), z(2*m), aux(2*m);
-  arma::vec J1(m), J2(m), t(m), w(m), arg(m);
+  arma::vec J1(m), J2(m), w(m), arg(m);
   double bet, gam, del, cnst;
 
   bet = (b - a)/m;		// Real numbers
@@ -18,7 +18,6 @@ arma::cx_vec fourierin_1d_cpp(const arma::vec & f, double a,
   del = bet*gam/2;
   J1 = arma::linspace<arma::vec>(0, m-1, m); // mx1 vectors
   J2 = arma::linspace<arma::vec>(m, 2*m-1, m);
-  t = a + bet*J1;
   w = c + gam*J1;
   y.zeros();		// (2m) x 1 vector
 
