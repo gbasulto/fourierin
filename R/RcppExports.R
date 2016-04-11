@@ -18,8 +18,8 @@ fourierin_cx_2d_cpp <- function(f, a, b, c, d, r, s) {
 }
 
 #' @export
-fft_rcpp <- function(v) {
-    .Call('fourierin_fft_rcpp', PACKAGE = 'fourierin', v)
+fft_rcpp <- function(real, imag) {
+    .Call('fourierin_fft_rcpp', PACKAGE = 'fourierin', real, imag)
 }
 
 # Register entry points for exported C++ functions
