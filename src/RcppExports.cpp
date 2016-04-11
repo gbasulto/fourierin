@@ -82,11 +82,11 @@ RcppExport SEXP fourierin_fourierin_2d_cpp(SEXP fSEXP, SEXP aSEXP, SEXP bSEXP, S
     return __result;
 }
 // fourierin_cx_1d_cpp
-arma::cx_vec fourierin_cx_1d_cpp(arma::cx_vec f, double a, double b, double c, double d, double r, double s);
+arma::cx_vec fourierin_cx_1d_cpp(const arma::cx_vec& f, double a, double b, double c, double d, double r, double s);
 static SEXP fourierin_fourierin_cx_1d_cpp_try(SEXP fSEXP, SEXP aSEXP, SEXP bSEXP, SEXP cSEXP, SEXP dSEXP, SEXP rSEXP, SEXP sSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
-    Rcpp::traits::input_parameter< arma::cx_vec >::type f(fSEXP);
+    Rcpp::traits::input_parameter< const arma::cx_vec& >::type f(fSEXP);
     Rcpp::traits::input_parameter< double >::type a(aSEXP);
     Rcpp::traits::input_parameter< double >::type b(bSEXP);
     Rcpp::traits::input_parameter< double >::type c(cSEXP);
@@ -118,15 +118,15 @@ RcppExport SEXP fourierin_fourierin_cx_1d_cpp(SEXP fSEXP, SEXP aSEXP, SEXP bSEXP
     return __result;
 }
 // fourierin_cx_2d_cpp
-arma::cx_mat fourierin_cx_2d_cpp(arma::cx_mat f, arma::vec a, arma::vec b, arma::vec c, arma::vec d, double r, double s);
+arma::cx_mat fourierin_cx_2d_cpp(const arma::cx_mat& f, const arma::vec& a, const arma::vec& b, const arma::vec& c, const arma::vec& d, double r, double s);
 static SEXP fourierin_fourierin_cx_2d_cpp_try(SEXP fSEXP, SEXP aSEXP, SEXP bSEXP, SEXP cSEXP, SEXP dSEXP, SEXP rSEXP, SEXP sSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
-    Rcpp::traits::input_parameter< arma::cx_mat >::type f(fSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type a(aSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type b(bSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type c(cSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type d(dSEXP);
+    Rcpp::traits::input_parameter< const arma::cx_mat& >::type f(fSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type a(aSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type b(bSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type c(cSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type d(dSEXP);
     Rcpp::traits::input_parameter< double >::type r(rSEXP);
     Rcpp::traits::input_parameter< double >::type s(sSEXP);
     __result = Rcpp::wrap(fourierin_cx_2d_cpp(f, a, b, c, d, r, s));
@@ -191,8 +191,8 @@ static int fourierin_RcppExport_validate(const char* sig) {
     if (signatures.empty()) {
         signatures.insert("arma::cx_vec(*fourierin_1d_cpp)(const arma::vec&,double,double,double,double,double,double)");
         signatures.insert("arma::cx_mat(*fourierin_2d_cpp)(const arma::mat&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&,double,double)");
-        signatures.insert("arma::cx_vec(*fourierin_cx_1d_cpp)(arma::cx_vec,double,double,double,double,double,double)");
-        signatures.insert("arma::cx_mat(*fourierin_cx_2d_cpp)(arma::cx_mat,arma::vec,arma::vec,arma::vec,arma::vec,double,double)");
+        signatures.insert("arma::cx_vec(*fourierin_cx_1d_cpp)(const arma::cx_vec&,double,double,double,double,double,double)");
+        signatures.insert("arma::cx_mat(*fourierin_cx_2d_cpp)(const arma::cx_mat&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&,double,double)");
         signatures.insert("Rcpp::NumericVector(*fft_rcpp)(Rcpp::NumericVector,Rcpp::NumericVector)");
     }
     return signatures.find(sig) != signatures.end();

@@ -5,12 +5,14 @@
 
 using namespace arma;
 
-arma::cx_mat fourierin_cx_2d_cpp(arma::cx_mat f, arma::vec a, arma::vec b,
-                          arma::vec c, arma::vec d, double r)
+arma::cx_mat fourierin_cx_2d_cpp(const arma::cx_mat & f,
+				 const arma::vec & a, const arma::vec & b,
+				 const arma::vec & c, const arma::vec & d,
+				 double r)
 {
   int m1 = f.n_rows, m2 = f.n_cols, j1, j2;
   arma::vec m(2), bet(2), gam(2), del(2), a_hat(2),
-    t1(m1), t2(m2), w1(m1), w2(m2);
+    w1(m1), w2(m2);
   double arg, aux, cnst;
   arma::cx_vec z1(2*m1), z2(2*m2);
   arma::cx_mat y(2*m1, 2*m2), out(2*m1, 2*m2);
@@ -24,11 +26,9 @@ arma::cx_mat fourierin_cx_2d_cpp(arma::cx_mat f, arma::vec a, arma::vec b,
   a_hat = a + bet/2.0;
 
   // m1 x 1 vectors
-  t1 = a_hat[0] + bet[0]*linspace<vec>(0, m1 - 1, m1);
   w1 = c[0] + gam[0]*linspace<vec>(0, m1 - 1, m1);
 
   // m2 x 1 vectors
-  t2 = a_hat[1] + bet[1]*linspace<vec>(0, m2 - 1, m2);
   w2 = c[1] + gam[1]*linspace<vec>(0, m2 - 1, m2);
 
   // Fill y matrix, m1 x m2
@@ -67,7 +67,6 @@ arma::cx_mat fourierin_cx_2d_cpp(arma::cx_mat f, arma::vec a, arma::vec b,
 
   // Output m1 x m2 matrix. It only requires to be multiplied by some
   // constants.
-  // out = ifft2(fft2(y) % (fft(z1) * (fft(z2).t())));
   out = ifft2(fft2(y) % (fft(z1) * strans(fft(z2))));
 
   // ... Which we do here.
@@ -87,9 +86,9 @@ arma::cx_mat fourierin_cx_2d_cpp(arma::cx_mat f, arma::vec a, arma::vec b,
 }
 
 // [[Rcpp::export]]
-arma::cx_mat fourierin_cx_2d_cpp(arma::cx_mat f, arma::vec a, arma::vec b,
-                          arma::vec c, arma::vec d,
-                          double r, double s)
+arma::cx_mat fourierin_cx_2d_cpp(const arma::cx_mat & f, const arma::vec & a,
+				 const arma::vec & b, const arma::vec & c,
+				 const arma::vec & d, double r, double s)
 {
 
   int m1, m2;

@@ -5,12 +5,12 @@
 
 using namespace arma;
 
-arma::cx_vec fourierin_cx_1d_cpp(arma::cx_vec f, double a,
+arma::cx_vec fourierin_cx_1d_cpp(const arma::cx_vec & f, double a,
 			  double b, double c, double d, double r)
 {
   int m = f.n_rows;
   arma::cx_vec out(m), y(2*m), z(2*m), aux(2*m);
-  arma::vec J1(m), J2(m), t(m), w(m), arg(m);
+  arma::vec J1(m), J2(m), w(m), arg(m);
   double bet, gam, del, cnst;
 
   bet = (b - a)/m;		// Real numbers
@@ -18,14 +18,12 @@ arma::cx_vec fourierin_cx_1d_cpp(arma::cx_vec f, double a,
   del = bet*gam/2;
   J1 = arma::linspace<arma::vec>(0, m-1, m); // mx1 vectors
   J2 = arma::linspace<arma::vec>(m, 2*m-1, m);
-  t = a + bet*J1;
   w = c + gam*J1;
   y.zeros();		// (2m) x 1 vector
 
   // We will first compute the argument and then create the complex
   // vector.
   arg = J1 % (bet*c + del*J1);	// Fill y
-  // y.rows(0, m - 1) = cx_vec(f % cos(arg), f % sin(arg));
   y.rows(0, m - 1) = f % cx_vec(cos(arg), sin(arg));
 
   arg = -del*pow(J1, 2);        // Fill first half of z
@@ -44,7 +42,7 @@ arma::cx_vec fourierin_cx_1d_cpp(arma::cx_vec f, double a,
 }
 
 // [[Rcpp::export]]
-arma::cx_vec fourierin_cx_1d_cpp(arma::cx_vec f, double a,
+arma::cx_vec fourierin_cx_1d_cpp(const arma::cx_vec & f, double a,
 			  double b, double c, double d,
 			  double r, double s)
 {
