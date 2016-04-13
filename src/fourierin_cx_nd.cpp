@@ -15,18 +15,35 @@
 
 //' @export
 //[[Rcpp::export]]
-Rcpp::NumericVector fft_rcpp(Rcpp::NumericVector real, Rcpp::NumericVector imag)
+Rcpp::ComplexVector fft_rcpp(const Rcpp::NumericVector & real,
+                             const Rcpp::NumericVector & imag)
 {
 
-//  Rcpp::ComplexVector out();
+  arma::cx_vec out(Rcpp::as<arma::vec>(real), Rcpp::as<arma::vec>(imag));
 
-//  Rprintf("v = %f\n", v[0].i);
-  // // Reuses memory and avoids extra copy
-  // arma::vec re(), im;
-  // arma::cx_vec v_arma(v.begin(), v.size());
+  out =  arma::fft(out);
 
-  // //  arma::fft();
-  // v_arma.print("v = ");
+  return Rcpp::wrap(out);
+}
 
-  return real;
+//' @export
+//[[Rcpp::export]]
+Rcpp::ComplexVector fft_rcpp_2(const Rcpp::ComplexVector & v)
+{
+  return Rcpp::wrap(arma::fft(Rcpp::as<arma::cx_vec>(v)));
+}
+
+//' @export
+//[[Rcpp::export]]
+Rcpp::ComplexVector fft_rcpp_3(const Rcpp::ComplexVector & v)
+{
+  arma::cx_vec out = Rcpp::as<arma::cx_vec>(v);
+  return Rcpp::wrap(arma::fft(out));
+}
+
+//' @export
+//[[Rcpp::export]]
+arma::cx_vec fft_rcpp_4(const arma::cx_vec & v)
+{
+  return arma::fft(v);
 }

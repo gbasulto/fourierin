@@ -101,11 +101,11 @@ namespace fourierin {
         return Rcpp::as<arma::cx_mat >(__result);
     }
 
-    inline Rcpp::NumericVector fft_rcpp(Rcpp::NumericVector real, Rcpp::NumericVector imag) {
+    inline Rcpp::ComplexVector fft_rcpp(const Rcpp::NumericVector& real, const Rcpp::NumericVector& imag) {
         typedef SEXP(*Ptr_fft_rcpp)(SEXP,SEXP);
         static Ptr_fft_rcpp p_fft_rcpp = NULL;
         if (p_fft_rcpp == NULL) {
-            validateSignature("Rcpp::NumericVector(*fft_rcpp)(Rcpp::NumericVector,Rcpp::NumericVector)");
+            validateSignature("Rcpp::ComplexVector(*fft_rcpp)(const Rcpp::NumericVector&,const Rcpp::NumericVector&)");
             p_fft_rcpp = (Ptr_fft_rcpp)R_GetCCallable("fourierin", "fourierin_fft_rcpp");
         }
         RObject __result;
@@ -117,7 +117,64 @@ namespace fourierin {
             throw Rcpp::internal::InterruptedException();
         if (__result.inherits("try-error"))
             throw Rcpp::exception(as<std::string>(__result).c_str());
-        return Rcpp::as<Rcpp::NumericVector >(__result);
+        return Rcpp::as<Rcpp::ComplexVector >(__result);
+    }
+
+    inline Rcpp::ComplexVector fft_rcpp_2(const Rcpp::ComplexVector& v) {
+        typedef SEXP(*Ptr_fft_rcpp_2)(SEXP);
+        static Ptr_fft_rcpp_2 p_fft_rcpp_2 = NULL;
+        if (p_fft_rcpp_2 == NULL) {
+            validateSignature("Rcpp::ComplexVector(*fft_rcpp_2)(const Rcpp::ComplexVector&)");
+            p_fft_rcpp_2 = (Ptr_fft_rcpp_2)R_GetCCallable("fourierin", "fourierin_fft_rcpp_2");
+        }
+        RObject __result;
+        {
+            RNGScope __rngScope;
+            __result = p_fft_rcpp_2(Rcpp::wrap(v));
+        }
+        if (__result.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (__result.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(__result).c_str());
+        return Rcpp::as<Rcpp::ComplexVector >(__result);
+    }
+
+    inline Rcpp::ComplexVector fft_rcpp_3(const Rcpp::ComplexVector& v) {
+        typedef SEXP(*Ptr_fft_rcpp_3)(SEXP);
+        static Ptr_fft_rcpp_3 p_fft_rcpp_3 = NULL;
+        if (p_fft_rcpp_3 == NULL) {
+            validateSignature("Rcpp::ComplexVector(*fft_rcpp_3)(const Rcpp::ComplexVector&)");
+            p_fft_rcpp_3 = (Ptr_fft_rcpp_3)R_GetCCallable("fourierin", "fourierin_fft_rcpp_3");
+        }
+        RObject __result;
+        {
+            RNGScope __rngScope;
+            __result = p_fft_rcpp_3(Rcpp::wrap(v));
+        }
+        if (__result.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (__result.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(__result).c_str());
+        return Rcpp::as<Rcpp::ComplexVector >(__result);
+    }
+
+    inline arma::cx_vec fft_rcpp_4(const arma::cx_vec& v) {
+        typedef SEXP(*Ptr_fft_rcpp_4)(SEXP);
+        static Ptr_fft_rcpp_4 p_fft_rcpp_4 = NULL;
+        if (p_fft_rcpp_4 == NULL) {
+            validateSignature("arma::cx_vec(*fft_rcpp_4)(const arma::cx_vec&)");
+            p_fft_rcpp_4 = (Ptr_fft_rcpp_4)R_GetCCallable("fourierin", "fourierin_fft_rcpp_4");
+        }
+        RObject __result;
+        {
+            RNGScope __rngScope;
+            __result = p_fft_rcpp_4(Rcpp::wrap(v));
+        }
+        if (__result.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (__result.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(__result).c_str());
+        return Rcpp::as<arma::cx_vec >(__result);
     }
 
 }

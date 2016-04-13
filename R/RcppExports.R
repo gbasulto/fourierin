@@ -22,6 +22,21 @@ fft_rcpp <- function(real, imag) {
     .Call('fourierin_fft_rcpp', PACKAGE = 'fourierin', real, imag)
 }
 
+#' @export
+fft_rcpp_2 <- function(v) {
+    .Call('fourierin_fft_rcpp_2', PACKAGE = 'fourierin', v)
+}
+
+#' @export
+fft_rcpp_3 <- function(v) {
+    .Call('fourierin_fft_rcpp_3', PACKAGE = 'fourierin', v)
+}
+
+#' @export
+fft_rcpp_4 <- function(v) {
+    .Call('fourierin_fft_rcpp_4', PACKAGE = 'fourierin', v)
+}
+
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
     .Call('fourierin_RcppExport_registerCCallable', PACKAGE = 'fourierin')
