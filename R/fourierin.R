@@ -26,10 +26,11 @@
 #' @example
 #' examples/ex_fourierin_1d.R
 #' @export
-fourierin_1d <- function(f, a, b, c, d, r, s, resol = NULL){
+fourierin_1d <- function(f, a, b, c, d, r, s, resol = NULL,
+                         w = NULL) {
   ## If function values are provided, then the resolution
   ## is the length of the vector of values.
-  if(!is.function(f)) resol <- length(f)
+  if (!is.function(f)) resol <- length(f)
 
   ## Increment in the frequency domain.
   gam <- (d - c)/resol
@@ -39,30 +40,25 @@ fourierin_1d <- function(f, a, b, c, d, r, s, resol = NULL){
 
   ## If f is the function, it needs to be evaluated in
   ## the time domain values.
-  if(is.function(f)){
-    del <- (b - a)/resol # Increment in the time
-    # domain.
-    t <- seq(a + del/2, b - del/2,
-             length.out = resol)    # Freq. dom. vector.
-    f_t <- f(t)                     # Function values
-    # Rutinary check
-    if(is.null(f_t)) stop("Function f is null.")
+  if (is.function(f)) {
 
-    if(is.complex(f_t)){
-      out <- fourierin_cx_1d_cpp(f_t, a, b, c, d, r, s)
-    } else{
-      out <- fourierin_1d_cpp(f_t, a, b, c, d, r, s)
-    }
-  } else{
-    if(is.complex(f)){
-      out <- fourierin_cx_1d_cpp(f, a, b, c, d, r, s)
-    } else{
-      out <- fourierin_1d_cpp(f, a, b, c, d, r, s)
-    }
+      del <- (b - a)/resol # Increment in the time domain.
+      t <- seq(a + del/2, b - del/2,
+               length.out = resol)    # Freq. dom. vector.
+      f_t <- f(t)                     # Function values
+      ## Rutinary check
+      if(is.null(f_t)) stop("Function f is null.")
+      
+  } else {
+      f_t <- f
   }
-
-  return(list(w = w,                  # Return list.
-              values = out))
+    
+    out <- switch(is.complex(f_t) + 1,
+                  fourierin_1d_cpp(f_t, a, b, c, d, r, s),
+                  fourierin_cx_1d_cpp(f_t, a, b, c, d, r, s))
+    
+    return(list(w = w,                  # Return list.
+                values = out))
 }
 
 #' Bivariate Fourier integrals
