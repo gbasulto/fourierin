@@ -44,6 +44,25 @@ namespace fourierin {
         return Rcpp::as<arma::cx_vec >(__result);
     }
 
+    inline arma::cx_vec fourierin_1d_nonregular_cpp(const arma::vec& f, double a, double b, const arma::vec& w, int resolution, double r, double s) {
+        typedef SEXP(*Ptr_fourierin_1d_nonregular_cpp)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_fourierin_1d_nonregular_cpp p_fourierin_1d_nonregular_cpp = NULL;
+        if (p_fourierin_1d_nonregular_cpp == NULL) {
+            validateSignature("arma::cx_vec(*fourierin_1d_nonregular_cpp)(const arma::vec&,double,double,const arma::vec&,int,double,double)");
+            p_fourierin_1d_nonregular_cpp = (Ptr_fourierin_1d_nonregular_cpp)R_GetCCallable("fourierin", "fourierin_fourierin_1d_nonregular_cpp");
+        }
+        RObject __result;
+        {
+            RNGScope __rngScope;
+            __result = p_fourierin_1d_nonregular_cpp(Rcpp::wrap(f), Rcpp::wrap(a), Rcpp::wrap(b), Rcpp::wrap(w), Rcpp::wrap(resolution), Rcpp::wrap(r), Rcpp::wrap(s));
+        }
+        if (__result.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (__result.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(__result).c_str());
+        return Rcpp::as<arma::cx_vec >(__result);
+    }
+
     inline arma::cx_mat fourierin_2d_cpp(const arma::mat& f, const arma::vec& a, const arma::vec& b, const arma::vec& c, const arma::vec& d, double r, double s) {
         typedef SEXP(*Ptr_fourierin_2d_cpp)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
         static Ptr_fourierin_2d_cpp p_fourierin_2d_cpp = NULL;

@@ -5,6 +5,10 @@ fourierin_1d_cpp <- function(f, a, b, c, d, r, s) {
     .Call('fourierin_fourierin_1d_cpp', PACKAGE = 'fourierin', f, a, b, c, d, r, s)
 }
 
+fourierin_1d_nonregular_cpp <- function(f, a, b, w, resolution, r, s) {
+    .Call('fourierin_fourierin_1d_nonregular_cpp', PACKAGE = 'fourierin', f, a, b, w, resolution, r, s)
+}
+
 fourierin_2d_cpp <- function(f, a, b, c, d, r, s) {
     .Call('fourierin_fourierin_2d_cpp', PACKAGE = 'fourierin', f, a, b, c, d, r, s)
 }
