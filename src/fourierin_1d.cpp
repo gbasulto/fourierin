@@ -69,7 +69,7 @@ arma::cx_vec fourierin_1d_nonregular_cpp(const arma::vec & f,
 {
   int m = resolution, k = w.n_rows, i;
   arma::cx_vec out(k);
-  arma::vec t(m), aux(k), arg(m);
+  arma::vec t(m), arg(m);
   double factor, delta, real, imag;
 
   delta = (b - a)/m;
