@@ -42,6 +42,29 @@ It computes Fourier integrals for functions of one and two
 variables.
 }
 \examples{
+## -- Example 0 ------------------------------------------------------
+##                       Speed test 
+## -------------------------------------------------------------------
+library(fourierin)
+
+                                        # Compute integral
+out1 <- fourierin_1d(f = function(t) exp(-t^2/2),
+                    a = -5, b = 5, c = -3, d = 3,
+                    r = -1, s = -1, resol = 64)
+grid1 <- out1$w                           # Extract grid and values
+values1 <- Re(out1$values)
+
+
+out2 <- fourierin_1d(f = function(t) exp(-t^2/2),
+                    a = -5, b = 5, c = -3, d = 3,
+                    r = -1, s = -1, resol = 64, use_fft = FALSE)
+grid1 <- out2$w                           # Extract grid and values
+values2 <- Re(out2$values)
+
+
+plot(grid1, values1, type = "l", col = 3)
+lines(grid1, dnorm(grid1), col = 4)
+
 ## -- Example 1 ------------------------------------------------------
 ## -- Recovering std. normal from its characteristic function --------
 library(fourierin)

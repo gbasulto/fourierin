@@ -4,7 +4,7 @@
 \alias{fourierin_1d}
 \title{Univariate Fourier integrals}
 \usage{
-fourierin_1d(f, a, b, c, d, r, s, resol = NULL)
+fourierin_1d(f, a, b, c, d, r, s, resol = NULL, w = NULL, use_fft = TRUE)
 }
 \arguments{
 \item{f}{function or a vector of size m. If a function is provided,

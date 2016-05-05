@@ -27,35 +27,45 @@
 #' examples/ex_fourierin_1d.R
 #' @export
 fourierin_1d <- function(f, a, b, c, d, r, s, resol = NULL,
-                         w = NULL) {
-  ## If function values are provided, then the resolution
-  ## is the length of the vector of values.
-  if (!is.function(f)) resol <- length(f)
-
-  ## Increment in the frequency domain.
-  gam <- (d - c)/resol
-
-  ## Freq. dom. vector.
-  w <- seq(c, d - gam, length.out = resol)
-
-  ## If f is the function, it needs to be evaluated in
-  ## the time domain values.
-  if (is.function(f)) {
-
-      del <- (b - a)/resol # Increment in the time domain.
-      t <- seq(a + del/2, b - del/2,
-               length.out = resol)    # Freq. dom. vector.
-      f_t <- f(t)                     # Function values
-      ## Rutinary check
-      if(is.null(f_t)) stop("Function f is null.")
-      
-  } else {
-      f_t <- f
-  }
+                         w = NULL, use_fft = TRUE) {
+    ## If function values are provided, then the resolution
+    ## is the length of the vector of values.
+    if (!is.function(f)) resol <- length(f)
     
-    out <- switch(is.complex(f_t) + 1,
-                  fourierin_1d_cpp(f_t, a, b, c, d, r, s),
-                  fourierin_cx_1d_cpp(f_t, a, b, c, d, r, s))
+    ## Increment in the frequency domain.
+    gam <- (d - c)/resol
+    
+    ## Freq. dom. vector. If w is provided, FFT will NOT be used.
+    if (is.null(w)) {
+        w <- seq(c, d - gam, length.out = resol)
+    } else {
+        use_fft <- FALSE
+    }
+    
+    ## If f is the function, it needs to be evaluated in
+    ## the time domain values.
+    if (is.function(f)) {
+        
+        del <- (b - a)/resol # Increment in the time domain.
+        t <- seq(a + del/2, b - del/2,
+                 length.out = resol)    # Freq. dom. vector.
+        f_t <- f(t)                     # Function values
+        ## Rutinary check
+        if(is.null(f_t)) stop("Function f is null.")
+    } else {
+        f_t <- f
+    }
+
+    if (!use_fft) {
+        out <- switch(is.complex(f_t) + 1,
+                      fourierin_1d_nonregular_cpp(f_t, a, b, w,
+                                                  resol, r, s),
+                  "Still working on it")
+    } else {
+        out <- switch(is.complex(f_t) + 1,
+                      fourierin_1d_cpp(f_t, a, b, c, d, r, s),
+                      fourierin_cx_1d_cpp(f_t, a, b, c, d, r, s))
+    }
     
     return(list(w = w,                  # Return list.
                 values = out))
