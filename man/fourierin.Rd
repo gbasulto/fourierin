@@ -47,23 +47,35 @@ variables.
 ## -------------------------------------------------------------------
 library(fourierin)
 
-                                        # Compute integral
-out1 <- fourierin_1d(f = function(t) exp(-t^2/2),
-                    a = -5, b = 5, c = -3, d = 3,
-                    r = -1, s = -1, resol = 64)
-grid1 <- out1$w                           # Extract grid and values
-values1 <- Re(out1$values)
+resolution <- 2^(0:8)
 
+times <- 
+    t(apply(matrix(resolution), 1,
+            function(resol) {
+                out <- microbenchmark::microbenchmark(
+                    fourierin_1d(f = function(t) exp(-t^2/2),
+                                 -5, 5, -3, 3, -1, -1, resol),
+                    fourierin_1d(f = function(t) exp(-t^2/2),
+                                 -5, 5, -3, 3, -1, -1, resol,
+                                 use_fft = FALSE),
+                    times = 5
+                )
+                out <- with(out, tapply(time/1000, expr, mean))
+                out <- c(out[[1]], out[[2]])
+            }
+            )
+      )
+summ <- data.frame(resolution,
+                   FFT = times[, 1], no_FFT = times[, 2])
+with(summ, {
+    plot(range(resolution), range(c(FFT, no_FFT)), type = "n",
+         xlab = "resolution", ylab = "time (microseconds)")
+    lines(resolution, FFT, type = "b", col = "cyan")
+    lines(resolution, no_FFT, type = "b", col = "magenta")
+    legend("topleft", legend = c("FFT", "No FFT"),
+           col = c("cyan", "magenta"), lty = 1, pch = 1)
+})
 
-out2 <- fourierin_1d(f = function(t) exp(-t^2/2),
-                    a = -5, b = 5, c = -3, d = 3,
-                    r = -1, s = -1, resol = 64, use_fft = FALSE)
-grid1 <- out2$w                           # Extract grid and values
-values2 <- Re(out2$values)
-
-
-plot(grid1, values1, type = "l", col = 3)
-lines(grid1, dnorm(grid1), col = 4)
 
 ## -- Example 1 ------------------------------------------------------
 ## -- Recovering std. normal from its characteristic function --------

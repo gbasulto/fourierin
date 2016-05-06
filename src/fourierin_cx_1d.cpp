@@ -56,3 +56,34 @@ arma::cx_vec fourierin_cx_1d_cpp(const arma::cx_vec & f, double a,
 
   return out;
 }
+
+// This function compute Fourier integrals evaluated in non-regular
+// grids.
+
+// [[Rcpp::export]]
+arma::cx_vec fourierin_cx_1d_nonregular_cpp(const arma::cx_vec & f,
+					 double a, double b,
+					 const arma::vec & w,
+					 int resolution,
+					 double r, double s)
+{
+  int m = resolution, k = w.n_rows, i;
+  arma::cx_vec out(k);
+  arma::vec t(m), arg(m);
+  double factor, delta, real, imag;
+
+  delta = (b - a)/m;
+  t = arma::linspace<arma::vec>(a + delta/2, b - delta/2, m);
+  factor = sqrt(abs(s)/pow(2*datum::pi, 1 - r))*delta;
+
+  for(i = 0; i < k; i++)
+    {
+      arg = s*w(i)*t;
+      out(i) = factor*sum(f % cx_vec(cos(arg), sin(arg)));
+      // real = factor*sum(f % cos(arg));
+      // imag = factor*sum(f % sin(arg));
+      // out(i) = cx_double(real, imag);
+    }
+
+  return out;
+}
