@@ -70,7 +70,7 @@ arma::cx_vec fourierin_cx_1d_nonregular_cpp(const arma::cx_vec & f,
   int m = resolution, k = w.n_rows, i;
   arma::cx_vec out(k);
   arma::vec t(m), arg(m);
-  double factor, delta, real, imag;
+  double factor, delta;
 
   delta = (b - a)/m;
   t = arma::linspace<arma::vec>(a + delta/2, b - delta/2, m);
@@ -80,9 +80,6 @@ arma::cx_vec fourierin_cx_1d_nonregular_cpp(const arma::cx_vec & f,
     {
       arg = s*w(i)*t;
       out(i) = factor*sum(f % cx_vec(cos(arg), sin(arg)));
-      // real = factor*sum(f % cos(arg));
-      // imag = factor*sum(f % sin(arg));
-      // out(i) = cx_double(real, imag);
     }
 
   return out;
