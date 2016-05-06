@@ -4,10 +4,11 @@
 library(fourierin)
 
 resolution <- 2^(0:8)
+
 times <- 
     t(apply(matrix(resolution), 1,
             function(resol) {
-                out <- microbenchmark(
+                out <- microbenchmark::microbenchmark(
                     fourierin_1d(f = function(t) exp(-t^2/2),
                                  -5, 5, -3, 3, -1, -1, resol),
                     fourierin_1d(f = function(t) exp(-t^2/2),
