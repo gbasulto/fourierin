@@ -3,8 +3,9 @@
 ## -------------------------------------------------------------------
 library(fourierin)
 
+## Test speed at several resolutions
 resolution <- 2^(0:8)
-
+## Compute the time for every resolution
 times <- 
     t(apply(matrix(resolution), 1,
             function(resol) {
@@ -21,8 +22,10 @@ times <-
             }
             )
       )
+## Convert to a dataframe with appropriate names
 summ <- data.frame(resolution,
                    FFT = times[, 1], no_FFT = times[, 2])
+## ... And plot it
 with(summ, {
     plot(range(resolution), range(c(FFT, no_FFT)), type = "n",
          xlab = "resolution", ylab = "time (microseconds)")
