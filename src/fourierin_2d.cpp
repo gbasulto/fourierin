@@ -5,9 +5,12 @@
 
 using namespace arma;
 
-arma::cx_mat fourierin_2d_cpp(const arma::mat & f, const arma::vec & a,
-			      const arma::vec & b, const arma::vec & c,
-			      const arma::vec & d, double r)
+arma::cx_mat fourierin_2d_cpp(const arma::mat & f,
+			      const arma::vec & a,
+			      const arma::vec & b,
+			      const arma::vec & c,
+			      const arma::vec & d,
+			      double r)
 {
   int m1 = f.n_rows, m2 = f.n_cols, j1, j2;
   arma::vec m(2), bet(2), gam(2), del(2), a_hat(2),
@@ -86,9 +89,12 @@ arma::cx_mat fourierin_2d_cpp(const arma::mat & f, const arma::vec & a,
 }
 
 // [[Rcpp::export]]
-arma::cx_mat fourierin_2d_cpp(const arma::mat & f, const arma::vec & a,
-			      const arma::vec & b, const arma::vec & c,
-			      const arma::vec & d, double r, double s)
+arma::cx_mat fourierin_2d_cpp(const arma::mat & f,
+			      const arma::vec & a,
+			      const arma::vec & b,
+			      const arma::vec & c,
+			      const arma::vec & d,
+			      double r, double s)
 {
 
   int m1, m2;
@@ -108,17 +114,19 @@ arma::cx_mat fourierin_2d_cpp(const arma::mat & f, const arma::vec & a,
 // grids.
 
 // [[Rcpp::export]]
-arma::cx_vec fourierin_2d_nonregular_cpp(const arma::vec & f,
-					 double a, double b,
-					 const arma::vec & w,
-					 int resolution,
+arma::cx_vec fourierin_2d_nonregular_cpp(const arma::mat & f,
+					 const arma::vec & a,
+					 const arma::vec & b,
+					 const arma::mat & w,
+					 const arma::vec & resolution,
 					 double r, double s)
 {
-  int m = resolution, k = w.n_rows, i;
+  int k = w.n_rows, i;
   arma::cx_vec out(k);
-  arma::vec t(m), arg(m);
-  double factor, delta, real, imag;
+  arma::vec t(m), arg(m), m(2), delta(2);
+  double factor, real, imag;
 
+  m = resolution;
   delta = (b - a)/m;
   t = arma::linspace<arma::vec>(a + delta/2, b - delta/2, m);
   factor = sqrt(abs(s)/pow(2*datum::pi, 1 - r))*delta;
