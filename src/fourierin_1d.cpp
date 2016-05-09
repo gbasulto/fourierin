@@ -43,8 +43,8 @@ arma::cx_vec fourierin_1d_cpp(const arma::vec & f, double a,
 
 // [[Rcpp::export]]
 arma::cx_vec fourierin_1d_cpp(const arma::vec & f, double a,
-			  double b, double c, double d,
-			  double r, double s)
+			      double b, double c, double d,
+			      double r, double s)
 {
 
   int m = f.n_rows;
