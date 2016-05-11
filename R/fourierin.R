@@ -107,7 +107,7 @@ fourierin_1d <- function(f, a, b, c, d, r, s, resol = NULL,
 fourierin_2d <- function(f, a, b, c, d, r, s, resol = NULL){
   ## If function values are provided, then the resolution is the
   ## length of the vector of values.
-  if(!is.function(f)) resol <- dim
+  if(!is.function(f)) resol <- dim(f)
 
   ## Increment in the frequency domain.
   gam <- (d - c)/resol
