@@ -87,8 +87,10 @@ arma::cx_mat fourierin_cx_2d_cpp(const arma::cx_mat & f,
 
 // [[Rcpp::export]]
 arma::cx_mat fourierin_cx_2d_cpp(const arma::cx_mat & f,
-				 const arma::vec & a, const arma::vec & b,
-				 const arma::vec & c, const arma::vec & d,
+				 const arma::vec & a,
+				 const arma::vec & b,
+				 const arma::vec & c,
+				 const arma::vec & d,
 				 double r, double s)
 {
 
