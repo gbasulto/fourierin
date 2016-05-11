@@ -10,9 +10,9 @@ fourierin_2d(f, a, b, c, d, r, s, resol = NULL)
 \item{f}{function or a matrix of size m1 x m2. If a function is
 provided, it must be able to be evaluated in a matrix of two
 columns. If a matrix of values is provided instead, such
-evaluations must have been obtained on
-a regular grid matrix and the Fourier integral is faster is m1
-and m2 are powers of 2.}
+evaluations must have been obtained on a regular grid matrix
+and the Fourier integral is faster is m1 and m2 are powers of
+2.}
 
 \item{a}{Lower integration limits.}
 
@@ -29,8 +29,8 @@ transform. It is usually 0, -1 or 1.}
 Fourier transform. It is usually 1, -1, 2pi or -2pi.}
 
 \item{resol}{A vector of two integers (faster if entries are powers
-of two) determining the
-resolution of the evaluation grid. Not required if f is a vector.}
+of two) determining the resolution of the evaluation grid. Not
+required if f is a vector.}
 }
 \value{
 A list with three elements

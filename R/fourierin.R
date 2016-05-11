@@ -60,7 +60,8 @@ fourierin_1d <- function(f, a, b, c, d, r, s, resol = NULL,
         out <- switch(is.complex(f_t) + 1,
                       fourierin_1d_nonregular_cpp(f_t, a, b, w,
                                                   resol, r, s),
-                  "Still working on it")
+                      fourierin_cx_1d_nonregular_cpp(f_t,
+					 a, b, w, resol, r, s))
     } else {
         out <- switch(is.complex(f_t) + 1,
                       fourierin_1d_cpp(f_t, a, b, c, d, r, s),
@@ -79,9 +80,9 @@ fourierin_1d <- function(f, a, b, c, d, r, s, resol = NULL,
 #' @param f function or a matrix of size m1 x m2. If a function is
 #'     provided, it must be able to be evaluated in a matrix of two
 #'     columns. If a matrix of values is provided instead, such
-#'     evaluations must have been obtained on
-#'     a regular grid matrix and the Fourier integral is faster is m1
-#'     and m2 are powers of 2.
+#'     evaluations must have been obtained on a regular grid matrix
+#'     and the Fourier integral is faster is m1 and m2 are powers of
+#'     2.
 #' @param a Lower integration limits.
 #' @param b Upper integration limits.
 #' @param c Lower evaluation limits.
@@ -91,8 +92,8 @@ fourierin_1d <- function(f, a, b, c, d, r, s, resol = NULL,
 #' @param s Constant to adjust the exponent on the definition of the
 #'     Fourier transform. It is usually 1, -1, 2pi or -2pi.
 #' @param resol A vector of two integers (faster if entries are powers
-#'     of two) determining the
-#'     resolution of the evaluation grid. Not required if f is a vector.
+#'     of two) determining the resolution of the evaluation grid. Not
+#'     required if f is a vector.
 #'
 #' @return A list with three elements
 #' \item{w1}{Evaluation grid for first entry}
