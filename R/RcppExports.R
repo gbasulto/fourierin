@@ -29,6 +29,10 @@ fourierin_cx_2d_cpp <- function(f, a, b, c, d, r, s) {
     .Call('fourierin_fourierin_cx_2d_cpp', PACKAGE = 'fourierin', f, a, b, c, d, r, s)
 }
 
+fourierin_cx_2d_nonregular_cpp <- function(f, a, b, w, resolution, r, s) {
+    .Call('fourierin_fourierin_cx_2d_nonregular_cpp', PACKAGE = 'fourierin', f, a, b, w, resolution, r, s)
+}
+
 #' @export
 fft_rcpp <- function(real, imag) {
     .Call('fourierin_fft_rcpp', PACKAGE = 'fourierin', real, imag)

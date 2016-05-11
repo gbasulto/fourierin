@@ -106,3 +106,55 @@ arma::cx_mat fourierin_cx_2d_cpp(const arma::cx_mat & f,
 
   return out;
 }
+
+
+/*
+
+  NON-REGULAR GRID INTEGRATION
+
+  To see more details about this function, see documentation in R
+  script "fourierin". This function is called by the function
+  fourierin_2d. 
+
+*/
+
+
+// This function compute Fourier integrals evaluated in non-regular
+// grids.
+
+// [[Rcpp::export]]
+arma::cx_mat fourierin_cx_2d_nonregular_cpp(const arma::cx_mat & f,
+					    const arma::vec & a,
+					    const arma::vec & b,
+					    const arma::mat & w,
+					    const arma::vec & resolution,
+					    double r, double s)
+{
+  int k = w.n_rows, i, j1, j2;
+  arma::cx_vec out(k);
+  arma::vec m(2), t1(resolution(0)), t2(resolution(2)),
+    delta(2);
+  double factor, arg;
+
+  m = resolution;
+  delta = (b - a)/m;
+  t1 = arma::linspace<arma::vec>(a(0) + delta(0)/2,
+				 b(0) - delta(0)/2, m(0));
+  t2 = arma::linspace<arma::vec>(a(1) + delta(1)/2,
+				 b(1) - delta(1)/2, m(1));
+  factor = abs(s)/pow(2*datum::pi, 1 - r)*prod(delta);
+  out.zeros();
+
+  for(i = 0; i < k; i++)
+    {
+      for(j1 = 0; j1 < m(0); j1++)
+	for(j2 = 0; j2 < m(1); j2++)
+	  {
+	    arg = s*(t1(j1)*w(i, 0) + t2(j2)*w(i, 1));
+	    out(i) += f(j1, j2)*cx_double(cos(arg), sin(arg));
+	  }
+      out(i) *= factor;
+    }
+
+  return out;
+}

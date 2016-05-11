@@ -158,6 +158,25 @@ namespace fourierin {
         return Rcpp::as<arma::cx_mat >(__result);
     }
 
+    inline arma::cx_mat fourierin_cx_2d_nonregular_cpp(const arma::cx_mat& f, const arma::vec& a, const arma::vec& b, const arma::mat& w, const arma::vec& resolution, double r, double s) {
+        typedef SEXP(*Ptr_fourierin_cx_2d_nonregular_cpp)(SEXP,SEXP,SEXP,SEXP,SEXP,SEXP,SEXP);
+        static Ptr_fourierin_cx_2d_nonregular_cpp p_fourierin_cx_2d_nonregular_cpp = NULL;
+        if (p_fourierin_cx_2d_nonregular_cpp == NULL) {
+            validateSignature("arma::cx_mat(*fourierin_cx_2d_nonregular_cpp)(const arma::cx_mat&,const arma::vec&,const arma::vec&,const arma::mat&,const arma::vec&,double,double)");
+            p_fourierin_cx_2d_nonregular_cpp = (Ptr_fourierin_cx_2d_nonregular_cpp)R_GetCCallable("fourierin", "fourierin_fourierin_cx_2d_nonregular_cpp");
+        }
+        RObject __result;
+        {
+            RNGScope __rngScope;
+            __result = p_fourierin_cx_2d_nonregular_cpp(Rcpp::wrap(f), Rcpp::wrap(a), Rcpp::wrap(b), Rcpp::wrap(w), Rcpp::wrap(resolution), Rcpp::wrap(r), Rcpp::wrap(s));
+        }
+        if (__result.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (__result.inherits("try-error"))
+            throw Rcpp::exception(as<std::string>(__result).c_str());
+        return Rcpp::as<arma::cx_mat >(__result);
+    }
+
     inline Rcpp::ComplexVector fft_rcpp(const Rcpp::NumericVector& real, const Rcpp::NumericVector& imag) {
         typedef SEXP(*Ptr_fft_rcpp)(SEXP,SEXP);
         static Ptr_fft_rcpp p_fft_rcpp = NULL;
