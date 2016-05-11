@@ -4,7 +4,7 @@
 \alias{fourierin_2d}
 \title{Bivariate Fourier integrals}
 \usage{
-fourierin_2d(f, a, b, c, d, r, s, resol = NULL)
+fourierin_2d(f, a, b, c, d, r, s, resol = NULL, w = NULL, use_fft = TURE)
 }
 \arguments{
 \item{f}{function or a matrix of size m1 x m2. If a function is

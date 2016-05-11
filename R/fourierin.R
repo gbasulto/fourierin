@@ -104,41 +104,64 @@ fourierin_1d <- function(f, a, b, c, d, r, s, resol = NULL,
 #' @example
 #' examples/ex_fourierin_2d.R
 #' @export
-fourierin_2d <- function(f, a, b, c, d, r, s, resol = NULL){
-  ## If function values are provided, then the resolution is the
-  ## length of the vector of values.
-  if(!is.function(f)) resol <- dim(f)
+fourierin_2d <- function(f, a, b, c, d, r, s, resol = NULL,
+                         w = NULL, use_fft = TURE){
+    ## If function values are provided, then the resolution is the
+    ## length of the vector of values.
+    if(!is.function(f)) resol <- dim(f)
+    
+    ## Increment in the frequency domain.
+    gam <- (d - c)/resol
+    
+    ## Freq. dom. vectors.
+    if (is.null(w)){
+        w1 <- seq(c[1], d[1] - gam[1], length.out = resol[1])
+        w2 <- seq(c[2], d[2] - gam[2], length.out = resol[2])
+    }
 
-  ## Increment in the frequency domain.
-  gam <- (d - c)/resol
-
-  ## Freq. dom. vectors.
-  w1 <- seq(c[1], d[1] - gam[1], length.out = resol[1])
-  w2 <- seq(c[2], d[2] - gam[2], length.out = resol[2])
-
-  ## If f is the function, it needs to be evaluated in the time
-  ## domain values.
-  if(is.function(f)){
-    del <- (b - a)/resol # Increment in the time
-    # domain.
-    t1 <- seq(a[1] + del[1]/2, b[1] - del[1]/2,
-              length.out = resol[1]) # Freq. dom. vector.
-    t2 <- seq(a[2] + del[2]/2, b[2] - del[2]/2,
-              length.out = resol[1]) # Freq. dom. vector.
-    t <- as.matrix(expand.grid(t1, t2))
-    f_vals <- matrix(f(t), resol[1], resol[2])
-
-    # Rutinary check
-    if(is.null(f_vals)) stop("Function f is null.")
-
+    ## If f is the function, it needs to be evaluated in the time
+    ## domain values.
+    if(is.function(f)){
+        del <- (b - a)/resol # Increment in the time domain.
+        t1 <- seq(a[1] + del[1]/2, b[1] - del[1]/2,
+                  length.out = resol[1]) # Freq. dom. vector.
+        t2 <- seq(a[2] + del[2]/2, b[2] - del[2]/2,
+                  length.out = resol[1]) # Freq. dom. vector.
+        t <- as.matrix(expand.grid(t1, t2))
+        f_vals <- matrix(f(t), resol[1], resol[2])
+        
+                                        # Rutinary check
+        if(is.null(f_vals)) stop("Function f is null.")
+        
+    } else{
+        f_vals <- f
+    }
+    
     out <- fourierin_2d_cpp(f_vals, a, b, c, d, r, s)
-  } else{
-    out <- fourierin_2d_cpp(f, a, b, c, d, r, s)
-  }
 
-  return(list(w1 = w1,
-              w2 = w2,
-              values = out))
+    if (!use_fft) {
+        w_temp <- switch(is.null(w) + 1,
+                         w,
+                         as.matrix(expand.grid(w1, w2))
+                         )
+        out <- switch(is.complex(f_t) + 1,
+                      fourierin_2d_nonregular_cpp(f_t, a, b,
+                                                  w_temp,
+                                                  resol, r, s),
+                      fourierin_cx_2d_nonregular_cpp(f_t, a, b,
+                                                     w_temp, resol,
+                                                     r, s))
+    } else {
+        out <- switch(is.complex(f_t) + 1,
+                      fourierin_2d_cpp(f_t, a, b, c, d, r, s),
+                      fourierin_cx_2d_cpp(f_t, a, b, c, d, r, s))
+    }
+    
+    
+    
+    return(list(w1 = w1,
+                w2 = w2,
+                values = out))
 }
 
 
