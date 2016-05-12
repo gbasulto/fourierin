@@ -4,7 +4,7 @@
 \alias{fourierin}
 \title{Compute Fourier integrals}
 \usage{
-fourierin(f, a, b, c, d, r, s, resol = NULL)
+fourierin(f, a, b, c, d, r, s, resol = NULL, w = NULL, use_fft = TRUE)
 }
 \arguments{
 \item{f}{A function which can be evaluated in matrices of n columns

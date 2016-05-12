@@ -200,14 +200,15 @@ fourierin_2d <- function(f, a, b, c, d, r, s, resol = NULL,
 #' @example
 #' examples/ex_fourierin.R
 #' @export
-fourierin <- function(f, a, b, c, d, r, s, resol = NULL){
+fourierin <- function(f, a, b, c, d, r, s, resol = NULL,
+                      w = NULL, use_fft = TRUE){
 
   n <- length(a)                      # Get dimension of function
   # from lower integration
   # limit.
   switch(n,
-         return(fourierin_1d(f, a, b, c, d, r, s, resol)),
-         return(fourierin_2d(f, a, b, c, d, r, s, resol))
+         return(fourierin_1d(f, a, b, c, d, r, s, resol, w, use_fft)),
+         return(fourierin_2d(f, a, b, c, d, r, s, resol, w, use_fft))
   ) # End switch
 }
 
