@@ -105,7 +105,7 @@ fourierin_1d <- function(f, a, b, c, d, r, s, resol = NULL,
 #' examples/ex_fourierin_2d.R
 #' @export
 fourierin_2d <- function(f, a, b, c, d, r, s, resol = NULL,
-                         w = NULL, use_fft = TURE){
+                         w = NULL, use_fft = TRUE){
     ## If function values are provided, then the resolution is the
     ## length of the vector of values.
     if(!is.function(f)) resol <- dim(f)
