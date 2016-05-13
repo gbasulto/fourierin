@@ -137,24 +137,22 @@ fourierin_2d <- function(f, a, b, c, d, r, s, resol = NULL,
         f_vals <- f
     }
 
-    out <- fourierin_2d_cpp(f_vals, a, b, c, d, r, s)
-
     if (!use_fft) {
         w_temp <- switch(is.null(w) + 1,
                          w,
                          as.matrix(expand.grid(w1, w2))
                          )
-        out <- switch(is.complex(f_t) + 1,
-                      fourierin_2d_nonregular_cpp(f_t, a, b,
+        out <- switch(is.complex(f_vals) + 1,
+                      fourierin_2d_nonregular_cpp(f_vals, a, b,
                                                   w_temp,
                                                   resol, r, s),
-                      fourierin_cx_2d_nonregular_cpp(f_t, a, b,
+                      fourierin_cx_2d_nonregular_cpp(f_vals, a, b,
                                                      w_temp, resol,
                                                      r, s))
     } else {
-        out <- switch(is.complex(f_t) + 1,
-                      fourierin_2d_cpp(f_t, a, b, c, d, r, s),
-                      fourierin_cx_2d_cpp(f_t, a, b, c, d, r, s))
+        out <- switch(is.complex(f_vals) + 1,
+                      fourierin_2d_cpp(f_vals, a, b, c, d, r, s),
+                      fourierin_cx_2d_cpp(f_vals, a, b, c, d, r, s))
     }
 
 
