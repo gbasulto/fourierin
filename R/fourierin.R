@@ -158,6 +158,7 @@ fourierin_2d <- function(f, a, b, c, d, r, s, resol = NULL,
     }
 
 
+    ## Return grid if it was not provided.
     if (is.null(w)) {
       return(list(w1 = w1,
                   w2 = w2,
