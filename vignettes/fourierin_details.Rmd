@@ -89,25 +89,31 @@ with(summ, {
 ```{r, fig.height= 5, fig.width= 7}
 library(fourierin)
 
+
 ## Test speed at several resolutions
 resolution <- 2^(0:8)
+resolution <- cbind(resolution, resolution)
 ## Compute the time for every resolution
 times <- 
-    t(apply(matrix(resolution), 1,
-            function(resol) {
-                out <- microbenchmark::microbenchmark(
-                    fourierin_1d(f = function(t) exp(-t^2/2),
-                                 -5, 5, -3, 3, -1, -1, resol),
-                    fourierin_1d(f = function(t) exp(-t^2/2),
-                                 -5, 5, -3, 3, -1, -1, resol,
-                                 use_fft = FALSE),
-                    times = 5
-                )
-                out <- with(out, tapply(time/1000, expr, mean))
-                out <- c(out[[1]], out[[2]])
-            }
+  t(apply(resolution, 1,
+          function(resol) {
+            out <- microbenchmark::microbenchmark(
+              fourierin(function(x) dnorm(x[, 1])*dnorm(x[, 2]), 
+                        a = c(-8, -6), b = c(6, 8),
+                        c = c(-4, -4), d = c(4, 4),
+                        r = 1, s = 1, resol = resol),
+              fourierin(function(x) dnorm(x[, 1])*dnorm(x[, 2]), 
+                        a = c(-8, -6), b = c(6, 8),
+                        c = c(-4, -4), d = c(4, 4),
+                        r = 1, s = 1, resol = resol,
+                        use_fft = FALSE),
+              times = 5
             )
-      )
+            out <- with(out, tapply(time/1000, expr, mean))
+            out <- c(out[[1]], out[[2]])
+          }
+  )
+  )
 ## Convert to a dataframe with appropriate names
 summ <- data.frame(resolution,
                    FFT = times[, 1], no_FFT = times[, 2])
