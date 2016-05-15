@@ -251,7 +251,7 @@ phi <- function(s) {
 ## Approximate cf using Fourier integrals
 eval <- fourierin(f, a = c(-8, -6), b = c(6, 8),
                     c = c(-4, -4), d = c(4, 4),
-                    r = 1, s = 1, resol = c(128, 128))
+                    r = 1, s = 1, resol = c(128, 128), use_fft = F)
 t1 <- eval$w1
 t2 <- eval$w2
 t <- as.matrix(expand.grid(t1 = t1, t2 = t2))
