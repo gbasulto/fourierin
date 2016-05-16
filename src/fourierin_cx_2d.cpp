@@ -132,11 +132,9 @@ arma::cx_mat fourierin_cx_2d_nonregular_cpp(const arma::cx_mat & f,
 {
   int k = w.n_rows, i, j1, j2;
   arma::cx_vec out(k);
-  arma::vec m(2), t1(resolution(0)), t2(resolution(2)),
-    delta(2);
+  arma::vec m(resolution), t1(m(0)), t2(m(1)), delta(2);
   double factor, arg;
 
-  m = resolution;
   delta = (b - a)/m;
   t1 = arma::linspace<arma::vec>(a(0) + delta(0)/2,
 				 b(0) - delta(0)/2, m(0));
