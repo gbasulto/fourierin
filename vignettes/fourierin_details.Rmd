@@ -48,7 +48,7 @@ Some examples (also found in documentation).
 library(fourierin)
 
 ## Test speed at several resolutions
-resolution <- 2^(0:8)
+resolution <- 2^(0:7)
 ## Compute the time for every resolution
 times <- 
     t(apply(matrix(resolution), 1,
@@ -91,7 +91,7 @@ library(fourierin)
 
 
 ## Test speed at several resolutions
-resolution <- 2^(0:8)
+resolution <- 2^(0:7)
 resolution <- cbind(resolution, resolution)
 ## Compute the time for every resolution
 times <- 
@@ -116,11 +116,11 @@ times <-
   )
 ## Convert to a dataframe with appropriate names
 summ <- data.frame(resolution,
-                   FFT = times[, 1], no_FFT = times[, 2])
+                   FFT = times[, 1]/1e6, no_FFT = times[, 2]/1e6)
 ## ... And plot it
 with(summ, {
     plot(range(resolution), range(c(FFT, no_FFT)), type = "n",
-         xlab = "resolution", ylab = "time (microseconds)")
+         xlab = "resolution", ylab = "time (seconds)")
     lines(resolution, FFT, type = "b", col = "cyan")
     lines(resolution, no_FFT, type = "b", col = "magenta")
     legend("topleft", legend = c("FFT", "No FFT"),
@@ -251,15 +251,15 @@ phi <- function(s) {
 ## Approximate cf using Fourier integrals
 eval <- fourierin(f, a = c(-8, -6), b = c(6, 8),
                     c = c(-4, -4), d = c(4, 4),
-                    r = 1, s = 1, resol = c(128, 128), use_fft = F)
+                    r = 1, s = 1, resol = c(64, 64), use_fft = F)
 t1 <- eval$w1
 t2 <- eval$w2
 t <- as.matrix(expand.grid(t1 = t1, t2 = t2))
 approx <- eval$values
-true <- matrix(phi(t), 128, 128)        # Compute true values
+true <- matrix(phi(t), length(t1))        # Compute true values
 
 ## This is a section of the characteristic functions
-i <- 65
+i <- 33
 plot(t2, Re(approx[i, ]), type = "l", col = 2,
      ylab = "",
      xlab = expression(t[2]),
