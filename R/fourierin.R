@@ -142,6 +142,7 @@ fourierin_2d <- function(f, a, b, c, d, r, s, resol = NULL,
                          w,
                          as.matrix(expand.grid(w1, w2))
                          )
+
         out <- switch(is.complex(f_vals) + 1,
                       fourierin_2d_nonregular_cpp(f_vals, a, b,
                                                   w_temp,
@@ -149,6 +150,9 @@ fourierin_2d <- function(f, a, b, c, d, r, s, resol = NULL,
                       fourierin_cx_2d_nonregular_cpp(f_vals, a, b,
                                                      w_temp, resol,
                                                      r, s))
+        ## If no grid was provided, the values of the Fourier integral
+        ## are put into a matrix.
+        if(is.null(w)) out <- matrix(out, resol[1], resol[2])
     } else {
         out <- switch(is.complex(f_vals) + 1,
                       fourierin_2d_cpp(f_vals, a, b, c, d, r, s),
