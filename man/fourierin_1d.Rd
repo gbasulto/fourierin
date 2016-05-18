@@ -4,7 +4,8 @@
 \alias{fourierin_1d}
 \title{Univariate Fourier integrals}
 \usage{
-fourierin_1d(f, a, b, c, d, r, s, resol = NULL, w = NULL, use_fft = TRUE)
+fourierin_1d(f, a, b, c = NULL, d = NULL, r, s, resol = NULL, w = NULL,
+  use_fft = TRUE)
 }
 \arguments{
 \item{f}{function or a vector of size m. If a function is provided,
@@ -22,18 +23,25 @@ power of 2.}
 \item{d}{Upper evaluation limit.}
 
 \item{r}{Factor related to adjust definition of Fourier
-transform. It is usually 0, -1 or 1.}
+transform. It is usually equal to 0, -1 or 1.}
 
 \item{s}{Constant to adjust the exponent on the definition of the
-Fourier transform. It is usually 1, -1, 2pi or -2pi.}
+Fourier transform. It is usually equal to 1, -1, 2pi or -2pi.}
 
 \item{resol}{An integer (faster if power of two) determining the
-resolution of the evaluation grid. Not required if f is a vector.}
+resolution of the evaluation grid. Not required if f is a
+vector.}
+
+\item{w}{An optional vector where the Fourier integral will be
+evaluated. If provided, the FFT will NOT be used.}
+
+\item{use_fft}{Logical value specifying whether the FFT will be
+used to compute the Fourier integral.}
 }
 \value{
-A list with the elements
-\item{w}{A vector of size m where the integral was computed.}
-\item{values}{A complex vector of size m with the values of the integral}
+A list with the elements \item{w}{A vector of size m where
+    the integral was computed.}  \item{values}{A complex vector of
+    size m with the values of the integral}
 }
 \description{
 It computes Fourier integrals of functions of one and two

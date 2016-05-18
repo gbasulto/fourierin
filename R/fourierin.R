@@ -13,21 +13,26 @@
 #' @param c Lower evaluation limit.
 #' @param d Upper evaluation limit.
 #' @param r Factor related to adjust definition of Fourier
-#'     transform. It is usually 0, -1 or 1.
+#'     transform. It is usually equal to 0, -1 or 1.
 #' @param s Constant to adjust the exponent on the definition of the
-#'     Fourier transform. It is usually 1, -1, 2pi or -2pi.
+#'     Fourier transform. It is usually equal to 1, -1, 2pi or -2pi.
 #' @param resol An integer (faster if power of two) determining the
-#'     resolution of the evaluation grid. Not required if f is a vector.
-#'
-#' @return A list with the elements
-#' \item{w}{A vector of size m where the integral was computed.}
-#' \item{values}{A complex vector of size m with the values of the integral}
+#'     resolution of the evaluation grid. Not required if f is a
+#'     vector.
+#' @param w An optional vector where the Fourier integral will be
+#'     evaluated. If provided, the FFT will NOT be used.
+#' @param use_fft Logical value specifying whether the FFT will be
+#'     used to compute the Fourier integral.
+#' @return A list with the elements \item{w}{A vector of size m where
+#'     the integral was computed.}  \item{values}{A complex vector of
+#'     size m with the values of the integral}
 #'
 #' @example
 #' examples/ex_fourierin_1d.R
 #' @export
-fourierin_1d <- function(f, a, b, c, d, r, s, resol = NULL,
-                         w = NULL, use_fft = TRUE) {
+fourierin_1d <- function(f, a, b, c = NULL, d = NULL,
+                         r, s, resol = NULL, w = NULL,
+                         use_fft = TRUE) {
     ## If function values are provided, then the resolution
     ## is the length of the vector of values.
     if (!is.function(f)) resol <- length(f)
@@ -38,6 +43,9 @@ fourierin_1d <- function(f, a, b, c, d, r, s, resol = NULL,
     ## Freq. dom. vector. If w is provided, FFT will NOT be used.
     if (is.null(w)) {
         w <- seq(c, d - gam, length.out = resol)
+        if (is.null(c) | is.null(d)) {
+            stop("c and d must be provided.")
+        }
     } else {
         use_fft <- FALSE
     }
