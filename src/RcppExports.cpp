@@ -297,127 +297,6 @@ RcppExport SEXP fourierin_fourierin_cx_2d_nonregular_cpp(SEXP fSEXP, SEXP aSEXP,
     UNPROTECT(1);
     return __result;
 }
-// fft_rcpp
-Rcpp::ComplexVector fft_rcpp(const Rcpp::NumericVector& real, const Rcpp::NumericVector& imag);
-static SEXP fourierin_fft_rcpp_try(SEXP realSEXP, SEXP imagSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type real(realSEXP);
-    Rcpp::traits::input_parameter< const Rcpp::NumericVector& >::type imag(imagSEXP);
-    __result = Rcpp::wrap(fft_rcpp(real, imag));
-    return __result;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP fourierin_fft_rcpp(SEXP realSEXP, SEXP imagSEXP) {
-    SEXP __result;
-    {
-        Rcpp::RNGScope __rngScope;
-        __result = PROTECT(fourierin_fft_rcpp_try(realSEXP, imagSEXP));
-    }
-    Rboolean __isInterrupt = Rf_inherits(__result, "interrupted-error");
-    if (__isInterrupt) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    Rboolean __isError = Rf_inherits(__result, "try-error");
-    if (__isError) {
-        SEXP __msgSEXP = Rf_asChar(__result);
-        UNPROTECT(1);
-        Rf_error(CHAR(__msgSEXP));
-    }
-    UNPROTECT(1);
-    return __result;
-}
-// fft_rcpp_2
-Rcpp::ComplexVector fft_rcpp_2(const Rcpp::ComplexVector& v);
-static SEXP fourierin_fft_rcpp_2_try(SEXP vSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::traits::input_parameter< const Rcpp::ComplexVector& >::type v(vSEXP);
-    __result = Rcpp::wrap(fft_rcpp_2(v));
-    return __result;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP fourierin_fft_rcpp_2(SEXP vSEXP) {
-    SEXP __result;
-    {
-        Rcpp::RNGScope __rngScope;
-        __result = PROTECT(fourierin_fft_rcpp_2_try(vSEXP));
-    }
-    Rboolean __isInterrupt = Rf_inherits(__result, "interrupted-error");
-    if (__isInterrupt) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    Rboolean __isError = Rf_inherits(__result, "try-error");
-    if (__isError) {
-        SEXP __msgSEXP = Rf_asChar(__result);
-        UNPROTECT(1);
-        Rf_error(CHAR(__msgSEXP));
-    }
-    UNPROTECT(1);
-    return __result;
-}
-// fft_rcpp_3
-Rcpp::ComplexVector fft_rcpp_3(const Rcpp::ComplexVector& v);
-static SEXP fourierin_fft_rcpp_3_try(SEXP vSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::traits::input_parameter< const Rcpp::ComplexVector& >::type v(vSEXP);
-    __result = Rcpp::wrap(fft_rcpp_3(v));
-    return __result;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP fourierin_fft_rcpp_3(SEXP vSEXP) {
-    SEXP __result;
-    {
-        Rcpp::RNGScope __rngScope;
-        __result = PROTECT(fourierin_fft_rcpp_3_try(vSEXP));
-    }
-    Rboolean __isInterrupt = Rf_inherits(__result, "interrupted-error");
-    if (__isInterrupt) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    Rboolean __isError = Rf_inherits(__result, "try-error");
-    if (__isError) {
-        SEXP __msgSEXP = Rf_asChar(__result);
-        UNPROTECT(1);
-        Rf_error(CHAR(__msgSEXP));
-    }
-    UNPROTECT(1);
-    return __result;
-}
-// fft_rcpp_4
-arma::cx_vec fft_rcpp_4(const arma::cx_vec& v);
-static SEXP fourierin_fft_rcpp_4_try(SEXP vSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::traits::input_parameter< const arma::cx_vec& >::type v(vSEXP);
-    __result = Rcpp::wrap(fft_rcpp_4(v));
-    return __result;
-END_RCPP_RETURN_ERROR
-}
-RcppExport SEXP fourierin_fft_rcpp_4(SEXP vSEXP) {
-    SEXP __result;
-    {
-        Rcpp::RNGScope __rngScope;
-        __result = PROTECT(fourierin_fft_rcpp_4_try(vSEXP));
-    }
-    Rboolean __isInterrupt = Rf_inherits(__result, "interrupted-error");
-    if (__isInterrupt) {
-        UNPROTECT(1);
-        Rf_onintr();
-    }
-    Rboolean __isError = Rf_inherits(__result, "try-error");
-    if (__isError) {
-        SEXP __msgSEXP = Rf_asChar(__result);
-        UNPROTECT(1);
-        Rf_error(CHAR(__msgSEXP));
-    }
-    UNPROTECT(1);
-    return __result;
-}
 
 // validate (ensure exported C++ functions exist before calling them)
 static int fourierin_RcppExport_validate(const char* sig) { 
@@ -431,10 +310,6 @@ static int fourierin_RcppExport_validate(const char* sig) {
         signatures.insert("arma::cx_vec(*fourierin_cx_1d_nonregular_cpp)(const arma::cx_vec&,double,double,const arma::vec&,int,double,double)");
         signatures.insert("arma::cx_mat(*fourierin_cx_2d_cpp)(const arma::cx_mat&,const arma::vec&,const arma::vec&,const arma::vec&,const arma::vec&,double,double)");
         signatures.insert("arma::cx_mat(*fourierin_cx_2d_nonregular_cpp)(const arma::cx_mat&,const arma::vec&,const arma::vec&,const arma::mat&,const arma::vec&,double,double)");
-        signatures.insert("Rcpp::ComplexVector(*fft_rcpp)(const Rcpp::NumericVector&,const Rcpp::NumericVector&)");
-        signatures.insert("Rcpp::ComplexVector(*fft_rcpp_2)(const Rcpp::ComplexVector&)");
-        signatures.insert("Rcpp::ComplexVector(*fft_rcpp_3)(const Rcpp::ComplexVector&)");
-        signatures.insert("arma::cx_vec(*fft_rcpp_4)(const arma::cx_vec&)");
     }
     return signatures.find(sig) != signatures.end();
 }
@@ -449,10 +324,6 @@ RcppExport SEXP fourierin_RcppExport_registerCCallable() {
     R_RegisterCCallable("fourierin", "fourierin_fourierin_cx_1d_nonregular_cpp", (DL_FUNC)fourierin_fourierin_cx_1d_nonregular_cpp_try);
     R_RegisterCCallable("fourierin", "fourierin_fourierin_cx_2d_cpp", (DL_FUNC)fourierin_fourierin_cx_2d_cpp_try);
     R_RegisterCCallable("fourierin", "fourierin_fourierin_cx_2d_nonregular_cpp", (DL_FUNC)fourierin_fourierin_cx_2d_nonregular_cpp_try);
-    R_RegisterCCallable("fourierin", "fourierin_fft_rcpp", (DL_FUNC)fourierin_fft_rcpp_try);
-    R_RegisterCCallable("fourierin", "fourierin_fft_rcpp_2", (DL_FUNC)fourierin_fft_rcpp_2_try);
-    R_RegisterCCallable("fourierin", "fourierin_fft_rcpp_3", (DL_FUNC)fourierin_fft_rcpp_3_try);
-    R_RegisterCCallable("fourierin", "fourierin_fft_rcpp_4", (DL_FUNC)fourierin_fft_rcpp_4_try);
     R_RegisterCCallable("fourierin", "fourierin_RcppExport_validate", (DL_FUNC)fourierin_RcppExport_validate);
     return R_NilValue;
 }

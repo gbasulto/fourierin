@@ -13,8 +13,6 @@
 
 */
 
-//' @export
-//[[Rcpp::export]]
 Rcpp::ComplexVector fft_rcpp(const Rcpp::NumericVector & real,
                              const Rcpp::NumericVector & imag)
 {
@@ -26,23 +24,17 @@ Rcpp::ComplexVector fft_rcpp(const Rcpp::NumericVector & real,
   return Rcpp::wrap(out);
 }
 
-//' @export
-//[[Rcpp::export]]
 Rcpp::ComplexVector fft_rcpp_2(const Rcpp::ComplexVector & v)
 {
   return Rcpp::wrap(arma::fft(Rcpp::as<arma::cx_vec>(v)));
 }
 
-//' @export
-//[[Rcpp::export]]
 Rcpp::ComplexVector fft_rcpp_3(const Rcpp::ComplexVector & v)
 {
   arma::cx_vec out = Rcpp::as<arma::cx_vec>(v);
   return Rcpp::wrap(arma::fft(out));
 }
 
-//' @export
-//[[Rcpp::export]]
 arma::cx_vec fft_rcpp_4(const arma::cx_vec & v)
 {
   return arma::fft(v);
