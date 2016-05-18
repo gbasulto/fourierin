@@ -38,7 +38,7 @@ fourierin_1d <- function(f, a, b, c = NULL, d = NULL,
                          use_fft = TRUE) {
     ## Flag to determine wheter a list or a vector will be returned
     w_given <- !is.null(w)
-    
+
     ## If function values are provided, then the resolution
     ## is the length of the vector of values.
     if (!is.function(f)) resol <- length(f)
@@ -85,7 +85,7 @@ fourierin_1d <- function(f, a, b, c = NULL, d = NULL,
     ## If w is given, return only the values of the integral,
     ## otherwise alse return w.
     if(w_given) return(out)
-    
+
     return(list(w = w,                  # Return list.
                 values = out))
 }
@@ -125,7 +125,7 @@ fourierin_1d <- function(f, a, b, c = NULL, d = NULL,
 #' @example
 #' examples/ex_fourierin_2d.R
 #' @export
-fourierin_2d <- function(f, a, b, c, d, r, s, resol = NULL,
+fourierin_2d <- function(f, a, b, c = NULL, d = NULL, r, s, resol = NULL,
                          w = NULL, use_fft = TRUE){
     ## If function values are provided, then the resolution is the
     ## length of the vector of values.
