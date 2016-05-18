@@ -1,6 +1,6 @@
 Package: fourierin
 Type: Package
-Title: Computes numeric Fourier integrals
+Title: Computes Numeric Fourier Integrals
 Version: 0.1.1
 Date: 2016-01-22
 Author: Guillermo Basulto-Elias
