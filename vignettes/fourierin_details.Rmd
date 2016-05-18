@@ -46,40 +46,39 @@ Some examples (also found in documentation).
 
 ```{r, fig.height= 5, fig.width= 7}
 library(fourierin)
-
-## Test speed at several resolutions
+                                        # Test speed at several
+                                        # resolutions
 resolution <- 2^(0:7)
-## Compute the time for every resolution
-times <- 
-    t(apply(matrix(resolution), 1,
-            function(resol) {
-                out <- microbenchmark::microbenchmark(
-                    fourierin_1d(f = function(t) exp(-t^2/2),
-                                 -5, 5, -3, 3, -1, -1, resol),
-                    fourierin_1d(f = function(t) exp(-t^2/2),
-                                 -5, 5, -3, 3, -1, -1, resol,
-                                 use_fft = FALSE),
-                    times = 5
-                )
-                out <- with(out, tapply(time/1000, expr, mean))
-                out <- c(out[[1]], out[[2]])
-            }
-            )
-      )
-## Convert to a dataframe with appropriate names
+                                        # Aux. function
+compute_times <- function(resol){
+    out <- microbenchmark::microbenchmark(
+        fourierin_1d(f = function(t) exp(-t^2/2),
+                     -5, 5, -3, 3, -1, -1, resol),
+        fourierin_1d(f = function(t) exp(-t^2/2),
+                     -5, 5, -3, 3, -1, -1, resol,
+                     use_fft = FALSE),
+        times = 5
+    )
+    out <- with(out, tapply(time/1e6, expr, mean))
+    out <- c(out[[1]], out[[2]])
+    return(out)
+}
+                                        # Compute the time for every
+                                        # resolution
+times <- t(apply(matrix(resolution), 1, compute_times))
+                                        # Convert to a dataframe with
+                                        # appropriate names
 summ <- data.frame(resolution,
                    FFT = times[, 1], no_FFT = times[, 2])
-## ... And plot it
+                                        # ... And plot it
 with(summ, {
     plot(range(resolution), range(c(FFT, no_FFT)), type = "n",
-         xlab = "resolution", ylab = "time (microseconds)")
+         xlab = "resolution", ylab = "time (milliseconds)")
     lines(resolution, FFT, type = "b", col = "cyan")
     lines(resolution, no_FFT, type = "b", col = "magenta")
     legend("topleft", legend = c("FFT", "No FFT"),
            col = c("cyan", "magenta"), lty = 1, pch = 1)
 })
-
-
 
 ```
 
@@ -87,37 +86,38 @@ with(summ, {
 ## Example 0.1 Bivariate
 
 ```{r, fig.height= 5, fig.width= 7}
-library(fourierin)
-
-
-## Test speed at several resolutions
-resolution <- 2^(0:7)
+                                        # Test speed at several
+                                        # resolutions
+resolution <- 2^(0:6)
 resolution <- cbind(resolution, resolution)
-## Compute the time for every resolution
-times <- 
-  t(apply(resolution, 1,
-          function(resol) {
-            out <- microbenchmark::microbenchmark(
-              fourierin(function(x) dnorm(x[, 1])*dnorm(x[, 2]), 
-                        a = c(-8, -6), b = c(6, 8),
-                        c = c(-4, -4), d = c(4, 4),
-                        r = 1, s = 1, resol = resol),
-              fourierin(function(x) dnorm(x[, 1])*dnorm(x[, 2]), 
-                        a = c(-8, -6), b = c(6, 8),
-                        c = c(-4, -4), d = c(4, 4),
-                        r = 1, s = 1, resol = resol,
-                        use_fft = FALSE),
-              times = 5
-            )
-            out <- with(out, tapply(time/1000, expr, mean))
-            out <- c(out[[1]], out[[2]])
-          }
-  )
-  )
-## Convert to a dataframe with appropriate names
+                                        # Aux. function
+compute_times <- function(resol){
+    out <- microbenchmark::microbenchmark(
+        fourierin(function(x)
+            dnorm(x[, 1])*dnorm(x[, 2]), 
+            a = c(-8, -6), b = c(6, 8),
+            c = c(-4, -4), d = c(4, 4),
+            r = 1, s = 1, resol = resol),
+        fourierin(function(x)
+            dnorm(x[, 1])*dnorm(x[, 2]), 
+            a = c(-8, -6), b = c(6, 8),
+            c = c(-4, -4), d = c(4, 4),
+            r = 1, s = 1, resol = resol,
+            use_fft = FALSE),
+        times = 5
+    )
+    out <- with(out, tapply(time/1e9, expr, mean))
+    out <- c(out[[1]], out[[2]])
+    return(out)
+}
+                                        # Compute the time for every
+                                        # resolution
+times <- t(apply(resolution, 1, compute_times))
+                                        # Convert to a dataframe with
+                                        # appropriate names
 summ <- data.frame(resolution,
-                   FFT = times[, 1]/1e6, no_FFT = times[, 2]/1e6)
-## ... And plot it
+                   FFT = times[, 1], no_FFT = times[, 2])
+                                        # ... And plot it
 with(summ, {
     plot(range(resolution), range(c(FFT, no_FFT)), type = "n",
          xlab = "resolution", ylab = "time (seconds)")
@@ -126,8 +126,6 @@ with(summ, {
     legend("topleft", legend = c("FFT", "No FFT"),
            col = c("cyan", "magenta"), lty = 1, pch = 1)
 })
-
-
 
 ```
 
