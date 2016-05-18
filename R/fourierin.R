@@ -48,9 +48,9 @@ fourierin_1d <- function(f, a, b, c = NULL, d = NULL,
 
     ## Freq. dom. vector. If w is provided, FFT will NOT be used.
     if (is.null(w)) {
-        w <- seq(c, d - gam, length.out = resol)
         if (is.null(c) | is.null(d)) {
             stop("c and d must be provided.")
+        w <- seq(c, d - gam, length.out = resol)
         }
     } else {
         use_fft <- FALSE
@@ -112,12 +112,15 @@ fourierin_1d <- function(f, a, b, c = NULL, d = NULL,
 #' @param resol A vector of two integers (faster if entries are powers
 #'     of two) determining the resolution of the evaluation grid. Not
 #'     required if f is a vector.
-#'
-#' @return A list with three elements
-#' \item{w1}{Evaluation grid for first entry}
-#' \item{w2}{Evaluation grid for second entry}
-#' \item{values}{m1 x m2 matrix of complex numbers, correspoding to the
-#'       evaluations of the integral}
+#' @param w An optional two-column matrix where the Fourier integral
+#'     will be evaluated. If provided, the FFT will NOT be used.
+#' @param use_fft Logical value specifying whether the FFT will be
+#'     used to compute the Fourier integral.
+#' @return If w is given, only the values of the Fourier integral are
+#'     returned, otherwise, a list with three elements
+#'     \item{w1}{Evaluation grid for first entry} \item{w2}{Evaluation
+#'     grid for second entry} \item{values}{m1 x m2 matrix of complex
+#'     numbers, correspoding to the evaluations of the integral}
 #'
 #' @example
 #' examples/ex_fourierin_2d.R
@@ -133,6 +136,9 @@ fourierin_2d <- function(f, a, b, c, d, r, s, resol = NULL,
 
     ## Freq. dom. vectors.
     if (is.null(w)){
+        if (is.null(c) | is.null(d)) {
+            stop("c and d must be provided.")
+            }
         w1 <- seq(c[1], d[1] - gam[1], length.out = resol[1])
         w2 <- seq(c[2], d[2] - gam[2], length.out = resol[2])
     }

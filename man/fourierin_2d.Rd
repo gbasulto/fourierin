@@ -31,13 +31,19 @@ Fourier transform. It is usually 1, -1, 2pi or -2pi.}
 \item{resol}{A vector of two integers (faster if entries are powers
 of two) determining the resolution of the evaluation grid. Not
 required if f is a vector.}
+
+\item{w}{An optional two-column matrix where the Fourier integral
+will be evaluated. If provided, the FFT will NOT be used.}
+
+\item{use_fft}{Logical value specifying whether the FFT will be
+used to compute the Fourier integral.}
 }
 \value{
-A list with three elements
-\item{w1}{Evaluation grid for first entry}
-\item{w2}{Evaluation grid for second entry}
-\item{values}{m1 x m2 matrix of complex numbers, correspoding to the
-      evaluations of the integral}
+If w is given, only the values of the Fourier integral are
+    returned, otherwise, a list with three elements
+    \item{w1}{Evaluation grid for first entry} \item{w2}{Evaluation
+    grid for second entry} \item{values}{m1 x m2 matrix of complex
+    numbers, correspoding to the evaluations of the integral}
 }
 \description{
 It computes Fourier integrals for functions of one and two
