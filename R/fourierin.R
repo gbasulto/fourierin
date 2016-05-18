@@ -50,8 +50,8 @@ fourierin_1d <- function(f, a, b, c = NULL, d = NULL,
     if (is.null(w)) {
         if (is.null(c) | is.null(d)) {
             stop("c and d must be provided.")
-        w <- seq(c, d - gam, length.out = resol)
         }
+        w <- seq(c, d - gam, length.out = resol)
     } else {
         use_fft <- FALSE
     }
