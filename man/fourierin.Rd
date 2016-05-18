@@ -52,15 +52,15 @@ variables.
 See plenty of detailed examples in the vignette.
 }
 \examples{
-## -- Example 0 ------------------------------------------------------
-##                       Speed test 
-## -------------------------------------------------------------------
+##--- Example 0 -----------------------------------------------------
+##-                      Speed test
+##--------------------------------------------------------------------
 library(fourierin)
 
-## Test speed at several resolutions
-resolution <- 2^(0:8)
-## Compute the time for every resolution
-times <- 
+##-Test speed at several resolutions
+resolution <- 2^(0:6)
+##-Compute the time for every resolution
+times <-
     t(apply(matrix(resolution), 1,
             function(resol) {
                 out <- microbenchmark::microbenchmark(
@@ -76,10 +76,10 @@ times <-
             }
             )
       )
-## Convert to a dataframe with appropriate names
+##-Convert to a dataframe with appropriate names
 summ <- data.frame(resolution,
                    FFT = times[, 1], no_FFT = times[, 2])
-## ... And plot it
+##-... And plot it
 with(summ, {
     plot(range(resolution), range(c(FFT, no_FFT)), type = "n",
          xlab = "resolution", ylab = "time (microseconds)")
@@ -89,9 +89,8 @@ with(summ, {
            col = c("cyan", "magenta"), lty = 1, pch = 1)
 })
 
-
-## -- Example 1 ------------------------------------------------------
-## -- Recovering std. normal from its characteristic function --------
+##--- Example 1 ------------------------------------------------------
+##--- Recovering std. normal from its characteristic function --------
 library(fourierin)
 
                                         # Compute integral
@@ -104,8 +103,8 @@ values <- Re(out$values)
 plot(grid, values, type = "l", col = 3)
 lines(grid, dnorm(grid), col = 4)
 
-## -- Example 2 ------------------------------------------------------
-## -- Computing characteristic function of a gamma r. v. ------------
+##--- Example 2 ------------------------------------------------------
+##--- Computing characteristic function of a gamma r. v. ------------
 
 library(fourierin)
                                         # Compute integral
@@ -137,36 +136,36 @@ lines(grid, true_re, col = 4)
 plot(grid, im_values, type = "l", col = 3)
 lines(grid, true_im, col = 4)
 
-## -- Example 3 ------------------------------------------------------
-## -- Recovering std. normal from its characteristic function --------
+##--- Example 3 ------------------------------------------------------
+##--- Recovering std. normal from its characteristic function --------
 library(fourierin)
 
-## Parameters of bivariate normal distribution
+##-Parameters of bivariate normal distribution
 mu <- c(-1, 1)
 sig <- matrix(c(3, -1, -1, 2), 2, 2)
 
-## Multivariate normal density
-## x is n x d
+##-Multivariate normal density
+##-x is n x d
 f <- function(x) {
-    ## Auxiliar values
+    ##-Auxiliar values
     d <- ncol(x)
     z <- sweep(x, 2, mu, "-")
 
-    ## Get numerator and denominator of normal density
+    ##-Get numerator and denominator of normal density
     num <- exp(-0.5*rowSums(z * (z \%*\% solve(sig))))
     denom <- sqrt((2*pi)^d*det(sig))
 
     return(num/denom)
 }
 
-## Characteristic function
-## s is n x d
+##-Characteristic function
+##-s is n x d
 phi <- function(s) {
     complex(modulus = exp(- 0.5*rowSums(s*(s \%*\% sig))),
             argument = s \%*\% mu)
 }
 
-## Approximate cf using Fourier integrals
+##-Approximate cf using Fourier integrals
 eval <- fourierin(f, a = c(-8, -6), b = c(6, 8),
                     c = c(-4, -4), d = c(4, 4),
                     r = 1, s = 1, resol = c(128, 128))
@@ -176,7 +175,7 @@ t <- as.matrix(expand.grid(t1 = t1, t2 = t2))
 approx <- eval$values
 true <- matrix(phi(t), 128, 128)        # Compute true values
 
-## This is a section of the characteristic functions
+##-This is a section of the characteristic functions
 i <- 65
 plot(t2, Re(approx[i, ]), type = "l", col = 2,
      ylab = "",
@@ -187,7 +186,7 @@ lines(t2, Re(true[i, ]), col = 3)
 legend("topleft", legend = c("true", "approximation"),
        col = 3:2, lwd = 1)
 
-## Another section, now of the imaginary part
+##-Another section, now of the imaginary part
 plot(t1, Im(approx[, i]), type = "l", col = 2,
      ylab = "",
      xlab = expression(t[1]),
@@ -196,7 +195,5 @@ plot(t1, Im(approx[, i]), type = "l", col = 2,
 lines(t1, Im(true[, i]), col = 3)
 legend("topleft", legend = c("true", "approximation"),
        col = 3:2, lwd = 1)
-
-
 }
 

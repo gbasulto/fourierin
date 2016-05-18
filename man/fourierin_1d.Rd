@@ -52,8 +52,8 @@ variables on a regular grid.
 See vignette for more detailed examples.
 }
 \examples{
-## -- Example 1 ------------------------------------------------------
-## -- Recovering std. normal from its characteristic function --------
+##--- Example 1 ------------------------------------------------------
+##--- Recovering std. normal from its characteristic function --------
 library(fourierin)
 
                                         # Compute integral
@@ -66,8 +66,8 @@ values <- Re(out$values)
 plot(grid, values, type = "l", col = 3)
 lines(grid, dnorm(grid), col = 4)
 
-## -- Example 2 ------------------------------------------------------
-## -- Computing characteristic function of a gamma r. v. ------------
+##--- Example 2 -----------------------------------------------
+##--- Computing characteristic function of a gamma r. v. ------
 
 library(fourierin)
                                         # Compute integral
@@ -94,10 +94,8 @@ true_im <- Im(true_cf(grid, shape, rate))
                                         # increased.
 plot(grid, re_values, type = "l", col = 3)
 lines(grid, true_re, col = 4)
-
                                         # Same here
 plot(grid, im_values, type = "l", col = 3)
 lines(grid, true_im, col = 4)
-
 }
 
