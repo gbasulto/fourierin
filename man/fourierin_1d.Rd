@@ -39,13 +39,17 @@ evaluated. If provided, the FFT will NOT be used.}
 used to compute the Fourier integral.}
 }
 \value{
-A list with the elements \item{w}{A vector of size m where
-    the integral was computed.}  \item{values}{A complex vector of
-    size m with the values of the integral}
+If w is given, only the values of the Fourier integral are
+    returned, otherwise, a list with the elements \item{w}{A vector
+    of size m where the integral was computed.}  \item{values}{A
+    complex vector of size m with the values of the integral}
 }
 \description{
 It computes Fourier integrals of functions of one and two
 variables on a regular grid.
+}
+\details{
+See vignette for more detailed examples.
 }
 \examples{
 ## -- Example 1 ------------------------------------------------------

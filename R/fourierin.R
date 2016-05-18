@@ -3,6 +3,8 @@
 #' It computes Fourier integrals of functions of one and two
 #' variables on a regular grid.
 #'
+#' See vignette for more detailed examples.
+#'
 #' @param f function or a vector of size m. If a function is provided,
 #'     it must be able to be evaluated in vectors. If a vector of
 #'     values is provided, such evaluations must have been obtained on
@@ -23,9 +25,10 @@
 #'     evaluated. If provided, the FFT will NOT be used.
 #' @param use_fft Logical value specifying whether the FFT will be
 #'     used to compute the Fourier integral.
-#' @return A list with the elements \item{w}{A vector of size m where
-#'     the integral was computed.}  \item{values}{A complex vector of
-#'     size m with the values of the integral}
+#' @return If w is given, only the values of the Fourier integral are
+#'     returned, otherwise, a list with the elements \item{w}{A vector
+#'     of size m where the integral was computed.}  \item{values}{A
+#'     complex vector of size m with the values of the integral}
 #'
 #' @example
 #' examples/ex_fourierin_1d.R
@@ -33,6 +36,9 @@
 fourierin_1d <- function(f, a, b, c = NULL, d = NULL,
                          r, s, resol = NULL, w = NULL,
                          use_fft = TRUE) {
+    ## Flag to determine wheter a list or a vector will be returned
+    w_given <- !is.null(w)
+    
     ## If function values are provided, then the resolution
     ## is the length of the vector of values.
     if (!is.function(f)) resol <- length(f)
@@ -76,6 +82,10 @@ fourierin_1d <- function(f, a, b, c = NULL, d = NULL,
                       fourierin_cx_1d_cpp(f_t, a, b, c, d, r, s))
     }
 
+    ## If w is given, return only the values of the integral,
+    ## otherwise alse return w.
+    if(w_given) return(out)
+    
     return(list(w = w,                  # Return list.
                 values = out))
 }
