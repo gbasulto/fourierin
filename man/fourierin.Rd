@@ -4,7 +4,8 @@
 \alias{fourierin}
 \title{Compute Fourier integrals}
 \usage{
-fourierin(f, a, b, c, d, r, s, resol = NULL, w = NULL, use_fft = TRUE)
+fourierin(f, a, b, c = NULL, d = NULL, r, s, resol = NULL, w = NULL,
+  use_fft = TRUE)
 }
 \arguments{
 \item{f}{A function which can be evaluated in matrices of n columns
@@ -26,20 +27,29 @@ transform. It is usually 0, -1 or 1.}
 Fourier transform. It is usually 1, -1, 2pi or -2pi.}
 
 \item{resol}{An integer (faster if power of two) determining the
-resolution of the evaluation grid. Not required if f is a vector.}
+resolution of the evaluation grid. Not required if f is a
+vector.}
+
+\item{w}{Optional matrix with d columns with the points where the
+Fourier integral will be evaluated. If it is provided, the FFT
+will not be used.}
+
+\item{use_fft}{Logical value specifying whether the FFT will be
+used.}
 }
 \value{
 A list with the elements n-dimensional array and n vectors
     with their corresponding resolution. Specifically,
-\item{values}{A n-dimensional (resol_1 x resol_2 x ... x resol_n)
-      complex array with the values.}
-\item{w1}{A vector of size resol_1}
-\item{...}{ }
-\item{wn}{A vector of size resol_n}
+    \item{values}{A n-dimensional (resol_1 x resol_2 x ... x
+    resol_n) complex array with the values.}  \item{w1}{A vector of
+    size resol_1} \item{...}{ } \item{wn}{A vector of size resol_n}
 }
 \description{
 It computes Fourier integrals for functions of one and two
 variables.
+}
+\details{
+See plenty of detailed examples in the vignette.
 }
 \examples{
 ## -- Example 0 ------------------------------------------------------

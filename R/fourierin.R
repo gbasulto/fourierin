@@ -202,6 +202,8 @@ fourierin_2d <- function(f, a, b, c = NULL, d = NULL, r, s, resol = NULL,
 #' It computes Fourier integrals for functions of one and two
 #' variables.
 #'
+#' See plenty of detailed examples in the vignette.
+#'
 #' @param f A function which can be evaluated in matrices of n columns
 #'     (n = 1 or n = 2). Or a matrix of n columns with f already
 #'     evaluated.
@@ -214,21 +216,24 @@ fourierin_2d <- function(f, a, b, c = NULL, d = NULL, r, s, resol = NULL,
 #' @param s Constant to adjust the exponent on the definition of the
 #'     Fourier transform. It is usually 1, -1, 2pi or -2pi.
 #' @param resol An integer (faster if power of two) determining the
-#'     resolution of the evaluation grid. Not required if f is a vector.
-#'
+#'     resolution of the evaluation grid. Not required if f is a
+#'     vector.
+#' @param w Optional matrix with d columns with the points where the
+#'     Fourier integral will be evaluated. If it is provided, the FFT
+#'     will not be used.
+#' @param use_fft Logical value specifying whether the FFT will be
+#'     used.
 #' @return A list with the elements n-dimensional array and n vectors
 #'     with their corresponding resolution. Specifically,
-#' \item{values}{A n-dimensional (resol_1 x resol_2 x ... x resol_n)
-#'       complex array with the values.}
-#' \item{w1}{A vector of size resol_1}
-#' \item{...}{ }
-#' \item{wn}{A vector of size resol_n}
+#'     \item{values}{A n-dimensional (resol_1 x resol_2 x ... x
+#'     resol_n) complex array with the values.}  \item{w1}{A vector of
+#'     size resol_1} \item{...}{ } \item{wn}{A vector of size resol_n}
 #'
 #' @example
 #' examples/ex_fourierin.R
 #' @export
-fourierin <- function(f, a, b, c, d, r, s, resol = NULL,
-                      w = NULL, use_fft = TRUE){
+fourierin <- function(f, a, b, c = NULL, d = NULL, r, s,
+                      resol = NULL, w = NULL, use_fft = TRUE){
 
   n <- length(a)                      # Get dimension of function
   # from lower integration
