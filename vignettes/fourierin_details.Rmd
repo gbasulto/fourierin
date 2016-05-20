@@ -46,12 +46,13 @@ Some examples (also found in documentation).
 
 ```{r, fig.height= 5, fig.width= 7}
 library(fourierin)
+if (require(microbenchmark)) {
                                         # Test speed at several
                                         # resolutions
 resolution <- 2^(0:7)
                                         # Aux. function
 compute_times <- function(resol){
-    out <- microbenchmark::microbenchmark(
+    out <- microbenchmark(
         fourierin_1d(f = function(t) exp(-t^2/2),
                      -5, 5, -3, 3, -1, -1, resol),
         fourierin_1d(f = function(t) exp(-t^2/2),
@@ -79,20 +80,22 @@ with(summ, {
     legend("topleft", legend = c("FFT", "No FFT"),
            col = c("cyan", "magenta"), lty = 1, pch = 1)
 })
-
+}
 ```
 
 
 ## Example 0.1 Bivariate
 
 ```{r, fig.height= 5, fig.width= 7}
+library(fourierin)
+if(require(microbenchmark)){
                                         # Test speed at several
                                         # resolutions
 resolution <- 2^(0:6)
 resolution <- cbind(resolution, resolution)
                                         # Aux. function
 compute_times <- function(resol){
-    out <- microbenchmark::microbenchmark(
+    out <- microbenchmark(
         fourierin(function(x)
             dnorm(x[, 1])*dnorm(x[, 2]), 
             a = c(-8, -6), b = c(6, 8),
@@ -126,7 +129,7 @@ with(summ, {
     legend("topleft", legend = c("FFT", "No FFT"),
            col = c("cyan", "magenta"), lty = 1, pch = 1)
 })
-
+}
 ```
 
 
