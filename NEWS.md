@@ -1,4 +1,8 @@
 
+# Version 0.1.2
+
+Patch: microbenchmark is now used only conditionally.
+
 # Version 0.1.1
 
 ## Major features
