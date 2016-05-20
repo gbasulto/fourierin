@@ -52,43 +52,6 @@ variables.
 See plenty of detailed examples in the vignette.
 }
 \examples{
-##--- Example 0 -----------------------------------------------------
-##-                      Speed test
-##--------------------------------------------------------------------
-library(fourierin)
-
-##-Test speed at several resolutions
-resolution <- 2^(0:6)
-##-Compute the time for every resolution
-times <-
-    t(apply(matrix(resolution), 1,
-            function(resol) {
-                out <- microbenchmark::microbenchmark(
-                    fourierin_1d(f = function(t) exp(-t^2/2),
-                                 -5, 5, -3, 3, -1, -1, resol),
-                    fourierin_1d(f = function(t) exp(-t^2/2),
-                                 -5, 5, -3, 3, -1, -1, resol,
-                                 use_fft = FALSE),
-                    times = 5
-                )
-                out <- with(out, tapply(time/1000, expr, mean))
-                out <- c(out[[1]], out[[2]])
-            }
-            )
-      )
-##-Convert to a dataframe with appropriate names
-summ <- data.frame(resolution,
-                   FFT = times[, 1], no_FFT = times[, 2])
-##-... And plot it
-with(summ, {
-    plot(range(resolution), range(c(FFT, no_FFT)), type = "n",
-         xlab = "resolution", ylab = "time (microseconds)")
-    lines(resolution, FFT, type = "b", col = "cyan")
-    lines(resolution, no_FFT, type = "b", col = "magenta")
-    legend("topleft", legend = c("FFT", "No FFT"),
-           col = c("cyan", "magenta"), lty = 1, pch = 1)
-})
-
 ##--- Example 1 ------------------------------------------------------
 ##--- Recovering std. normal from its characteristic function --------
 library(fourierin)
