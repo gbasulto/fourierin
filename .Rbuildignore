@@ -4,3 +4,4 @@
 ^README.html$
 .png
 ^cran-comments\.md$
+.travis.yml
