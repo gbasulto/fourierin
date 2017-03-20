@@ -131,7 +131,7 @@ fourierin_1d <- function(f, a, b, c = NULL, d = NULL,
     if(w_given) return(out)
 
     return(list(w = w,                  # Return list.
-                values = out))
+                values = drop(out)))
 }
 
 #' Bivariate Fourier integrals
@@ -441,13 +441,13 @@ fourierin_2d <- function(f, a, b, c = NULL, d = NULL, r, s, resol = NULL,
 fourierin <- function(f, a, b, c = NULL, d = NULL, r, s,
                       resol = NULL, w = NULL, use_fft = TRUE){
 
-  n <- length(a)                      # Get dimension of function
-  # from lower integration
-  # limit.
-  switch(n,
-         return(fourierin_1d(f, a, b, c, d, r, s, resol, w, use_fft)),
-         return(fourierin_2d(f, a, b, c, d, r, s, resol, w, use_fft))
-  ) # End switch
+    n <- length(a)                      # Get dimension of function
+                                        # from lower integration
+                                        # limit.
+    switch(n,
+           return(fourierin_1d(f, a, b, c, d, r, s, resol, w, use_fft)),
+           return(fourierin_2d(f, a, b, c, d, r, s, resol, w, use_fft))
+           ) # End switch
 }
 
 #' @useDynLib fourierin

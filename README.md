@@ -51,7 +51,7 @@ legend("topleft", legend = c("True", "Recovered"), col = c(4, 3),
       lwd = 1)
 ```
 
-![](README_files/figure-html/unnamed-chunk-1-1.png)
+![](README_files/figure-html/unnamed-chunk-1-1.png)<!-- -->
 
 #### Example 2: Computing characteristic function of a gamma density
 
@@ -87,7 +87,7 @@ legend("topright", legend = c("True", "Recovered"), col = c(4, 3),
       lwd = 1)
 ```
 
-![](README_files/figure-html/unnamed-chunk-2-1.png)
+![](README_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
 
 ```r
                                         # Same here
@@ -98,5 +98,5 @@ legend("topright", legend = c("True", "Recovered"), col = c(4, 3),
       lwd = 1)
 ```
 
-![](README_files/figure-html/unnamed-chunk-2-2.png)
+![](README_files/figure-html/unnamed-chunk-2-2.png)<!-- -->
 
