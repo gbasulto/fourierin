@@ -74,7 +74,8 @@ times <- t(apply(matrix(resolution), 1, compute_times))
 summ <- data.frame(resolution,
                    FFT = times[, 1], no_FFT = times[, 2])
                                         # ... And plot it
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
 
 summ %>%
     gather(FFT, ISE, -resolution) %>%
