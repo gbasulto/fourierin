@@ -2,6 +2,9 @@
 
 export(fourierin)
 export(fourierin_1d)
+export(fourierin_1d_test)
 export(fourierin_2d)
+export(fourierin_2d_test)
+export(fourierin_test)
 importFrom(Rcpp,sourceCpp)
 useDynLib(fourierin)
