@@ -1,3 +1,11 @@
+## -------------------------------------------------------------------
+
+## dummy_fnc <- function(f, lower_int, upper_int,
+##                       lower_eval = NULL, upper_eval= NULL,
+##                       r, s, resol = NULL, w = NULL,
+##                       use_fft = TRUE) {
+## }
+
 #' Univariate Fourier integrals
 #'
 #' It computes Fourier integrals of functions of one and two
@@ -31,8 +39,8 @@
 #'     complex vector of size m with the values of the integral}
 #'
 #' @examples
-#' ##--- Example 1 ------------------------------------------------------
-#' ##--- Recovering std. normal from its characteristic function --------
+#' ##--- Example 1 ---------------------------------------------------
+#' ##--- Recovering std. normal from its characteristic function -----
 #' library(fourierin)
 #'
 #'                                         # Compute integral
