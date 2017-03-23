@@ -9,7 +9,7 @@ dummy_fnc(f, lower_int, upper_int, lower_eval, upper_eval, const_adj, freq_adj,
 }
 \arguments{
 \item{f}{function or a vector of size m. If a function is
-provided, it must be able to be evaluated in vectors. If a
+provided, it must be able to be evaluated at vectors. If a
 vector of values is provided, such evaluations must have been
 obtained on a regular grid and the Fourier integral is faster
 is m is a power of 2.}
@@ -31,9 +31,9 @@ transform. It is usually equal to 0, -1 or 1.}
 of the Fourier transform. It is usually equal to 1, -1, 2pi or
 -2pi.}
 
-\item{resolution}{An integer (faster if power of two) determining
-the resolution of the evaluation grid. Not required if f is a
-vector.}
+\item{resolution}{A vector of integers (faster if powers of two)
+determining the resolution of the evaluation grid. Not required
+if f is a vector.}
 
 \item{eval_grid}{Optional matrix with d columns with the points
 where the Fourier integral will be evaluated. If it is
