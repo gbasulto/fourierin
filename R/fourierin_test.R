@@ -1,10 +1,40 @@
 ## -------------------------------------------------------------------
-
-## dummy_fnc <- function(f, lower_int, upper_int,
-##                       lower_eval = NULL, upper_eval= NULL,
-##                       r, s, resol = NULL, w = NULL,
-##                       use_fft = TRUE) {
-## }
+##' Dummy function to describe arguments
+##'
+##' The arguments described here will be recycled in the functions of
+##' this package.
+##' @param f function or a vector of size m. If a function is
+##'     provided, it must be able to be evaluated in vectors. If a
+##'     vector of values is provided, such evaluations must have been
+##'     obtained on a regular grid and the Fourier integral is faster
+##'     is m is a power of 2.
+##' @param lower_int Lower integration limit(s).
+##' @param upper_int Upper integration limit(s).
+##' @param lower_eval Lower evaluation limit(s). It can be NULL if an
+##'     evaluation grid is provided.
+##' @param upper_eval Upper evaluation limit(s). It can be NULL if an
+##'     evaluation grid is provided.
+##' @param const_adj Factor related to adjust definition of Fourier
+#'     transform. It is usually equal to 0, -1 or 1.
+##' @param freq_adj Constant to adjust the exponent on the definition
+#'     of the Fourier transform. It is usually equal to 1, -1, 2pi or
+#'     -2pi.
+##' @param resolution An integer (faster if power of two) determining
+#'     the resolution of the evaluation grid. Not required if f is a
+#'     vector.
+##' @param eval_grid Optional matrix with d columns with the points
+#'     where the Fourier integral will be evaluated. If it is
+#'     provided, the FFT will not be used.
+##' @param use_fft Logical value specifying whether the FFT will be
+#'     used.
+##' @return NULL
+##' @author Guillermo Basulto-Elias
+dummy_fnc <- function(f, lower_int, upper_int,
+                      lower_eval, upper_eval,
+                      const_adj, freq_adj,
+                      resolution, eval_grid,
+                      use_fft) {
+}
 
 #' Univariate Fourier integrals
 #'
@@ -234,8 +264,9 @@ fourierin_1d_test <- function(f, a, b, c = NULL, d = NULL,
 #' legend("topleft", legend = c("true", "approximation"),
 #'        col = 3:2, lwd = 1)
 #' @export
-fourierin_2d_test <- function(f, a, b, c = NULL, d = NULL, r, s, resol = NULL,
-                         w = NULL, use_fft = TRUE){
+fourierin_2d_test <- function(f, a, b, c = NULL, d = NULL,
+                              r, s, resol = NULL,
+                              w = NULL, use_fft = TRUE){
     ## If function values are provided, then the resolution is the
     ## length of the vector of values.
     if(!is.function(f)) resol <- dim(f)
@@ -339,8 +370,9 @@ fourierin_2d_test <- function(f, a, b, c = NULL, d = NULL, r, s, resol = NULL,
 #'     size resol_1} \item{...}{ } \item{wn}{A vector of size resol_n}
 #'
 #' @examples
-#' ##--- Example 1 ------------------------------------------------------
-#' ##--- Recovering std. normal from its characteristic function --------
+#' ##--- Example 1
+#' 
+#' ##--- Recovering std. normal from its characteristic function 
 #' library(fourierin)
 #'
 #'                                         # Compute integral
@@ -353,8 +385,8 @@ fourierin_2d_test <- function(f, a, b, c = NULL, d = NULL, r, s, resol = NULL,
 #' plot(grid, values, type = "l", col = 3)
 #' lines(grid, dnorm(grid), col = 4)
 #'
-#' ##--- Example 2 ------------------------------------------------------
-#' ##--- Computing characteristic function of a gamma r. v. ------------
+#' ##--- Example 2 ----------------------------------------------
+#' ##--- Computing characteristic function of a gamma r. v. -----
 #'
 #' library(fourierin)
 #'                                         # Compute integral
@@ -368,8 +400,8 @@ fourierin_2d_test <- function(f, a, b, c = NULL, d = NULL, r, s, resol = NULL,
 #' im_values <- Im(out$values)             # Imag values
 #'
 #'                                         # Now compute the real and
-#'                                         # imaginary true values of the
-#'                                         # characteric function.
+#'                                         # imaginary true values of
+#'                                         # the characteric function.
 #' true_cf <- function(t, shape, rate) (1 - 1i*t/rate)^-shape
 #' true_re <- Re(true_cf(grid, shape, rate))
 #' true_im <- Im(true_cf(grid, shape, rate))
@@ -386,8 +418,8 @@ fourierin_2d_test <- function(f, a, b, c = NULL, d = NULL, r, s, resol = NULL,
 #' plot(grid, im_values, type = "l", col = 3)
 #' lines(grid, true_im, col = 4)
 #'
-#' ##--- Example 3 ------------------------------------------------------
-#' ##--- Recovering std. normal from its characteristic function --------
+#' ##--- Example 3 ----------------------------------------------
+#' ##--- Recovering std. normal from its characteristic function 
 #' library(fourierin)
 #'
 #' ##-Parameters of bivariate normal distribution

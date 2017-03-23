@@ -52,8 +52,8 @@ variables on a regular grid.
 See vignette for more detailed examples.
 }
 \examples{
-##--- Example 1 ------------------------------------------------------
-##--- Recovering std. normal from its characteristic function --------
+##--- Example 1 ---------------------------------------------------
+##--- Recovering std. normal from its characteristic function -----
 library(fourierin)
 
                                         # Compute integral

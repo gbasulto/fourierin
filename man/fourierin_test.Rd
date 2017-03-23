@@ -52,8 +52,9 @@ variables.
 See plenty of detailed examples in the vignette.
 }
 \examples{
-##--- Example 1 ------------------------------------------------------
-##--- Recovering std. normal from its characteristic function --------
+##--- Example 1
+
+##--- Recovering std. normal from its characteristic function 
 library(fourierin)
 
                                         # Compute integral
@@ -66,8 +67,8 @@ values <- Re(out$values)
 plot(grid, values, type = "l", col = 3)
 lines(grid, dnorm(grid), col = 4)
 
-##--- Example 2 ------------------------------------------------------
-##--- Computing characteristic function of a gamma r. v. ------------
+##--- Example 2 ----------------------------------------------
+##--- Computing characteristic function of a gamma r. v. -----
 
 library(fourierin)
                                         # Compute integral
@@ -81,8 +82,8 @@ re_values <- Re(out$values)             # Real values
 im_values <- Im(out$values)             # Imag values
 
                                         # Now compute the real and
-                                        # imaginary true values of the
-                                        # characteric function.
+                                        # imaginary true values of
+                                        # the characteric function.
 true_cf <- function(t, shape, rate) (1 - 1i*t/rate)^-shape
 true_re <- Re(true_cf(grid, shape, rate))
 true_im <- Im(true_cf(grid, shape, rate))
@@ -99,8 +100,8 @@ lines(grid, true_re, col = 4)
 plot(grid, im_values, type = "l", col = 3)
 lines(grid, true_im, col = 4)
 
-##--- Example 3 ------------------------------------------------------
-##--- Recovering std. normal from its characteristic function --------
+##--- Example 3 ----------------------------------------------
+##--- Recovering std. normal from its characteristic function 
 library(fourierin)
 
 ##-Parameters of bivariate normal distribution
