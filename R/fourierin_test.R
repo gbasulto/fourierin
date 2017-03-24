@@ -18,16 +18,16 @@
 ##' @param const_adj Factor related to adjust definition of Fourier
 #'     transform. It is usually equal to 0, -1 or 1.
 ##' @param freq_adj Constant to adjust the exponent on the definition
-#'     of the Fourier transform. It is usually equal to 1, -1, 2pi or
-#'     -2pi.
+##'     of the Fourier transform. It is usually equal to 1, -1, 2pi or
+##'     -2pi.
 ##' @param resolution A vector of integers (faster if powers of two)
-#'     determining the resolution of the evaluation grid. Not required
-#'     if f is a vector.
+##'     determining the resolution of the evaluation grid. Not
+##'     required if f is a vector.
 ##' @param eval_grid Optional matrix with d columns with the points
-#'     where the Fourier integral will be evaluated. If it is
-#'     provided, the FFT will not be used.
+##'     where the Fourier integral will be evaluated. If it is
+##'     provided, the FFT will not be used.
 ##' @param use_fft Logical value specifying whether the FFT will be
-#'     used.
+##'     used.
 ##' @return NULL
 ##' @author Guillermo Basulto-Elias
 dummy_fnc <- function(f, lower_int, upper_int, lower_eval,
@@ -35,71 +35,66 @@ dummy_fnc <- function(f, lower_int, upper_int, lower_eval,
                       resolution, eval_grid, use_fft) {
 }
 
-#' Univariate Fourier integrals
-#'
-#' It computes Fourier integrals of functions of one and two
-#' variables on a regular grid.
-#'
-#' See vignette for more detailed examples.
-#'
-#' @param f function or a vector of size m. If a function is provided,
-#'     it must be able to be evaluated in vectors. If a vector of
-#'     values is provided, such evaluations must have been obtained on
-#'     a regular grid and the Fourier integral is faster is m is a
-#'     power of 2.
-#' @inheritParams dummy_fnc
-#' @return If w is given, only the values of the Fourier integral are
-#'     returned, otherwise, a list with the elements \item{w}{A vector
-#'     of size m where the integral was computed.}  \item{values}{A
-#'     complex vector of size m with the values of the integral}
-#'
-#' @examples
-#' ##--- Example 1 ---------------------------------------------------
-#' ##--- Recovering std. normal from its characteristic function -----
-#' library(fourierin)
-#'
-#'                                         # Compute integral
-#' out <- fourierin_1d(f = function(t) exp(-t^2/2),
-#'                  a = -5, b = 5, c = -3, d = 3,
-#'                  r = -1, s = -1, resol = 64)
-#' grid <- out$w                           # Extract grid and values
-#' values <- Re(out$values)
-#'
-#' plot(grid, values, type = "l", col = 3)
-#' lines(grid, dnorm(grid), col = 4)
-#'
-#' ##--- Example 2 -----------------------------------------------
-#' ##--- Computing characteristic function of a gamma r. v. ------
-#'
-#' library(fourierin)
-#'                                         # Compute integral
-#' shape <- 5
-#' rate <- 3
-#' out <- fourierin_1d(f = function(t) dgamma(t, shape, rate),
-#'                  a = 0, b = 6, c = -4, d = 4,
-#'                  r = 1, s = 1, resol = 64)
-#' grid <- out$w                           # Extract grid
-#' re_values <- Re(out$values)             # Real values
-#' im_values <- Im(out$values)             # Imag values
-#'
-#'                                         # Now compute the real and
-#'                                         # imaginary true values of the
-#'                                         # characteric function.
-#' true_cf <- function(t, shape, rate) (1 - 1i*t/rate)^-shape
-#' true_re <- Re(true_cf(grid, shape, rate))
-#' true_im <- Im(true_cf(grid, shape, rate))
-#'
-#'                                         # Compare them. We can see a
-#'                                         # slight discrepancy on the
-#'                                         # tails, but that is fixed
-#'                                         # when resulution is
-#'                                         # increased.
-#' plot(grid, re_values, type = "l", col = 3)
-#' lines(grid, true_re, col = 4)
-#'                                         # Same here
-#' plot(grid, im_values, type = "l", col = 3)
-#' lines(grid, true_im, col = 4)
-#' @export
+##' Univariate Fourier integrals
+##'
+##' It computes Fourier integrals of functions of one and two
+##' variables on a regular grid.
+##'
+##' See vignette for more detailed examples.
+##'
+##' @inheritParams dummy_fnc
+##' @return If w is given, only the values of the Fourier integral are
+##'     returned, otherwise, a list with the elements \item{w}{A vector
+##'     of size m where the integral was computed.}  \item{values}{A
+##'     complex vector of size m with the values of the integral}
+##'
+##' @examples
+##' ##--- Example 1 --------------------------------------------------
+##' ##--- Recovering std. normal from its characteristic function ----
+##' library(fourierin)
+##'
+##'                                         # Compute integral
+##' out <- fourierin_1d(f = function(t) exp(-t^2/2),
+##'                  a = -5, b = 5, c = -3, d = 3,
+##'                  r = -1, s = -1, resol = 64)
+##' grid <- out$w                           # Extract grid and values
+##' values <- Re(out$values)
+##'
+##' plot(grid, values, type = "l", col = 3)
+##' lines(grid, dnorm(grid), col = 4)
+##'
+##' ##--- Example 2 -----------------------------------------------
+##' ##--- Computing characteristic function of a gamma r. v. ------
+##'
+##' library(fourierin)
+##'                                         # Compute integral
+##' shape <- 5
+##' rate <- 3
+##' out <- fourierin_1d(f = function(t) dgamma(t, shape, rate),
+##'                  a = 0, b = 6, c = -4, d = 4,
+##'                  r = 1, s = 1, resol = 64)
+##' grid <- out$w                           # Extract grid
+##' re_values <- Re(out$values)             # Real values
+##' im_values <- Im(out$values)             # Imag values
+##'
+##'                                         # Now compute the real and
+##'                                         # imaginary true values of the
+##'                                         # characteric function.
+##' true_cf <- function(t, shape, rate) (1 - 1i*t/rate)^-shape
+##' true_re <- Re(true_cf(grid, shape, rate))
+##' true_im <- Im(true_cf(grid, shape, rate))
+##'
+##'                                       # Compare them. We can see a
+##'                                       # slight discrepancy on the
+##'                                       # tails, but that is fixed
+##'                                       # when resulution is
+##'                                       # increased.
+##' plot(grid, re_values, type = "l", col = 3)
+##' lines(grid, true_re, col = 4)
+##'                                         # Same here
+##' plot(grid, im_values, type = "l", col = 3)
+##' lines(grid, true_im, col = 4)
+##' @export
 fourierin_1d_test <- function(f, lower_int, upper_int,
                               lower_eval = NULL, upper_eval = NULL,
                               const_adj, freq_adj, resolution = NULL,
