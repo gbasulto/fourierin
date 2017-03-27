@@ -481,7 +481,4 @@ fourierin_test <- function(f, a, b, c = NULL, d = NULL, r, s,
            ) # End switch
 }
 
-#' @useDynLib fourierin
-#' @importFrom Rcpp sourceCpp
-NULL
 
