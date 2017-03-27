@@ -9,11 +9,11 @@ fourierin_1d_test(f, lower_int, upper_int, lower_eval = NULL,
   eval_grid = NULL, use_fft = TRUE)
 }
 \arguments{
-\item{f}{function or a vector of size m. If a function is provided,
-it must be able to be evaluated in vectors. If a vector of
-values is provided, such evaluations must have been obtained on
-a regular grid and the Fourier integral is faster is m is a
-power of 2.}
+\item{f}{function or a vector of size m. If a function is
+provided, it must be able to be evaluated at vectors. If a
+vector of values is provided, such evaluations must have been
+obtained on a regular grid and the Fourier integral is faster
+is m is a power of 2.}
 
 \item{lower_int}{Lower integration limit(s).}
 
@@ -33,8 +33,8 @@ of the Fourier transform. It is usually equal to 1, -1, 2pi or
 -2pi.}
 
 \item{resolution}{A vector of integers (faster if powers of two)
-determining the resolution of the evaluation grid. Not required
-if f is a vector.}
+determining the resolution of the evaluation grid. Not
+required if f is a vector.}
 
 \item{eval_grid}{Optional matrix with d columns with the points
 where the Fourier integral will be evaluated. If it is
@@ -57,8 +57,8 @@ variables on a regular grid.
 See vignette for more detailed examples.
 }
 \examples{
-##--- Example 1 ---------------------------------------------------
-##--- Recovering std. normal from its characteristic function -----
+##--- Example 1 --------------------------------------------------
+##--- Recovering std. normal from its characteristic function ----
 library(fourierin)
 
                                         # Compute integral
@@ -92,11 +92,11 @@ true_cf <- function(t, shape, rate) (1 - 1i*t/rate)^-shape
 true_re <- Re(true_cf(grid, shape, rate))
 true_im <- Im(true_cf(grid, shape, rate))
 
-                                        # Compare them. We can see a
-                                        # slight discrepancy on the
-                                        # tails, but that is fixed
-                                        # when resulution is
-                                        # increased.
+                                      # Compare them. We can see a
+                                      # slight discrepancy on the
+                                      # tails, but that is fixed
+                                      # when resulution is
+                                      # increased.
 plot(grid, re_values, type = "l", col = 3)
 lines(grid, true_re, col = 4)
                                         # Same here

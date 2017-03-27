@@ -32,8 +32,8 @@ of the Fourier transform. It is usually equal to 1, -1, 2pi or
 -2pi.}
 
 \item{resolution}{A vector of integers (faster if powers of two)
-determining the resolution of the evaluation grid. Not required
-if f is a vector.}
+determining the resolution of the evaluation grid. Not
+required if f is a vector.}
 
 \item{eval_grid}{Optional matrix with d columns with the points
 where the Fourier integral will be evaluated. If it is
