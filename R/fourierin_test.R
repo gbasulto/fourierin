@@ -168,27 +168,7 @@ fourierin_1d_test <- function(f, lower_int, upper_int,
 #' It computes Fourier integrals for functions of one and two
 #' variables.
 #'
-#' @param f function or a matrix of size m1 x m2. If a function is
-#'     provided, it must be able to be evaluated in a matrix of two
-#'     columns. If a matrix of values is provided instead, such
-#'     evaluations must have been obtained on a regular grid matrix
-#'     and the Fourier integral is faster is m1 and m2 are powers of
-#'     2.
-#' @param a Lower integration limits.
-#' @param b Upper integration limits.
-#' @param c Lower evaluation limits.
-#' @param d Upper evaluation limits.
-#' @param r Factor related to adjust definition of Fourier
-#'     transform. It is usually 0, -1 or 1.
-#' @param s Constant to adjust the exponent on the definition of the
-#'     Fourier transform. It is usually 1, -1, 2pi or -2pi.
-#' @param resol A vector of two integers (faster if entries are powers
-#'     of two) determining the resolution of the evaluation grid. Not
-#'     required if f is a vector.
-#' @param w An optional two-column matrix where the Fourier integral
-#'     will be evaluated. If provided, the FFT will NOT be used.
-#' @param use_fft Logical value specifying whether the FFT will be
-#'     used to compute the Fourier integral.
+#' @inheritParams dummy_fnc
 #' @return If w is given, only the values of the Fourier integral are
 #'     returned, otherwise, a list with three elements
 #'     \item{w1}{Evaluation grid for first entry} \item{w2}{Evaluation
@@ -255,9 +235,21 @@ fourierin_1d_test <- function(f, lower_int, upper_int,
 #' legend("topleft", legend = c("true", "approximation"),
 #'        col = 3:2, lwd = 1)
 #' @export
-fourierin_2d_test <- function(f, a, b, c = NULL, d = NULL,
-                              r, s, resol = NULL,
-                              w = NULL, use_fft = TRUE){
+fourierin_2d_test <- function(f, lower_int, upper_int,
+                              lower_eval = NULL, upper_eval = NULL,
+                              const_adj, freq_adj,
+                              resolution = NULL, eval_grid = NULL,
+                              use_fft = TRUE){
+    ## Condensed notation
+    a <- lower_int
+    b <- upper_int
+    c <- lower_eval
+    d <- upper_eval
+    r <- const_adj
+    s <- freq_adj
+    resol <- resolution
+    w <- eval_grid
+
     ## If function values are provided, then the resolution is the
     ## length of the vector of values.
     if(!is.function(f)) resol <- dim(f)
