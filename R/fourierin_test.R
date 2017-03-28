@@ -327,25 +327,7 @@ fourierin_2d_test <- function(f, lower_int, upper_int,
 #'
 #' See plenty of detailed examples in the vignette.
 #'
-#' @param f A function which can be evaluated in matrices of n columns
-#'     (n = 1 or n = 2). Or a matrix of n columns with f already
-#'     evaluated.
-#' @param a Lower integration limit(s).
-#' @param b Upper integration limit(s).
-#' @param c Lower evaluation limit(s).
-#' @param d Upper evaluation limit(s).
-#' @param r Factor related to adjust definition of Fourier
-#'     transform. It is usually 0, -1 or 1.
-#' @param s Constant to adjust the exponent on the definition of the
-#'     Fourier transform. It is usually 1, -1, 2pi or -2pi.
-#' @param resol An integer (faster if power of two) determining the
-#'     resolution of the evaluation grid. Not required if f is a
-#'     vector.
-#' @param w Optional matrix with d columns with the points where the
-#'     Fourier integral will be evaluated. If it is provided, the FFT
-#'     will not be used.
-#' @param use_fft Logical value specifying whether the FFT will be
-#'     used.
+#' @inheritParams dummy_fnc
 #' @return A list with the elements n-dimensional array and n vectors
 #'     with their corresponding resolution. Specifically,
 #'     \item{values}{A n-dimensional (resol_1 x resol_2 x ... x
@@ -461,15 +443,24 @@ fourierin_2d_test <- function(f, lower_int, upper_int,
 #' legend("topleft", legend = c("true", "approximation"),
 #'        col = 3:2, lwd = 1)
 #' @export
-fourierin_test <- function(f, a, b, c = NULL, d = NULL, r, s,
-                      resol = NULL, w = NULL, use_fft = TRUE){
+fourierin_test <- function(f, lower_int, upper_int,
+                           lower_eval = NULL, upper_eval = NULL,
+                           const_adj, freq_adj,
+                           resolution = NULL, eval_grid = NULL,
+                           use_fft = TRUE){
 
-    n <- length(a)                      # Get dimension of function
-                                        # from lower integration
-                                        # limit.
+    ## Get dimension of function from lower integration limit.
+    n <- length(lower_int)              
+
     switch(n,
-           return(fourierin_1d_test(f, a, b, c, d, r, s, resol, w, use_fft)),
-           return(fourierin_2d_test(f, a, b, c, d, r, s, resol, w, use_fft))
+           return(fourierin_1d_test(f, lower_int, upper_int,
+                                    lower_eval, upper_eval,
+                                    const_adj, freq_adj, resolution,
+                                    eval_grid, use_fft)),
+           return(fourierin_2d_test(f, lower_int, upper_int,
+                                    lower_eval, upper_eval,
+                                    const_adj, freq_adj,
+                                    resolution, eval_grid, use_fft))
            ) # End switch
 }
 

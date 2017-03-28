@@ -4,35 +4,41 @@
 \alias{fourierin_test}
 \title{Compute Fourier integrals}
 \usage{
-fourierin_test(f, a, b, c = NULL, d = NULL, r, s, resol = NULL,
-  w = NULL, use_fft = TRUE)
+fourierin_test(f, lower_int, upper_int, lower_eval = NULL,
+  upper_eval = NULL, const_adj, freq_adj, resolution = NULL,
+  eval_grid = NULL, use_fft = TRUE)
 }
 \arguments{
-\item{f}{A function which can be evaluated in matrices of n columns
-(n = 1 or n = 2). Or a matrix of n columns with f already
-evaluated.}
+\item{f}{function or a vector of size m. If a function is
+provided, it must be able to be evaluated at vectors. If a
+vector of values is provided, such evaluations must have been
+obtained on a regular grid and the Fourier integral is faster
+is m is a power of 2.}
 
-\item{a}{Lower integration limit(s).}
+\item{lower_int}{Lower integration limit(s).}
 
-\item{b}{Upper integration limit(s).}
+\item{upper_int}{Upper integration limit(s).}
 
-\item{c}{Lower evaluation limit(s).}
+\item{lower_eval}{Lower evaluation limit(s). It can be NULL if an
+evaluation grid is provided.}
 
-\item{d}{Upper evaluation limit(s).}
+\item{upper_eval}{Upper evaluation limit(s). It can be NULL if an
+evaluation grid is provided.}
 
-\item{r}{Factor related to adjust definition of Fourier
-transform. It is usually 0, -1 or 1.}
+\item{const_adj}{Factor related to adjust definition of Fourier
+transform. It is usually equal to 0, -1 or 1.}
 
-\item{s}{Constant to adjust the exponent on the definition of the
-Fourier transform. It is usually 1, -1, 2pi or -2pi.}
+\item{freq_adj}{Constant to adjust the exponent on the definition
+of the Fourier transform. It is usually equal to 1, -1, 2pi or
+-2pi.}
 
-\item{resol}{An integer (faster if power of two) determining the
-resolution of the evaluation grid. Not required if f is a
-vector.}
+\item{resolution}{A vector of integers (faster if powers of two)
+determining the resolution of the evaluation grid. Not
+required if f is a vector.}
 
-\item{w}{Optional matrix with d columns with the points where the
-Fourier integral will be evaluated. If it is provided, the FFT
-will not be used.}
+\item{eval_grid}{Optional matrix with d columns with the points
+where the Fourier integral will be evaluated. If it is
+provided, the FFT will not be used.}
 
 \item{use_fft}{Logical value specifying whether the FFT will be
 used.}
