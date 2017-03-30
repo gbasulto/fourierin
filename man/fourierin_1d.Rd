@@ -42,12 +42,6 @@ provided, the FFT will not be used.}
 
 \item{use_fft}{Logical value specifying whether the FFT will be
 used.}
-
-\item{f}{function or a vector of size m. If a function is provided,
-it must be able to be evaluated in vectors. If a vector of
-values is provided, such evaluations must have been obtained on
-a regular grid and the Fourier integral is faster is m is a
-power of 2.}
 }
 \value{
 If w is given, only the values of the Fourier integral are
@@ -64,14 +58,20 @@ See vignette for more detailed examples.
 }
 \examples{
 ##--- Example 1 ---------------------------------------------------
-##--- Recovering std. normal from its characteristic function -----
 library(fourierin)
 
-                                        # Compute integral
-out <- fourierin_1d(f = function(t) exp(-t^2/2),
-                 a = -5, b = 5, c = -3, d = 3,
-                 r = -1, s = -1, resol = 64)
-grid <- out$w                           # Extract grid and values
+#' Function to to be used in integrand
+myfun <- function(t) exp(-t^2/2)
+
+                                        # Compute Foueien integral
+out <- fourierin_1d(f = myfun,
+                    lower_int = -5, upper_int = 5,
+                    lower_eval = -3, upper_eval = 3,
+                    const_adj = -1, freq_adj = -1,
+                    resolution = 64)
+
+## Extract grid and values
+grid <- out$w                           
 values <- Re(out$values)
 
 plot(grid, values, type = "l", col = 3)
@@ -81,12 +81,17 @@ lines(grid, dnorm(grid), col = 4)
 ##--- Computing characteristic function of a gamma r. v. ------
 
 library(fourierin)
-                                        # Compute integral
+
+## Function to to be used in integrand
+myfun <- function(t) dgamma(t, shape, rate)
+
+## Compute integral
 shape <- 5
 rate <- 3
-out <- fourierin_1d(f = function(t) dgamma(t, shape, rate),
-                 a = 0, b = 6, c = -4, d = 4,
-                 r = 1, s = 1, resol = 64)
+out <- fourierin_1d(f = myfun, lower_int = 0, upper_int = 6,
+                    lower_eval = -4, upper_eval = 4,
+                    const_adj = 1, freq_adj = 1, resolution = 64)
+
 grid <- out$w                           # Extract grid
 re_values <- Re(out$values)             # Real values
 im_values <- Im(out$values)             # Imag values
@@ -105,6 +110,7 @@ true_im <- Im(true_cf(grid, shape, rate))
                                         # increased.
 plot(grid, re_values, type = "l", col = 3)
 lines(grid, true_re, col = 4)
+
                                         # Same here
 plot(grid, im_values, type = "l", col = 3)
 lines(grid, true_im, col = 4)
