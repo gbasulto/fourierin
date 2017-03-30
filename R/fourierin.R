@@ -1,3 +1,4 @@
+## -------------------------------------------------------------------
 #' Univariate Fourier integrals
 #'
 #' It computes Fourier integrals of functions of one and two
@@ -5,34 +6,43 @@
 #'
 #' See vignette for more detailed examples.
 #'
+#' @param f function or a vector of size m. If a function is
+#'     provided, it must be able to be evaluated at vectors. If a
+#'     vector of values is provided, such evaluations must have been
+#'     obtained on a regular grid and the Fourier integral is faster
+#'     is m is a power of 2.
+#' @param lower_int Lower integration limit(s).
+#' @param upper_int Upper integration limit(s).
+#' @param lower_eval Lower evaluation limit(s). It can be NULL if an
+#'     evaluation grid is provided.
+#' @param upper_eval Upper evaluation limit(s). It can be NULL if an
+#'     evaluation grid is provided.
+#' @param const_adj Factor related to adjust definition of Fourier
+#'     transform. It is usually equal to 0, -1 or 1.
+#' @param freq_adj Constant to adjust the exponent on the definition
+#'     of the Fourier transform. It is usually equal to 1, -1, 2pi or
+#'     -2pi.
+#' @param resolution A vector of integers (faster if powers of two)
+#'     determining the resolution of the evaluation grid. Not
+#'     required if f is a vector.
+#' @param eval_grid Optional matrix with d columns with the points
+#'     where the Fourier integral will be evaluated. If it is
+#'     provided, the FFT will not be used.
+#' @param use_fft Logical value specifying whether the FFT will be
+#'     used.
 #' @param f function or a vector of size m. If a function is provided,
 #'     it must be able to be evaluated in vectors. If a vector of
 #'     values is provided, such evaluations must have been obtained on
 #'     a regular grid and the Fourier integral is faster is m is a
 #'     power of 2.
-#' @param a Lower integration limit.
-#' @param b Upper integration limit.
-#' @param c Lower evaluation limit.
-#' @param d Upper evaluation limit.
-#' @param r Factor related to adjust definition of Fourier
-#'     transform. It is usually equal to 0, -1 or 1.
-#' @param s Constant to adjust the exponent on the definition of the
-#'     Fourier transform. It is usually equal to 1, -1, 2pi or -2pi.
-#' @param resol An integer (faster if power of two) determining the
-#'     resolution of the evaluation grid. Not required if f is a
-#'     vector.
-#' @param w An optional vector where the Fourier integral will be
-#'     evaluated. If provided, the FFT will NOT be used.
-#' @param use_fft Logical value specifying whether the FFT will be
-#'     used to compute the Fourier integral.
 #' @return If w is given, only the values of the Fourier integral are
 #'     returned, otherwise, a list with the elements \item{w}{A vector
 #'     of size m where the integral was computed.}  \item{values}{A
 #'     complex vector of size m with the values of the integral}
 #'
 #' @examples
-#' ##--- Example 1 ------------------------------------------------------
-#' ##--- Recovering std. normal from its characteristic function --------
+#' ##--- Example 1 ---------------------------------------------------
+#' ##--- Recovering std. normal from its characteristic function -----
 #' library(fourierin)
 #'
 #'                                         # Compute integral
@@ -77,9 +87,23 @@
 #' plot(grid, im_values, type = "l", col = 3)
 #' lines(grid, true_im, col = 4)
 #' @export
-fourierin_1d <- function(f, a, b, c = NULL, d = NULL,
-                         r, s, resol = NULL, w = NULL,
-                         use_fft = TRUE) {
+fourierin_1d <- function(f, lower_int, upper_int,
+                         lower_eval = NULL, upper_eval = NULL,
+                         const_adj, freq_adj, resolution = NULL,
+                         eval_grid = NULL, use_fft = TRUE) {
+    ## Condensed notation
+    a <- lower_int
+    b <- upper_int
+    c <- lower_eval
+    d <- upper_eval
+    r <- const_adj
+    s <- freq_adj
+    resol <- resolution
+    w <- eval_grid
+    
+## fourierin_1d <- function(f, a, b, c = NULL, d = NULL,
+##                          r, s, resol = NULL, w = NULL,
+##                          use_fft = TRUE) {
     ## Flag to determine wheter a list or a vector will be returned
     w_given <- !is.null(w)
 

@@ -4,39 +4,50 @@
 \alias{fourierin_1d}
 \title{Univariate Fourier integrals}
 \usage{
-fourierin_1d(f, a, b, c = NULL, d = NULL, r, s, resol = NULL, w = NULL,
+fourierin_1d(f, lower_int, upper_int, lower_eval = NULL, upper_eval = NULL,
+  const_adj, freq_adj, resolution = NULL, eval_grid = NULL,
   use_fft = TRUE)
 }
 \arguments{
+\item{f}{function or a vector of size m. If a function is
+provided, it must be able to be evaluated at vectors. If a
+vector of values is provided, such evaluations must have been
+obtained on a regular grid and the Fourier integral is faster
+is m is a power of 2.}
+
+\item{lower_int}{Lower integration limit(s).}
+
+\item{upper_int}{Upper integration limit(s).}
+
+\item{lower_eval}{Lower evaluation limit(s). It can be NULL if an
+evaluation grid is provided.}
+
+\item{upper_eval}{Upper evaluation limit(s). It can be NULL if an
+evaluation grid is provided.}
+
+\item{const_adj}{Factor related to adjust definition of Fourier
+transform. It is usually equal to 0, -1 or 1.}
+
+\item{freq_adj}{Constant to adjust the exponent on the definition
+of the Fourier transform. It is usually equal to 1, -1, 2pi or
+-2pi.}
+
+\item{resolution}{A vector of integers (faster if powers of two)
+determining the resolution of the evaluation grid. Not
+required if f is a vector.}
+
+\item{eval_grid}{Optional matrix with d columns with the points
+where the Fourier integral will be evaluated. If it is
+provided, the FFT will not be used.}
+
+\item{use_fft}{Logical value specifying whether the FFT will be
+used.}
+
 \item{f}{function or a vector of size m. If a function is provided,
 it must be able to be evaluated in vectors. If a vector of
 values is provided, such evaluations must have been obtained on
 a regular grid and the Fourier integral is faster is m is a
 power of 2.}
-
-\item{a}{Lower integration limit.}
-
-\item{b}{Upper integration limit.}
-
-\item{c}{Lower evaluation limit.}
-
-\item{d}{Upper evaluation limit.}
-
-\item{r}{Factor related to adjust definition of Fourier
-transform. It is usually equal to 0, -1 or 1.}
-
-\item{s}{Constant to adjust the exponent on the definition of the
-Fourier transform. It is usually equal to 1, -1, 2pi or -2pi.}
-
-\item{resol}{An integer (faster if power of two) determining the
-resolution of the evaluation grid. Not required if f is a
-vector.}
-
-\item{w}{An optional vector where the Fourier integral will be
-evaluated. If provided, the FFT will NOT be used.}
-
-\item{use_fft}{Logical value specifying whether the FFT will be
-used to compute the Fourier integral.}
 }
 \value{
 If w is given, only the values of the Fourier integral are
@@ -52,8 +63,8 @@ variables on a regular grid.
 See vignette for more detailed examples.
 }
 \examples{
-##--- Example 1 ------------------------------------------------------
-##--- Recovering std. normal from its characteristic function --------
+##--- Example 1 ---------------------------------------------------
+##--- Recovering std. normal from its characteristic function -----
 library(fourierin)
 
                                         # Compute integral
