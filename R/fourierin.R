@@ -37,7 +37,7 @@
 #'
 #' @examples
 #' ##--- Example 1 ---------------------------------------------------
-## ##--- Recovering std. normal from its characteristic function -----
+#' ##--- Recovering std. normal from its characteristic function -----
 #' library(fourierin)
 #' 
 #' #' Function to to be used in integrand
@@ -76,18 +76,18 @@
 #' re_values <- Re(out$values)             # Real values
 #' im_values <- Im(out$values)             # Imag values
 #' 
-#'                                         # Now compute the real and
-#'                                         # imaginary true values of the
+#'                                      # Now compute the real and
+#'                                      # imaginary true values of the
 #'                                         # characteric function.
 #' true_cf <- function(t, shape, rate) (1 - 1i*t/rate)^-shape
 #' true_re <- Re(true_cf(grid, shape, rate))
 #' true_im <- Im(true_cf(grid, shape, rate))
 #' 
-#'                                         # Compare them. We can see a
-#'                                         # slight discrepancy on the
-#'                                         # tails, but that is fixed
-#'                                         # when resulution is
-#'                                         # increased.
+#'                                      # Compare them. We can see a
+#'                                      # slight discrepancy on the
+#'                                      # tails, but that is fixed
+#'                                      # when resulution is
+#'                                      # increased.
 #' plot(grid, re_values, type = "l", col = 3)
 #' lines(grid, true_re, col = 4)
 #' 
@@ -171,27 +171,7 @@ fourierin_1d <- function(f, lower_int, upper_int,
 #' It computes Fourier integrals for functions of one and two
 #' variables.
 #'
-#' @param f function or a matrix of size m1 x m2. If a function is
-#'     provided, it must be able to be evaluated in a matrix of two
-#'     columns. If a matrix of values is provided instead, such
-#'     evaluations must have been obtained on a regular grid matrix
-#'     and the Fourier integral is faster is m1 and m2 are powers of
-#'     2.
-#' @param a Lower integration limits.
-#' @param b Upper integration limits.
-#' @param c Lower evaluation limits.
-#' @param d Upper evaluation limits.
-#' @param r Factor related to adjust definition of Fourier
-#'     transform. It is usually 0, -1 or 1.
-#' @param s Constant to adjust the exponent on the definition of the
-#'     Fourier transform. It is usually 1, -1, 2pi or -2pi.
-#' @param resol A vector of two integers (faster if entries are powers
-#'     of two) determining the resolution of the evaluation grid. Not
-#'     required if f is a vector.
-#' @param w An optional two-column matrix where the Fourier integral
-#'     will be evaluated. If provided, the FFT will NOT be used.
-#' @param use_fft Logical value specifying whether the FFT will be
-#'     used to compute the Fourier integral.
+#' @inheritParams fourierin_1d
 #' @return If w is given, only the values of the Fourier integral are
 #'     returned, otherwise, a list with three elements
 #'     \item{w1}{Evaluation grid for first entry} \item{w2}{Evaluation
@@ -199,44 +179,47 @@ fourierin_1d <- function(f, lower_int, upper_int,
 #'     numbers, correspoding to the evaluations of the integral}
 #'
 #' @examples
-#' ##--- Recovering std. normal from its characteristic function --------
+#' ##--- Recovering std. normal from its characteristic function -----
 #' library(fourierin)
-#'
+#' 
 #' ##-Parameters of bivariate normal distribution
 #' mu <- c(-1, 1)
 #' sig <- matrix(c(3, -1, -1, 2), 2, 2)
-#'
+#' 
 #' ##-Multivariate normal density
 #' ##-x is n x d
 #' f <- function(x) {
 #'     ##-Auxiliar values
 #'     d <- ncol(x)
 #'     z <- sweep(x, 2, mu, "-")
-#'
+#' 
 #'     ##-Get numerator and denominator of normal density
 #'     num <- exp(-0.5*rowSums(z * (z %*% solve(sig))))
 #'     denom <- sqrt((2*pi)^d*det(sig))
-#'
+#' 
 #'     return(num/denom)
 #' }
-#'
+#' 
 #' ##-Characteristic function
 #' ##-s is n x d
 #' phi <- function(s) {
 #'     complex(modulus = exp(- 0.5*rowSums(s*(s %*% sig))),
 #'             argument = s %*% mu)
 #' }
-#'
+#' 
 #' ##-Approximate cf using Fourier integrals
-#' eval <- fourierin_2d(f, a = c(-8, -6), b = c(6, 8),
-#'                     c = c(-4, -4), d = c(4, 4),
-#'                     r = 1, s = 1, resol = c(128, 128))
+#' eval <- fourierin_2d(f, lower_int = c(-8, -6), upper_int = c(6, 8),
+#'                      lower_eval = c(-4, -4), upper_eval = c(4, 4),
+#'                      const_adj = 1, freq_adj =  1,
+#'                      resolution = c(128, 128))
+#' 
+#' ## Extract values
 #' t1 <- eval$w1
 #' t2 <- eval$w2
 #' t <- as.matrix(expand.grid(t1 = t1, t2 = t2))
 #' approx <- eval$values
 #' true <- matrix(phi(t), 128, 128)        # Compute true values
-#'
+#' 
 #' ##-This is a section of the characteristic functions
 #' i <- 65
 #' plot(t2, Re(approx[i, ]), type = "l", col = 2,
@@ -247,7 +230,7 @@ fourierin_1d <- function(f, lower_int, upper_int,
 #' lines(t2, Re(true[i, ]), col = 3)
 #' legend("topleft", legend = c("true", "approximation"),
 #'        col = 3:2, lwd = 1)
-#'
+#' 
 #' ##-Another section, now of the imaginary part
 #' plot(t1, Im(approx[, i]), type = "l", col = 2,
 #'      ylab = "",
@@ -258,8 +241,21 @@ fourierin_1d <- function(f, lower_int, upper_int,
 #' legend("topleft", legend = c("true", "approximation"),
 #'        col = 3:2, lwd = 1)
 #' @export
-fourierin_2d <- function(f, a, b, c = NULL, d = NULL, r, s, resol = NULL,
-                         w = NULL, use_fft = TRUE){
+fourierin_2d <- function(f, lower_int, upper_int,
+                         lower_eval = NULL, upper_eval = NULL,
+                         const_adj, freq_adj,
+                         resolution = NULL, eval_grid = NULL,
+                         use_fft = TRUE){
+    ## Condensed notation
+    a <- lower_int
+    b <- upper_int
+    c <- lower_eval
+    d <- upper_eval
+    r <- const_adj
+    s <- freq_adj
+    resol <- resolution
+    w <- eval_grid
+
     ## If function values are provided, then the resolution is the
     ## length of the vector of values.
     if(!is.function(f)) resol <- dim(f)

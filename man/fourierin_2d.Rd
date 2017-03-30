@@ -4,40 +4,44 @@
 \alias{fourierin_2d}
 \title{Bivariate Fourier integrals}
 \usage{
-fourierin_2d(f, a, b, c = NULL, d = NULL, r, s, resol = NULL, w = NULL,
+fourierin_2d(f, lower_int, upper_int, lower_eval = NULL, upper_eval = NULL,
+  const_adj, freq_adj, resolution = NULL, eval_grid = NULL,
   use_fft = TRUE)
 }
 \arguments{
-\item{f}{function or a matrix of size m1 x m2. If a function is
-provided, it must be able to be evaluated in a matrix of two
-columns. If a matrix of values is provided instead, such
-evaluations must have been obtained on a regular grid matrix
-and the Fourier integral is faster is m1 and m2 are powers of
-2.}
+\item{f}{function or a vector of size m. If a function is
+provided, it must be able to be evaluated at vectors. If a
+vector of values is provided, such evaluations must have been
+obtained on a regular grid and the Fourier integral is faster
+is m is a power of 2.}
 
-\item{a}{Lower integration limits.}
+\item{lower_int}{Lower integration limit(s).}
 
-\item{b}{Upper integration limits.}
+\item{upper_int}{Upper integration limit(s).}
 
-\item{c}{Lower evaluation limits.}
+\item{lower_eval}{Lower evaluation limit(s). It can be NULL if an
+evaluation grid is provided.}
 
-\item{d}{Upper evaluation limits.}
+\item{upper_eval}{Upper evaluation limit(s). It can be NULL if an
+evaluation grid is provided.}
 
-\item{r}{Factor related to adjust definition of Fourier
-transform. It is usually 0, -1 or 1.}
+\item{const_adj}{Factor related to adjust definition of Fourier
+transform. It is usually equal to 0, -1 or 1.}
 
-\item{s}{Constant to adjust the exponent on the definition of the
-Fourier transform. It is usually 1, -1, 2pi or -2pi.}
+\item{freq_adj}{Constant to adjust the exponent on the definition
+of the Fourier transform. It is usually equal to 1, -1, 2pi or
+-2pi.}
 
-\item{resol}{A vector of two integers (faster if entries are powers
-of two) determining the resolution of the evaluation grid. Not
+\item{resolution}{A vector of integers (faster if powers of two)
+determining the resolution of the evaluation grid. Not
 required if f is a vector.}
 
-\item{w}{An optional two-column matrix where the Fourier integral
-will be evaluated. If provided, the FFT will NOT be used.}
+\item{eval_grid}{Optional matrix with d columns with the points
+where the Fourier integral will be evaluated. If it is
+provided, the FFT will not be used.}
 
 \item{use_fft}{Logical value specifying whether the FFT will be
-used to compute the Fourier integral.}
+used.}
 }
 \value{
 If w is given, only the values of the Fourier integral are
@@ -51,7 +55,7 @@ It computes Fourier integrals for functions of one and two
 variables.
 }
 \examples{
-##--- Recovering std. normal from its characteristic function --------
+##--- Recovering std. normal from its characteristic function -----
 library(fourierin)
 
 ##-Parameters of bivariate normal distribution
@@ -80,9 +84,12 @@ phi <- function(s) {
 }
 
 ##-Approximate cf using Fourier integrals
-eval <- fourierin_2d(f, a = c(-8, -6), b = c(6, 8),
-                    c = c(-4, -4), d = c(4, 4),
-                    r = 1, s = 1, resol = c(128, 128))
+eval <- fourierin_2d(f, lower_int = c(-8, -6), upper_int = c(6, 8),
+                     lower_eval = c(-4, -4), upper_eval = c(4, 4),
+                     const_adj = 1, freq_adj =  1,
+                     resolution = c(128, 128))
+
+## Extract values
 t1 <- eval$w1
 t2 <- eval$w2
 t <- as.matrix(expand.grid(t1 = t1, t2 = t2))

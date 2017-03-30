@@ -58,6 +58,7 @@ See vignette for more detailed examples.
 }
 \examples{
 ##--- Example 1 ---------------------------------------------------
+##--- Recovering std. normal from its characteristic function -----
 library(fourierin)
 
 #' Function to to be used in integrand
@@ -96,18 +97,18 @@ grid <- out$w                           # Extract grid
 re_values <- Re(out$values)             # Real values
 im_values <- Im(out$values)             # Imag values
 
-                                        # Now compute the real and
-                                        # imaginary true values of the
+                                     # Now compute the real and
+                                     # imaginary true values of the
                                         # characteric function.
 true_cf <- function(t, shape, rate) (1 - 1i*t/rate)^-shape
 true_re <- Re(true_cf(grid, shape, rate))
 true_im <- Im(true_cf(grid, shape, rate))
 
-                                        # Compare them. We can see a
-                                        # slight discrepancy on the
-                                        # tails, but that is fixed
-                                        # when resulution is
-                                        # increased.
+                                     # Compare them. We can see a
+                                     # slight discrepancy on the
+                                     # tails, but that is fixed
+                                     # when resulution is
+                                     # increased.
 plot(grid, re_values, type = "l", col = 3)
 lines(grid, true_re, col = 4)
 
