@@ -42,201 +42,213 @@ The implementation of this algorithm is the one described in [Inverarity (2002),
 
 Some examples (also found in documentation).
 
-## Example 0: Speed test
+## Example 0: Speed tests
 
-```{r}
+Below it is an example of univariate continuous Fourier transform.
+
+```{r, fig.height= 5, fig.width= 7}
 
 library(fourierin)
+library(dplyr)
+library(purrr)
+library(ggplot2)
 library(microbenchmark)
 
-## Test speed at several resolutionsre
-resolution <- 2^(0:7)
+## Test speed at several resolutions
+resolution <- 2^(3:8)
 
-                                        # Aux. function
+## Function to be tested
+myfnc <- function(t) exp(-t^2/2)
+
+## Aux. function
 compute_times <- function(resol){
-    out <- microbenchmark(
-        fourierin_1d(f = function(t) exp(-t^2/2),
-                     -5, 5, -3, 3, -1, -1, resol),
-        fourierin_1d(f = function(t) exp(-t^2/2),
-                     -5, 5, -3, 3, -1, -1, resol,
-                     use_fft = FALSE),
-        times = 5
-    )
-    out <- with(out, tapply(time/1e6, expr, mean))
-    out <- c(out[[1]], out[[2]])
-    return(out)
+    out <- 
+        microbenchmark(
+            fourierin_1d(f = myfnc, -5, 5, -3, 3, -1, -1, resol),
+            fourierin_1d(f = myfnc, -5, 5, -3, 3, -1, -1, resol,
+                         use_fft = FALSE),
+            times = 5) %>%
+        as.data.frame()
+    ## Rename levels
+    levels(out$expr) <- c("yes", "no")
+    ## Obtain median of time.
+    out %>%
+        group_by(expr) %>%
+        summarize(time = median(time*1e-6),
+                  resolution = resol) %>%
+        rename(FFT = expr) 
 }
-                                        # Compute the time for every
-                                        # resolution
-times <- t(apply(matrix(resolution), 1, compute_times))
-                                        # Convert to a dataframe with
-                                        # appropriate names
-summ <- data.frame(resolution,
-                   FFT = times[, 1], no_FFT = times[, 2])
-                                        # ... And plot it
-library(tidyr)
+
+
+resolution %>%
+    map_df(compute_times) %>%
+    mutate(resolution = as.factor(resolution)) %>%
+    ggplot(aes(resolution, time, color = FFT)) +
+    geom_point(size = 2, aes(shape = FFT)) +
+    geom_line(aes(linetype = FFT, group = FFT)) +
+    ylab("time (in milliseconds)")
+
+```
+
+Now we present an example using a bivariate function.
+
+```{r, fig.height= 5, fig.width= 7}
+## Load packages
+library(fourierin)
 library(dplyr)
+library(purrr)
 library(ggplot2)
+library(microbenchmark)
 
-summ %>%
-    gather(FFT, ISE, -resolution) %>%
-    mutate(FFT = gsub("FFT", "yes", FFT),
-           FFT = gsub("no_yes", "no", FFT)) %>%
-    ggplot(aes(resolution, ISE, color = FFT)) +
-    geom_point(shape = 1) +
-    geom_line() +
-    theme_bw()
+## Test speed at several resolutions
+resolution <- 2^(3:7)
 
-with(summ, {
-    plot(range(resolution), range(c(FFT, no_FFT)), type = "n",
-         xlab = "resolution", ylab = "time (milliseconds)")
-    lines(resolution, FFT, type = "b", col = "cyan")
-    lines(resolution, no_FFT, type = "b", col = "magenta")
-    legend("topleft", legend = c("FFT", "No FFT"),
-           col = c("cyan", "magenta"), lty = 1, pch = 1)
-})
+## Bivariate function to be tested
+myfnc <- function(x) dnorm(x[, 1])*dnorm(x[, 2])
 
-```
-
-Above is a sample
-
-```{r, fig.height= 5, fig.width= 7}
-library(fourierin)
-if (require(microbenchmark)) {
-                                        # Test speed at several
-                                        # resolutions
-resolution <- 2^(0:7)
-                                        # Aux. function
+## Aux. function
 compute_times <- function(resol){
-    out <- microbenchmark(
-        fourierin_1d(f = function(t) exp(-t^2/2),
-                     -5, 5, -3, 3, -1, -1, resol),
-        fourierin_1d(f = function(t) exp(-t^2/2),
-                     -5, 5, -3, 3, -1, -1, resol,
-                     use_fft = FALSE),
-        times = 5
-    )
-    out <- with(out, tapply(time/1e6, expr, mean))
-    out <- c(out[[1]], out[[2]])
-    return(out)
+    resol <- rep(resol, 2)
+    out <-
+        microbenchmark(
+            fourierin(myfnc,
+                      lower_int = c(-8, -6), upper_int = c(6, 8),
+                      lower_eval = c(-4, -4), upper_eval = c(4, 4),
+                      const_adj = 1, freq_adj = 1,
+                      resolution = resol),
+            fourierin(myfnc,
+                      lower_int = c(-8, -6), upper_int = c(6, 8),
+                      lower_eval = c(-4, -4), upper_eval = c(4, 4),
+                      const_adj = 1, freq_adj = 1,
+                      resolution = resol, use_fft = FALSE),
+            times = 5) %>%
+        as.data.frame()
+    
+    ## Rename levels
+    levels(out$expr) <- c("yes", "no")
+    ## Obtain median of time.
+    out %>%
+        group_by(expr) %>%
+        summarize(time = median(time*1e-9),
+                  resolution = resol[1]) %>%
+        rename(FFT = expr) 
 }
-                                        # Compute the time for every
-                                        # resolution
-times <- t(apply(matrix(resolution), 1, compute_times))
-                                        # Convert to a dataframe with
-                                        # appropriate names
-summ <- data.frame(resolution,
-                   FFT = times[, 1], no_FFT = times[, 2])
-                                        # ... And plot it
-with(summ, {
-    plot(range(resolution), range(c(FFT, no_FFT)), type = "n",
-         xlab = "resolution", ylab = "time (milliseconds)")
-    lines(resolution, FFT, type = "b", col = "cyan")
-    lines(resolution, no_FFT, type = "b", col = "magenta")
-    legend("topleft", legend = c("FFT", "No FFT"),
-           col = c("cyan", "magenta"), lty = 1, pch = 1)
-})
-}
-```
 
+## Values
+comparison <- 
+    resolution %>%
+    map_df(compute_times) 
 
-## Example 0.1 Bivariate
+fctr_order <-
+    unique(comparison$resolution) %>%
+    paste(., ., sep = "x")
 
-```{r, fig.height= 5, fig.width= 7}
-library(fourierin)
-if(require(microbenchmark)){
-                                        # Test speed at several
-                                        # resolutions
-resolution <- 2^(0:6)
-resolution <- cbind(resolution, resolution)
-                                        # Aux. function
-compute_times <- function(resol){
-    out <- microbenchmark(
-        fourierin(function(x)
-            dnorm(x[, 1])*dnorm(x[, 2]), 
-            a = c(-8, -6), b = c(6, 8),
-            c = c(-4, -4), d = c(4, 4),
-            r = 1, s = 1, resol = resol),
-        fourierin(function(x)
-            dnorm(x[, 1])*dnorm(x[, 2]), 
-            a = c(-8, -6), b = c(6, 8),
-            c = c(-4, -4), d = c(4, 4),
-            r = 1, s = 1, resol = resol,
-            use_fft = FALSE),
-        times = 5
-    )
-    out <- with(out, tapply(time/1e9, expr, mean))
-    out <- c(out[[1]], out[[2]])
-    return(out)
-}
-                                        # Compute the time for every
-                                        # resolution
-times <- t(apply(resolution, 1, compute_times))
-                                        # Convert to a dataframe with
-                                        # appropriate names
-summ <- data.frame(resolution,
-                   FFT = times[, 1], no_FFT = times[, 2])
-                                        # ... And plot it
-with(summ, {
-    plot(range(resolution), range(c(FFT, no_FFT)), type = "n",
-         xlab = "resolution", ylab = "time (seconds)")
-    lines(resolution, FFT, type = "b", col = "cyan")
-    lines(resolution, no_FFT, type = "b", col = "magenta")
-    legend("topleft", legend = c("FFT", "No FFT"),
-           col = c("cyan", "magenta"), lty = 1, pch = 1)
-})
-}
+## Plot
+comparison %>%
+    mutate(resolution = paste(resolution, resolution, sep = "x"),
+           resolution = ordered(resolution, levels = fctr_order)) %>%
+    ggplot(aes(resolution, time, color = FFT)) +
+    geom_point(size = 2, aes(shape = FFT)) +
+    geom_line(aes(linetype = FFT, group = FFT)) +
+    ylab("time (in seconds)")
+
 ```
 
 
 
 ## Example 1: Recovering standard normal from its characteristic function
 
+The density function of a random variable can be recovered using the [Fourier inversion theorem](https://en.wikipedia.org/wiki/Fourier_inversion_theorem). The characteristic function of a standard normal distribution is 
+$$
+\phi(t) = \exp(-t^2/2) \;\; t \in \mathbb{R}
+$$
+
+The due to the smoothness and symmetry of both, the characteristic function and the standard normal density, it can be well approximated even with a low resolution.
+
 ```{r, fig.height= 5, fig.width= 7}
 library(fourierin)
+library(dplyr)
+library(ggplot2)
 
-                                        # Compute integral
-out <- fourierin(f = function(t) exp(-t^2/2),
-                 a = -5, b = 5, c = -3, d = 3,
-                 r = -1, s = -1, resol = 64)
-grid <- out$w                           # Extract grid and values
-values <- Re(out$values)
+## Characteristic function of std. normal.
+fnc <- function(t) exp(-t^2/2)
 
-plot(grid, values, type = "l", col = 3, xlab = "x", ylab = "f(x)")
-lines(grid, dnorm(grid), col = 4)
-legend("topleft", legend = c("True", "Recovered"), col = c(4, 3),
-      lwd = 1)
+## Compute integral
+out <- fourierin(f = fnc, lower_int = -5, upper_int = 5,
+                 lower_eval = -5, upper_eval = 5,
+                 const_adj = -1, freq_adj = -1, resolution = 64)
+
+## Extract values and compute true values of the density
+df1 <- out %>%
+    as_data_frame() %>%
+    mutate(values = Re(values),
+           density = "approximated")
+
+df2 <- data_frame(w = seq(min(df1$w), max(df1$w), len = 150),
+                  values = dnorm(w),
+                  density = "true")
+
+bind_rows(df1, df2) %>%
+    ggplot(aes(w, values, color = density)) +
+    geom_line(aes(linetype = density)) +
+    xlab("x") + ylab("f(x)")
+
 ```
 
-This is another example using gamma density
+We now present a second example: recovering the density of a $\chi^2$ distribution using its characteristic function. The corresponding density is not symmetryc and its support is not the entire real line, thus a higher resolution might be required to achieve a good approximation.
 
 ```{r, fig.height= 5, fig.width= 7}
+
 library(fourierin)
+library(dplyr)
+library(purrr)
+library(ggplot2)
 
-df <- 5
-                                        # Set functions
+## Set functions
+df <- 5                                        
 cf <- function(t) (1 - 2i*t)^(-df/2)
-dens <- function(t) dchisq(t, df)
+dens <- function(x) dchisq(x, df)
 
-                                        # Compute integral
-out <- fourierin(f = cf,
-                 a = -5, b = 5, c = -1, d = 20,
-                 r = -1, s = -1, resol = 128)
-grid <- out$w                           # Extract grid and values
-values <- Re(out$values)
 
-plot(grid, values, type = "l", col = 3, xlab = "x", ylab = "f(x)")
-lines(grid, dens(grid), col = 4)
-legend("topright", legend = c("True", "Recovered"), col = c(4, 3),
-      lwd = 1)
+## Set resolutions
+resolutions <- 2^(6:8)
 
+## Compute integral given the resoltion
+recover_f <- function(resol){
+    ## Get grid and density values
+    out <- fourierin(f = cf, lower_int = -10, upper_int = 10,
+                     lower_eval = -3, upper_eval = 20,
+                     const_adj = -1, freq_adj = -1,
+                     resolution = resol)
+    ## Return in dataframe format
+    out %>%
+        as_data_frame() %>%
+        transmute(
+            x = w,
+            values = Re(values),
+            resolution = resol)
+}
+
+## Density approximations
+vals <- map_df(resolutions, recover_f)
+
+## True values
+true <- data_frame(x = seq(min(vals$x), max(vals$x), length = 150),
+                   values = dens(x))
+
+vals %>%
+    mutate(resolution = ordered(resolution,
+                                labels = resolutions)) %>%
+    ggplot(aes(x, values)) +
+    geom_line(aes(color = resolution)) +
+    geom_line(data = true, aes(color = "true values"))
 
 ```
 
 
 ## Example 2: Computing characteristic function of a gamma density
 
-```{r, fig.height= 5, fig.width= 7}
+```{r, fig.height= 5, fig.width= 7, eval  = FALSE}
 
 library(fourierin)
                                         # Compute integral
@@ -277,7 +289,7 @@ legend("topright", legend = c("True", "Recovered"), col = c(4, 3),
 
 ## Example 3: Recovering std. normal from its characteristic function
 
-```{r, fig.height= 5, fig.width= 7}
+```{r, fig.height= 5, fig.width= 7, eval = FALSE}
 library(fourierin)
 
 ## Parameters of bivariate normal distribution
