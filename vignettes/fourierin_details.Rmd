@@ -121,7 +121,7 @@ compute_times <- function(resol){
                       lower_eval = c(-4, -4), upper_eval = c(4, 4),
                       const_adj = 1, freq_adj = 1,
                       resolution = resol, use_fft = FALSE),
-            times = 5) %>%
+            times = 3) %>%
         as.data.frame()
     
     ## Rename levels
