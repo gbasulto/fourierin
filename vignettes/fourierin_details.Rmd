@@ -248,43 +248,55 @@ vals %>%
 
 ## Example 2: Computing characteristic function of a gamma density
 
-```{r, fig.height= 5, fig.width= 7, eval  = FALSE}
+```{r, fig.height= 5, fig.width= 7}
 
 library(fourierin)
-                                        # Compute integral
+library(tidyr)
+library(dplyr)
+library(purrr)
+library(ggplot2)
+
+## Compute integral
 shape <- 5
 rate <- 3
-out <- fourierin(f = function(t) dgamma(t, shape, rate),
-                 a = -0, b = 8, c = -5, d = 5,
-                 r = 1, s = 1, resol = 64)
-grid <- out$w                           # Extract grid
-re_values <- Re(out$values)             # Real values
-im_values <- Im(out$values)             # Imag values
+myfnc <- function(t) dgamma(t, shape, rate)
 
-                                        # Now compute the real and
-                                        # imaginary true values of the
-                                        # characteric function.
+## Function to compute characteristic function for a given resolution.
+approximate_CF <- function (resol) {
+    out <- fourierin(f = myfnc, -0, 8, -5, 5, 1, 1, resol)
+    
+    out %>%
+        as_data_frame() %>%
+        transmute(t = w,
+                  real = Re(values),
+                  imaginary = Im(values),
+                  resolution = as.character(resol)) %>%
+        gather(CF, values, -t, -resolution)
+}
+
+## Evaluate approxs. to CF for different resulutions
+resolution <- 2^c(6, 7)
+CF <- map_df(resolution, approximate_CF)
+
+## Evaluate true values of characteristic function
 true_cf <- function(t, shape, rate) (1 - 1i*t/rate)^-shape
-true_re <- Re(true_cf(grid, shape, rate))
-true_im <- Im(true_cf(grid, shape, rate))
+true <- data_frame(t = seq(min(CF$t), max(CF$t), length = 150),
+                   values = true_cf(t, shape, rate),
+                   real = Re(values),
+                   imaginary = Im(values),
+                   resolution = "true values") %>%
+    select(-values) %>%
+    gather(CF, values, -t, -resolution)
 
-                                        # Compare them. We can see a
-                                        # slight discrepancy on the
-                                        # tails, but that is fixed
-                                        # when resulution is
-                                        # increased.
-plot(grid, re_values, type = "l", col = 3, xlab = "t",
-     ylab = expression(paste("Re ", phi(t))))
-lines(grid, true_re, col = 4)
-legend("topright", legend = c("True", "Recovered"), col = c(4, 3),
-      lwd = 1)
+## Plot values
+CF %>%
+    ggplot(aes(t, values, color = resolution,
+               group = resolution)) +
+    geom_line(aes()) +
+    geom_line(data = true) + 
+    facet_grid(~CF) + 
+    theme(legend.position = "bottom")
 
-                                        # Same here
-plot(grid, im_values, type = "l", col = 3, xlab = "t",
-     ylab = expression(paste("Im ", phi(t))))
-lines(grid, true_im, col = 4)
-legend("topright", legend = c("True", "Recovered"), col = c(4, 3),
-      lwd = 1)
 ```
 
 ## Example 3: Recovering std. normal from its characteristic function
