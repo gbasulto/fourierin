@@ -21,7 +21,8 @@ Suggests:
     dplyr,
     tidyr,
     purrr,
-    ggplot2
+    ggplot2,
+    lattice
 RoxygenNote: 6.0.1
 URL: http://github.com/gbasulto/fourierin
 BugReports: https://github.com/gbasulto/fourierin/issues
