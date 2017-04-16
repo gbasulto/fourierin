@@ -1,0 +1,7 @@
+.Rproj.user
+.Rhistory
+.RData
+.Rbuilignore
+fourierin.Rproj
+inst/doc
+README.html
