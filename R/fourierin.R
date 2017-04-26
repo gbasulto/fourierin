@@ -480,7 +480,11 @@ fourierin <- function(f, lower_int, upper_int,
            ) # End switch
 }
 
-#' @useDynLib fourierin
+#' @useDynLib fourierin, .registration=TRUE
 #' @importFrom Rcpp sourceCpp
 NULL
 
+
+.onUnload <- function (libpath) {
+  library.dynam.unload("fourierin", libpath)
+}

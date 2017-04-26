@@ -71,7 +71,7 @@ out <- fourierin(f = myfnc, lower_int = -5, upper_int = 5,
                  freq_adj = -1, resolution = 64)
 
 ## Extract grid and values
-grid <- out$w                           
+grid <- out$w
 values <- Re(out$values)
 
 ## Compare with true values of Fourier transform

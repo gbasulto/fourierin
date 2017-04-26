@@ -72,7 +72,7 @@ out <- fourierin_1d(f = myfun,
                     resolution = 64)
 
 ## Extract grid and values
-grid <- out$w                           
+grid <- out$w
 values <- Re(out$values)
 
 plot(grid, values, type = "l", col = 3)
