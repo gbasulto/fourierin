@@ -52,7 +52,6 @@ library(fourierin)
 library(dplyr)
 library(purrr)
 library(ggplot2)
-library(microbenchmark)
 
 ## Test speed at several resolutions
 resolution <- 2^(3:8)
@@ -62,23 +61,16 @@ myfnc <- function(t) exp(-t^2/2)
 
 ## Aux. function
 compute_times <- function(resol){
-    out <- 
-        microbenchmark(
-            fourierin_1d(f = myfnc, -5, 5, -3, 3, -1, -1, resol),
-            fourierin_1d(f = myfnc, -5, 5, -3, 3, -1, -1, resol,
-                         use_fft = FALSE),
-            times = 5) %>%
-        as.data.frame()
-    ## Rename levels
-    levels(out$expr) <- c("yes", "no")
-    ## Obtain median of time.
-    out %>%
-        group_by(expr) %>%
-        summarize(time = median(time*1e-6),
-                  resolution = resol) %>%
-        rename(FFT = expr) 
+  reps <- 100
+  rbenchmark::benchmark(
+    yes = fourierin_1d(f = myfnc, -5, 5, -3, 3, -1, -1, resol),
+    no = fourierin_1d(f = myfnc, -5, 5, -3, 3, -1, -1, resol,
+                      use_fft = FALSE),
+    replications = reps) %>%
+    as.data.frame() %>%
+    select(FFT = test, time = elapsed) %>%
+    mutate(time = time*1e3/reps, resolution = resol)
 }
-
 
 resolution %>%
     map_df(compute_times) %>%
@@ -98,7 +90,6 @@ library(fourierin)
 library(dplyr)
 library(purrr)
 library(ggplot2)
-library(microbenchmark)
 
 ## Test speed at several resolutions
 resolution <- 2^(3:7)
@@ -108,30 +99,23 @@ myfnc <- function(x) dnorm(x[, 1])*dnorm(x[, 2])
 
 ## Aux. function
 compute_times <- function(resol){
-    resol <- rep(resol, 2)
-    out <-
-        microbenchmark(
-            fourierin(myfnc,
+  reps <- 1
+  resol <- rep(resol, 2)
+  rbenchmark::benchmark(
+    yes = fourierin(myfnc,
                       lower_int = c(-8, -6), upper_int = c(6, 8),
                       lower_eval = c(-4, -4), upper_eval = c(4, 4),
                       const_adj = 1, freq_adj = 1,
                       resolution = resol),
-            fourierin(myfnc,
+    no = fourierin(myfnc,
                       lower_int = c(-8, -6), upper_int = c(6, 8),
                       lower_eval = c(-4, -4), upper_eval = c(4, 4),
                       const_adj = 1, freq_adj = 1,
                       resolution = resol, use_fft = FALSE),
-            times = 3) %>%
-        as.data.frame()
-    
-    ## Rename levels
-    levels(out$expr) <- c("yes", "no")
-    ## Obtain median of time.
-    out %>%
-        group_by(expr) %>%
-        summarize(time = median(time*1e-9),
-                  resolution = resol[1]) %>%
-        rename(FFT = expr) 
+    replications = reps) %>%
+    as.data.frame() %>%
+    select(FFT = test, time = elapsed) %>%
+    mutate(time = time/reps, resolution = resol)
 }
 
 ## Values

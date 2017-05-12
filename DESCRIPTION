@@ -17,12 +17,12 @@ Suggests:
     MASS,
     knitr,
     rmarkdown,
-    microbenchmark,
     dplyr,
     tidyr,
     purrr,
     ggplot2,
-    lattice
+    lattice,
+    rbenchmark
 RoxygenNote: 6.0.1
 URL: http://github.com/gbasulto/fourierin
 BugReports: https://github.com/gbasulto/fourierin/issues
