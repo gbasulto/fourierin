@@ -176,7 +176,7 @@ fourierin_1d <- function(f, lower_int, upper_int,
 #'     returned, otherwise, a list with three elements
 #'     \item{w1}{Evaluation grid for first entry} \item{w2}{Evaluation
 #'     grid for second entry} \item{values}{m1 x m2 matrix of complex
-#'     numbers, correspoding to the evaluations of the integral}
+#'     numbers, corresponding to the evaluations of the integral}
 #'
 #' @examples
 #' ##--- Recovering std. normal from its characteristic function -----

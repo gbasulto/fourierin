@@ -48,7 +48,7 @@ If w is given, only the values of the Fourier integral are
     returned, otherwise, a list with three elements
     \item{w1}{Evaluation grid for first entry} \item{w2}{Evaluation
     grid for second entry} \item{values}{m1 x m2 matrix of complex
-    numbers, correspoding to the evaluations of the integral}
+    numbers, corresponding to the evaluations of the integral}
 }
 \description{
 It computes Fourier integrals for functions of one and two
