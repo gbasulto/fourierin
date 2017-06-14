@@ -2,35 +2,35 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 fourierin_1d_cpp <- function(f, a, b, c, d, r, s) {
-    .Call('fourierin_fourierin_1d_cpp', PACKAGE = 'fourierin', f, a, b, c, d, r, s)
+    .Call(fourierin_fourierin_1d_cpp, f, a, b, c, d, r, s)
 }
 
 fourierin_1d_nonregular_cpp <- function(f, a, b, w, resolution, r, s) {
-    .Call('fourierin_fourierin_1d_nonregular_cpp', PACKAGE = 'fourierin', f, a, b, w, resolution, r, s)
+    .Call(fourierin_fourierin_1d_nonregular_cpp, f, a, b, w, resolution, r, s)
 }
 
 fourierin_2d_cpp <- function(f, a, b, c, d, r, s) {
-    .Call('fourierin_fourierin_2d_cpp', PACKAGE = 'fourierin', f, a, b, c, d, r, s)
+    .Call(fourierin_fourierin_2d_cpp, f, a, b, c, d, r, s)
 }
 
 fourierin_2d_nonregular_cpp <- function(f, a, b, w, resolution, r, s) {
-    .Call('fourierin_fourierin_2d_nonregular_cpp', PACKAGE = 'fourierin', f, a, b, w, resolution, r, s)
+    .Call(fourierin_fourierin_2d_nonregular_cpp, f, a, b, w, resolution, r, s)
 }
 
 fourierin_cx_1d_cpp <- function(f, a, b, c, d, r, s) {
-    .Call('fourierin_fourierin_cx_1d_cpp', PACKAGE = 'fourierin', f, a, b, c, d, r, s)
+    .Call(fourierin_fourierin_cx_1d_cpp, f, a, b, c, d, r, s)
 }
 
 fourierin_cx_1d_nonregular_cpp <- function(f, a, b, w, resolution, r, s) {
-    .Call('fourierin_fourierin_cx_1d_nonregular_cpp', PACKAGE = 'fourierin', f, a, b, w, resolution, r, s)
+    .Call(fourierin_fourierin_cx_1d_nonregular_cpp, f, a, b, w, resolution, r, s)
 }
 
 fourierin_cx_2d_cpp <- function(f, a, b, c, d, r, s) {
-    .Call('fourierin_fourierin_cx_2d_cpp', PACKAGE = 'fourierin', f, a, b, c, d, r, s)
+    .Call(fourierin_fourierin_cx_2d_cpp, f, a, b, c, d, r, s)
 }
 
 fourierin_cx_2d_nonregular_cpp <- function(f, a, b, w, resolution, r, s) {
-    .Call('fourierin_fourierin_cx_2d_nonregular_cpp', PACKAGE = 'fourierin', f, a, b, w, resolution, r, s)
+    .Call(fourierin_fourierin_cx_2d_nonregular_cpp, f, a, b, w, resolution, r, s)
 }
 
 # Register entry points for exported C++ functions
