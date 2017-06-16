@@ -1,14 +1,15 @@
 
 ## -------------------------------------------------------------------
 
-## The next functions are only a test.
-z <- function (m, delta) {
+fz <- function (m, delta) {
     
     ## Argument
     idx <- 0:(m - 1)
-    arg1 <- -delta*idx^2
-    arg2 <- -delta*(idx - m)^2
-    z <- complex(argument = c(arg1, arg2))
+    z <- complex(argument = -delta*c(idx, idx - m)^2)
     
     fft(z)
+}
+
+fft_array <- function (mv_FFT_vals_array, FFT_vect_list) {
+    list(mv_FFT_vals_array, FFT_vect_list)
 }
