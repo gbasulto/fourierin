@@ -12,7 +12,8 @@ LinkingTo:
     RcppArmadillo,
     Rcpp
 Imports:
-    Rcpp (>= 0.12.5)
+    Rcpp (>= 0.12.5),
+    stats
 Suggests:
     MASS,
     knitr,
