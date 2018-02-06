@@ -1,12 +1,11 @@
 
 ## -------------------------------------------------------------------
-
 fz <- function (m, delta) {
-    
+
     ## Argument
     idx <- 0:(m - 1)
     z <- complex(argument = -delta*c(idx, idx - m)^2)
-    
+
     stats::fft(z)
 }
 
