@@ -4,9 +4,9 @@
 \alias{fourierin_1d}
 \title{Univariate Fourier integrals}
 \usage{
-fourierin_1d(f, lower_int, upper_int, lower_eval = NULL, upper_eval = NULL,
-  const_adj, freq_adj, resolution = NULL, eval_grid = NULL,
-  use_fft = TRUE)
+fourierin_1d(f, lower_int, upper_int, lower_eval = NULL,
+  upper_eval = NULL, const_adj, freq_adj, resolution = NULL,
+  eval_grid = NULL, use_fft = TRUE)
 }
 \arguments{
 \item{f}{function or a vector of size m. If a function is
