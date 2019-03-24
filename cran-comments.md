@@ -1,6 +1,6 @@
 ## Test environments
 
-* local Ubuntu 12.04, R 3.4.0
+* local Ubuntu 18.10, R 3.5.3
 * win-builder (devel and release)
 
 ## R CMD check results
