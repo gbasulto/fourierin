@@ -1,7 +1,7 @@
 Package: fourierin
 Type: Package
 Title: Computes Numeric Fourier Integrals
-Version: 0.2.2
+Version: 0.2.3
 Date: 2017-05-14
 Author: Guillermo Basulto-Elias
 Maintainer: Guillermo Basulto-Elias <guillermobasulto@gmail.com>
@@ -12,7 +12,7 @@ LinkingTo:
     RcppArmadillo,
     Rcpp
 Imports:
-    Rcpp (>= 0.12.5),
+    Rcpp (>= 1.0.1),
     stats
 Suggests:
     MASS,

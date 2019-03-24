@@ -179,7 +179,7 @@ bind_rows(df1, df2) %>%
 
 ```
 
-We now present a second example: recovering the density of a $\chi^2$ distribution using its characteristic function. The corresponding density is not symmetryc and its support is not the entire real line, thus a higher resolution might be required to achieve a good approximation.
+We now present a second example: recovering the density of a $\chi^2$ distribution using its characteristic function. The corresponding density is not symmetric and its support is not the entire real line, thus a higher resolution might be required to achieve a good approximation.
 
 ```{r, fig.height= 5, fig.width= 7}
 
@@ -285,9 +285,9 @@ CF %>%
 
 ## Example 3: Recovering std. normal from its characteristic function
 
-fwrwrg rg
+Testing example.
 
-```{r, fig.height= 5, fig.width= 7}
+```{r, fig.height= 5, fig.width= 7, eval = FALSE}
 
 ## Load packages
 library(fourierin)

@@ -1,4 +1,9 @@
 
+# Version 0.2.3
+
+- Explicitly call std::abs for doubles in C++ code.
+
+
 # Version 0.2.2
 
 - Suggested package 'microbenchmark' has been replaced by 'rbenchmark'.

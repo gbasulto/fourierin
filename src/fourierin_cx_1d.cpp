@@ -52,7 +52,7 @@ arma::cx_vec fourierin_cx_1d_cpp(const arma::cx_vec & f, double a,
 
   // fourierin_1d without s argument is meant for s = 1. Thus we have
   // to make it valid for any s.
-  out = pow(abs(s), 1/2)*fourierin_cx_1d_cpp(f, a, b, s*c, s*d, r);
+  out = pow(std::abs(s), 1/2)*fourierin_cx_1d_cpp(f, a, b, s*c, s*d, r);
 
   return out;
 }
@@ -74,7 +74,7 @@ arma::cx_vec fourierin_cx_1d_nonregular_cpp(const arma::cx_vec & f,
 
   delta = (b - a)/m;
   t = arma::linspace<arma::vec>(a + delta/2, b - delta/2, m);
-  factor = sqrt(abs(s)/pow(2*datum::pi, 1 - r))*delta;
+  factor = sqrt(std::abs(s)/pow(2*datum::pi, 1 - r))*delta;
 
   for(i = 0; i < k; i++)
     {
