@@ -104,7 +104,7 @@ arma::cx_mat fourierin_2d_cpp(const arma::mat & f,
 
   // fourierin_1d without s argument is meant for s = 1. Thus we have
   // to make it valid for any s.
-  out = abs(s)*fourierin_2d_cpp(f, a, b, s*c, s*d, r);
+  out = std::abs(s)*fourierin_2d_cpp(f, a, b, s*c, s*d, r);
 
 
   return out;
@@ -116,7 +116,7 @@ arma::cx_mat fourierin_2d_cpp(const arma::mat & f,
 
   To see more details about this function, see documentation in R
   script "fourierin". This function is called by the function
-  fourierin_2d. 
+  fourierin_2d.
 
 */
 
@@ -143,7 +143,7 @@ arma::cx_mat fourierin_2d_nonregular_cpp(const arma::mat & f,
 				 b(0) - delta(0)/2, m(0));
   t2 = arma::linspace<arma::vec>(a(1) + delta(1)/2,
 				 b(1) - delta(1)/2, m(1));
-  factor = abs(s)/pow(2*datum::pi, 1 - r)*prod(delta);
+  factor = std::abs(s)/pow(2*datum::pi, 1 - r)*prod(delta);
   out.zeros();
 
   for(i = 0; i < k; i++)
