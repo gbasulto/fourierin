@@ -1,5 +1,10 @@
-# fourierin
-Guillermo Basulto-Elias  
+---
+title: "fourierin"
+author: "Guillermo Basulto-Elias"
+output: 
+  html_document: 
+    keep_md: yes
+---
 
 This is a package in `R` to numerically calculate Fourier-type integrals of univariate and bivariate  functions with compact support and simultaneously evaluated at several points. If the evaluation grid is equally spaced, a Fast Fourier Transform method is used to speed up computations.
 
