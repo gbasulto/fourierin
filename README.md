@@ -7,6 +7,8 @@
 
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/gbasulto/fourierin?branch=master&svg=true)](https://ci.appveyor.com/project/gbasulto/fourierin)
+[![Travis build
+status](https://travis-ci.org/gbasulto/fourierin.svg?branch=master)](https://travis-ci.org/gbasulto/fourierin)
 <!-- badges: end -->
 
 This is a package in `R` to numerically calculate Fourier-type integrals
