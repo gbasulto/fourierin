@@ -13,7 +13,7 @@ arma::cx_vec fourierin_cx_1d_cpp(const arma::cx_vec & f, double a,
   arma::vec J1(m), J2(m), w(m), arg(m);
   double bet, gam, del, cnst;
 
-  bet = (b - a)/m;		// Real numbers
+  bet = (b - a)/m;		// Real numbers.
   gam = (d - c)/m;
   del = bet*gam/2;
   J1 = arma::linspace<arma::vec>(0, m-1, m); // mx1 vectors
@@ -22,7 +22,7 @@ arma::cx_vec fourierin_cx_1d_cpp(const arma::cx_vec & f, double a,
   y.zeros();		// (2m) x 1 vector
 
   // We will first compute the argument and then create the complex
-  // vector.
+  // vector
   arg = J1 % (bet*c + del*J1);	// Fill y
   y.rows(0, m - 1) = f % cx_vec(cos(arg), sin(arg));
 
