@@ -25,9 +25,11 @@ Suggests:
     lattice,
     rbenchmark,
     testthat (>= 2.1.0),
-    covr
+    covr,
+    spelling
 RoxygenNote: 6.1.1
 URL: http://github.com/gbasulto/fourierin
 BugReports: https://github.com/gbasulto/fourierin/issues
 VignetteBuilder: knitr
 Encoding: UTF-8
+Language: en-US
