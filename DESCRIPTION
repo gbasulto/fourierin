@@ -23,7 +23,9 @@ Suggests:
     purrr,
     ggplot2,
     lattice,
-    rbenchmark
+    rbenchmark,
+    testthat (>= 2.1.0),
+    covr
 RoxygenNote: 6.1.1
 URL: http://github.com/gbasulto/fourierin
 BugReports: https://github.com/gbasulto/fourierin/issues
