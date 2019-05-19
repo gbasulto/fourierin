@@ -164,11 +164,11 @@ out <- fourierin(f = fnc, lower_int = -5, upper_int = 5,
 
 ## Extract values and compute true values of the density
 df1 <- out %>%
-    as_data_frame() %>%
+    as_tibble() %>%
     mutate(values = Re(values),
            density = "approximated")
 
-df2 <- data_frame(w = seq(min(df1$w), max(df1$w), len = 150),
+df2 <- tibble(w = seq(min(df1$w), max(df1$w), len = 150),
                   values = dnorm(w),
                   density = "true")
 
