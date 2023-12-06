@@ -13,7 +13,6 @@ LinkingTo:
     Rcpp
 Imports:
     Rcpp (>= 1.0.1),
-    stats
 Suggests:
     MASS,
     knitr,
