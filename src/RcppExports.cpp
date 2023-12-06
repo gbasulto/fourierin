@@ -9,6 +9,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // fourierin_1d_cpp
 arma::cx_vec fourierin_1d_cpp(const arma::vec& f, double a, double b, double c, double d, double r, double s);
 static SEXP _fourierin_fourierin_1d_cpp_try(SEXP fSEXP, SEXP aSEXP, SEXP bSEXP, SEXP cSEXP, SEXP dSEXP, SEXP rSEXP, SEXP sSEXP) {

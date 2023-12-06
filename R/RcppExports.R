@@ -35,5 +35,5 @@ fourierin_cx_2d_nonregular_cpp <- function(f, a, b, w, resolution, r, s) {
 
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
-    .Call('_fourierin_RcppExport_registerCCallable', PACKAGE = 'fourierin')
+    .Call(`_fourierin_RcppExport_registerCCallable`)
 })
