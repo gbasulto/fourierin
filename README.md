@@ -5,8 +5,6 @@
 
 <!-- badges: start -->
 
-[![Travis build
-status](https://travis-ci.org/gbasulto/fourierin.svg?branch=master)](https://travis-ci.org/gbasulto/fourierin)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/fourierin)](https://cran.r-project.org/package=fourierin)
 [![Codecov test
