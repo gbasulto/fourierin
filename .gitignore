@@ -1,7 +1,11 @@
 .Rproj.user
 .Rhistory
 .RData
+.Ruserdata
 .Rbuilignore
 fourierin.Rproj
 inst/doc
 README.html
+src/*.o
+src/*.so
+src/*.dll
