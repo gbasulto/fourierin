@@ -1,4 +1,9 @@
 
+# Version 0.2.4.1
+
+- Update Rcpp.
+
+
 # Version 0.2.4
 
 - Fix bugs.
