@@ -2,7 +2,7 @@ Package: fourierin
 Type: Package
 Title: Computes Numeric Fourier Integrals
 Version: 0.2.5
-Date: 2019-04-01
+Date: 2023-12-08
 Author: Guillermo Basulto-Elias
 Maintainer: Guillermo Basulto-Elias <guillermobasulto@gmail.com>
 Description: Computes Fourier integrals of functions of one and two variables using the Fast Fourier transform. The Fourier transforms must be evaluated on a regular grid for fast evaluation.
