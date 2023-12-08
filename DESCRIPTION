@@ -27,7 +27,7 @@ Suggests:
     covr,
     spelling
 RoxygenNote: 6.1.1
-URL: http://github.com/gbasulto/fourierin
+URL: http://github.com/gbasulto/fourierin, https://github.com/gbasulto/fourierin
 BugReports: https://github.com/gbasulto/fourierin/issues
 VignetteBuilder: knitr
 Encoding: UTF-8
