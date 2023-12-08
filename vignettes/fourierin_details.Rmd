@@ -38,7 +38,7 @@ $c_l \leq w^{(l)} \leq c_l$.
 
 Common values for _r_ are -1, 0 and -1, while common values for _s_ are _-2\pi_, -1, 1 and _2\pi_. For example, if _f_ is a density function, _s = 1_ and _r = 1_ could be used to obtain the characteristic function of _f_. Conversely, if _f_ is the characteristic function of a probability density function, then _r = -1_ and _s = -1_ could be used to recover the density.
 
-The implementation of this algorithm is the one described in [Inverarity (2002), Fast Computation of multidimensional Integrals](http://epubs.siam.org/doi/abs/10.1137/S106482750138647X).
+The implementation of this algorithm is the one described in [Inverarity (2002), Fast Computation of multidimensional Integrals](https://epubs.siam.org/doi/abs/10.1137/S106482750138647X).
 
 Some examples (also found in documentation).
 
