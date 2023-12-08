@@ -4,9 +4,18 @@
 \alias{fourierin_2d}
 \title{Bivariate Fourier integrals}
 \usage{
-fourierin_2d(f, lower_int, upper_int, lower_eval = NULL,
-  upper_eval = NULL, const_adj, freq_adj, resolution = NULL,
-  eval_grid = NULL, use_fft = TRUE)
+fourierin_2d(
+  f,
+  lower_int,
+  upper_int,
+  lower_eval = NULL,
+  upper_eval = NULL,
+  const_adj,
+  freq_adj,
+  resolution = NULL,
+  eval_grid = NULL,
+  use_fft = TRUE
+)
 }
 \arguments{
 \item{f}{function or a vector of size m. If a function is
