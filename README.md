@@ -8,7 +8,7 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/fourierin)](https://cran.r-project.org/package=fourierin)
 [![Codecov test
-coverage](https://codecov.io/gh/gbasulto/fourierin/branch/master/graph/badge.svg)](https://codecov.io/gh/gbasulto/fourierin?branch=master)
+coverage](https://codecov.io/gh/gbasulto/fourierin/branch/master/graph/badge.svg)](https://app.codecov.io/gh/gbasulto/fourierin?branch=master)
 <!-- badges: end -->
 
 This is a package in `R` to numerically calculate Fourier-type integrals

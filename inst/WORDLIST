@@ -3,6 +3,8 @@ Inverarity
 Rcpp
 boldsymbol
 cdots
+doi
+epubs
 frac
 imath
 langle
@@ -13,3 +15,4 @@ microbenchmark
 rangle
 rbenchmark
 resol
+siam
