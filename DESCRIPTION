@@ -1,7 +1,7 @@
 Package: fourierin
 Type: Package
 Title: Computes Numeric Fourier Integrals
-Version: 0.2.6
+Version: 1.0.0
 Date: 2026-06-27
 Authors@R: 
     person(
