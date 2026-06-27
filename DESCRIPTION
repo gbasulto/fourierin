@@ -8,14 +8,18 @@ Authors@R:
         given = "Guillermo",
         family = "Basulto-Elias",
         role = c("aut", "cre"),
-        email = "guillermobasulto@gmail.com"
+        email = "guillermobasulto@gmail.com",
+        comment = c(ORCID = "0000-0002-5205-2190")
     )
 Description: Computes Fourier integrals of functions of one and two variables using the Fast Fourier transform. The Fourier transforms must be evaluated on a regular grid for fast evaluation.
 License: MIT + file LICENSE
 LazyData: TRUE
-LinkingTo: RcppArmadillo, Rcpp
-Imports: Rcpp (>= 1.0.1)
-Suggests: 
+Imports:
+    Rcpp (>= 1.0.1)
+LinkingTo:
+    Rcpp,
+    RcppArmadillo
+Suggests:
     MASS,
     knitr,
     rmarkdown,
@@ -28,9 +32,9 @@ Suggests:
     testthat (>= 3.1.0),
     covr,
     spelling
-RoxygenNote: 7.2.3
 URL: https://github.com/gbasulto/fourierin
 BugReports: https://github.com/gbasulto/fourierin/issues
 VignetteBuilder: knitr, rmarkdown
 Encoding: UTF-8
 Language: en-US
+Config/roxygen2/version: 8.0.0
