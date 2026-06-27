@@ -1,0 +1,70 @@
+
+R version 4.6.1 (2026-06-24 ucrt) -- "Happy Hop"
+Copyright (C) 2026 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "nev"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> options(pager = "console")
+> library('nev')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("rnev")
+> ### * rnev
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: rnev
+> ### Title: Draw nested extreme value random variables
+> ### Aliases: rnev
+> 
+> ### ** Examples
+> 
+> rnev(10, 0.5, c(1,1,2,3))
+            [,1]        [,2]         [,3]        [,4]
+ [1,] -0.4716755  0.95704410 -0.592959725  2.75487645
+ [2,] -0.5477346  0.04032051 -0.048951691 -0.69670871
+ [3,]  0.4378297 -0.46191098  0.722828418  0.45116133
+ [4,]  2.3572544  1.73340423 -0.065218805 -0.44077029
+ [5,] -0.3261100 -0.58962029  1.606146289 -0.79930444
+ [6,]  1.2809162  1.53052089  0.003131842  0.22728552
+ [7,]  2.5426950  3.96583090  0.656281793 -1.64177854
+ [8,]  1.0886821  1.04028922  4.115657573 -0.79598648
+ [9,]  0.6656069  0.24191443 -0.329392533  1.75253063
+[10,]  0.1501615 -0.17563497  1.211373209 -0.03932099
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.33 0.11 1.68 NA NA 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')
