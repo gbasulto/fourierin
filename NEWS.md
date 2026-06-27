@@ -1,3 +1,9 @@
+
+# fourierin 1.0.0
+
+- Set this version with minor changes as stable version.
+
+
 # fourierin 0.2.5
 
 - Update Rcpp.
