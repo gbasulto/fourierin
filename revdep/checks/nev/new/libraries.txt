@@ -1,8 +1,0 @@
-Library: C:\Users\basulto\Box\r_packages\fourierin/revdep/library/fourierin/new
-fourierin (1.0.0)
-
-Library: C:\Users\basulto\Box\r_packages\fourierin/revdep/library/nev
-extraDistr    (1.10.0.4)
-pracma        (2.4.6)
-Rcpp          (1.1.1-1.1)
-RcppArmadillo (15.4.0-1)
