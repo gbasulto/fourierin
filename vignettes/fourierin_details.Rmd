@@ -9,6 +9,26 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r setup, include=FALSE}
+suggested_pkgs <- c(
+  "dplyr",
+  "purrr",
+  "ggplot2",
+  "tidyr",
+  "lattice",
+  "rbenchmark"
+)
+
+has_suggested_pkgs <- all(vapply(
+  suggested_pkgs,
+  requireNamespace,
+  logical(1),
+  quietly = TRUE
+))
+
+knitr::opts_chunk$set(eval = has_suggested_pkgs)
+```
+
 This is a package in `R` to numerically calculate Fourier-type integrals of multivariate functions with compact support evaluated at regular grids. Specifically, integrals of the type
 
 $$
